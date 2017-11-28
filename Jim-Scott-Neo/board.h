@@ -1,14 +1,15 @@
 #ifndef BOARD_H
 #define BOARD_H
-#include "observer.h"
 #include "cell.h"
+#include "block.h"
 #include <iostream>
 
 //class TextDisplay;
 class Observer;
 
-class Board :public Observer{
-	std::vector<std::vector<Cell>> theBoard;
+class Board{
+	std::vector<std::vector<Cell>> the_board;
+	Block* the_block;
 	//TextDisplay *td = nullptr;
 	Observer *display = nullptr;
 public:
@@ -16,7 +17,6 @@ public:
 	bool isOver() const;
 	void newBlock(int level);
 	void movement(std::string direction);
-	void notify(Subject &whoFrom) override;
 
 	~Board();
 

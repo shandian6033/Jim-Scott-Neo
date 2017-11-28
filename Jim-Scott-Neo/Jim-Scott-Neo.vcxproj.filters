@@ -35,5 +35,8 @@
     <ClCompile Include="main.cc">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="cell.cc">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

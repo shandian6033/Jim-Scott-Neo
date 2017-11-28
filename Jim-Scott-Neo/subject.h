@@ -3,6 +3,7 @@
 #include <vector>
 #include "info.h"
 #include "observer.h"
+const int immortality = -1;
 
 class Subject {
 	std::vector<Observer*> who_looks_at_me;
