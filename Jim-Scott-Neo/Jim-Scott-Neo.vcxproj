@@ -64,6 +64,8 @@
     <ClCompile Include="main.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="block.h" />
+    <ClInclude Include="board.h" />
     <ClInclude Include="cell.h" />
     <ClInclude Include="info.h" />
     <ClInclude Include="observer.h" />

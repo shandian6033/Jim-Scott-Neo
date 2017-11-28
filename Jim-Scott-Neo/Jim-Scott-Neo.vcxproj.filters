@@ -21,6 +21,12 @@
     <ClInclude Include="subject.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="block.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="board.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cc">
