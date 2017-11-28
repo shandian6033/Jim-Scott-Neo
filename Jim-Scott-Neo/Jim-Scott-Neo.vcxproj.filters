@@ -27,6 +27,9 @@
     <ClInclude Include="board.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="textdisplay.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cc">
