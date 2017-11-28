@@ -3,7 +3,8 @@
 #include "subject.h"
 
 class Cell:public Subject{
-	int r, c, living_time;
+	const int r, c;
+	int living_time;
 	WhoIam id;
 
 	Cell* left;
@@ -11,17 +12,22 @@ class Cell:public Subject{
 	Cell* up;
 	Cell* down;
 
+	bool isRightClear()const;
+	bool isLeftClear() const;
 public:
     Cell(int, int);
 
-    void setPiece(WhoIam);
-    void upCopy();
-	bool isRightClear()const;
-	bool isLeftClear() const;
+	void setLeft(Cell &);
+	void setRight(Cell &);
+	void setUp(Cell &);
+	void setDown(Cell &);
+	void setPiece(WhoIam); //will only Block and Cell call this function
+
+    void upCopy(); //only WhoIam::I,O,J,Z,S,T,L,Null  will call this.
+				//this fn will recursively call upper cell.upCopy()
 	bool isRowClear() const{ return this->isRightClear() && this->isLeftClear(); }
 
 	Info getInfo() const override;
-
 };
 
 
