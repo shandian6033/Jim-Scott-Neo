@@ -1,19 +1,18 @@
 #ifndef  CELL_H
 #define CELL_H
-#include "observer.h"
 #include "subject.h"
 
-class cell:public Subject{
+class Cell:public Subject{
 	int r, c, living_time;
 	WhoIam id;
 
-	cell* left;
-	cell* right;
-	cell* up;
-	cell* down;
+	Cell* left;
+	Cell* right;
+	Cell* up;
+	Cell* down;
 
 public:
-    cell(int, int);
+    Cell(int, int);
 
     void setPiece(WhoIam);
     void upCopy();
@@ -24,6 +23,6 @@ public:
 	Info getInfo() const override;
 
 };
+
+
 #endif
-
-
