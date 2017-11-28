@@ -24,7 +24,7 @@ void Cell::setPiece(WhoIam new_id) {
 }
 
 void Cell::upCopy(){
-	if (this->up->id == WhoIam::Top) {
+	if (this->up == nullptr) {
 		setPiece(WhoIam::Null);
 	}
 	else {
@@ -34,7 +34,7 @@ void Cell::upCopy(){
 }
 
 bool Cell::isRightClear()const {
-	if (this->right->id == WhoIam::Right) {
+	if (this->right == nullptr) {
 		return true;
 	}
 	else if (this->right->id == WhoIam::Null) {
@@ -46,7 +46,7 @@ bool Cell::isRightClear()const {
 }
 
 bool Cell::isLeftClear()const {
-	if (this->left->id == WhoIam::Left) {
+	if (this->left == nullptr) {
 		return true;
 	}
 	else if (this->left->id == WhoIam::Null) {
