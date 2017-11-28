@@ -9,7 +9,7 @@ class TextDisplay: public Observer {
 	std::vector<std::vector<char>> theDisplay;
 	const int length, width;
 public:
-	TextDisplay(int l, int w);
+	TextDisplay(int width, int length);
 
 	void notify(Subject &whoFrom) override;
 
