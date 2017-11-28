@@ -6,8 +6,7 @@
 
 class Subject {
 	std::vector<Observer*> who_looks_at_me;
-protected:
-	void setState(Shape newS);
+
 public:
     void attach(Observer *p);
     void notifyObservers();
