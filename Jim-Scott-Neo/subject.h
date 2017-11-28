@@ -1,6 +1,7 @@
 #ifndef SUBJECT_H
 #define SUBJECT_H
 #include <vector>
+#include <memory>
 #include "info.h"
 #include "observer.h"
 const int immortality = -1;
@@ -11,7 +12,7 @@ class Subject {
 public:
     void attach(Observer *p);
     void notifyObservers();
-    void detach(Observer*); // not sure if needed
+    //void detach(Observer*); // not sure if needed
     virtual Info getInfo() const = 0; //not NVI
 };
 

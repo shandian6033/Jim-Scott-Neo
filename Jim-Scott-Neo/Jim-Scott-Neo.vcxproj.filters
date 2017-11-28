@@ -38,5 +38,8 @@
     <ClCompile Include="cell.cc">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="board.cc">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
