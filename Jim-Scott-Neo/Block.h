@@ -57,7 +57,7 @@ public:
     void rRotate() override;
     void lRotate() override;
 
-
+	Info getInfo() const override;
 };
 
 #endif

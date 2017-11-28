@@ -1,4 +1,4 @@
-#ifndef  CELL_H
+#ifndef CELL_H
 #define CELL_H
 #include "subject.h"
 
@@ -16,9 +16,9 @@ public:
 
     void setPiece(WhoIam);
     void upCopy();
-	bool isRightClear();
-	bool isLeftClear();
-	bool isRowClear() { return this->isRightClear() && this->isLeftClear(); }
+	bool isRightClear()const;
+	bool isLeftClear() const;
+	bool isRowClear() const{ return this->isRightClear() && this->isLeftClear(); }
 
 	Info getInfo() const override;
 

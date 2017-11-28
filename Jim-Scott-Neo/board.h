@@ -13,7 +13,7 @@ class Board :public Observer{
 	Observer *display = nullptr;
 public:
 	void init();
-	bool isOver();
+	bool isOver() const;
 	void newBlock(int level);
 	void movement(std::string direction);
 	void notify(Subject &whoFrom) override;
