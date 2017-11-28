@@ -11,7 +11,7 @@ public:
     void attach(Observer *p);
     void notifyObservers();
     void detach(Observer*); // not sure if needed
-    virtual Info getInfo() = 0; //not NVI
+    virtual Info getInfo() const = 0; //not NVI
 };
 
 
