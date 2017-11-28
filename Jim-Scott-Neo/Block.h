@@ -47,7 +47,7 @@ public:
 class LBlock: public Block
 {
 private:
-    vector<vector<char>> small_grid;
+    vector<vector<WhoIam>> small_grid;
 public:
     void left()override;
     void right() override;
