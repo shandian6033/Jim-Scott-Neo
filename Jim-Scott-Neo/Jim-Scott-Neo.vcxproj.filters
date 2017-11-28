@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{d042ac43-a84d-4153-bd67-5b181f61f389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{06c7f69d-e872-40ce-8a22-1412638a2a06}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cell.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="info.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="observer.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="subject.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cc">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
