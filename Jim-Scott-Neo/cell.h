@@ -17,7 +17,9 @@ public:
 
     void setPiece(WhoIam);
     void upCopy();
-	void isRowClear();
+	bool isRightClear();
+	bool isLeftClear();
+	bool isRowClear() { return this->isRightClear() && this->isLeftClear(); }
 
 	Info getInfo() const override;
 
