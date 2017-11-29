@@ -14,6 +14,10 @@ class Cell:public Subject{
 
 	bool isRightClear()const;
 	bool isLeftClear() const;
+    bool isRowClear() const { return this->isRightClear() && this->isLeftClear(); }
+    //only WhoIam::I,O,J,Z,S,T,L,Null  will call this.
+    //this fn will recursively call upper cell.upCopy()
+    void upCopy();
 public:
     Cell(int, int);
 
@@ -23,10 +27,12 @@ public:
 	void setDown(Cell &);
 	void setPiece(WhoIam); //will only Block and Cell call this function
 
-    void upCopy(); //only WhoIam::I,O,J,Z,S,T,L,Null  will call this.
-				//this fn will recursively call upper cell.upCopy()
-	bool isRowClear() const{ return this->isRightClear() && this->isLeftClear(); }
+    Cell* getLeft()const;
+    Cell* getRight()const;
+    Cell* getUp()const;
+    Cell* getDown()const;
 
+    void eraseRow(); //erase the entire row if possible
 	Info getInfo() const override;
 };
 

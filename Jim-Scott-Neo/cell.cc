@@ -1,5 +1,7 @@
 #include "cell.h"
 
+//public
+
 Cell::Cell(int row, int col) :r{ row }, c{ col }, living_time{ immortality }, id{ WhoIam::Null }, 
 	left{ nullptr }, right{nullptr}, up{nullptr}, down{nullptr}{}
 
@@ -23,45 +25,86 @@ void Cell::setPiece(WhoIam new_id) {
 	this->id = new_id;
 }
 
-void Cell::upCopy(){
-	if (this->up == nullptr) {
-		setPiece(WhoIam::Null);
-	}
-	else {
-		setPiece(this->up->id);
-		this->upCopy();
-	}
+Cell* Cell::getLeft()const{
+    return left;
 }
-
-bool Cell::isRightClear()const {
-	if (this->right == nullptr) {
-		return true;
-	}
-	else if (this->right->id == WhoIam::Null) {
-		return false;
-	}
-	else {
-		return this->right->isRightClear();
-	}
+Cell* Cell::getRight()const{
+    return right;
 }
-
-bool Cell::isLeftClear()const {
-	if (this->left == nullptr) {
-		return true;
-	}
-	else if (this->left->id == WhoIam::Null) {
-		return false;
-	}
-	else {
-		return this->left->isLeftClear();
-	}
+Cell* Cell::getUp()const{
+    return up;
+}
+Cell* Cell::getDown()const{
+    return down;
 }
 
 Info Cell::getInfo() const {
-	Info result;
-	result.col = this->c;
-	result.row = this->r;
-	result.living_time = this->living_time;
-	result.id = this->id;
-	return result;
+    Info result;
+    result.col = this->c;
+    result.row = this->r;
+    result.living_time = this->living_time;
+    result.id = this->id;
+    return result;
+}
+
+void Cell::eraseRow() {
+
+    if (isRowClear()) {
+
+        upCopy();
+        Cell* p = left;
+
+        while (p != nullptr) {
+            p->upCopy();
+            p = p->left;
+        }
+
+        p = right;
+
+        while (p != nullptr) {
+            p->upCopy();
+            p = p->right;
+        }
+
+    }
+
+
+
+}
+
+
+//private
+bool Cell::isRightClear()const {
+    if (this->right == nullptr) {
+        return true;
+    }
+    else if (this->right->id == WhoIam::Null) {
+        return false;
+    }
+    else {
+        return this->right->isRightClear();
+    }
+}
+
+bool Cell::isLeftClear()const {
+    if (this->left == nullptr) {
+        return true;
+    }
+    else if (this->left->id == WhoIam::Null) {
+        return false;
+    }
+    else {
+        return this->left->isLeftClear();
+    }
+}
+
+void Cell::upCopy() {
+
+    if (up == nullptr) {
+        setPiece(WhoIam::Null);
+    }
+    else {
+        setPiece(up->id);
+        up->upCopy();
+    }
 }
