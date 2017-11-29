@@ -56,8 +56,11 @@ int main(int argc, char* argv[])
 		int digit = s.length();
 		if (n != 0)stringstream(original_cmd).ignore(digit) >> string_cmd;
 		else { 
-			stringstream(original_cmd) >> string_cmd;
-			n = 1;
+			if (original_cmd.at(0) == '0')continue; //should start reading new cmd
+			else {
+				stringstream(original_cmd) >> string_cmd;
+				n = 1;
+			}
 		}
 		//seperated
 		//string_cmd may need be modified
