@@ -29,33 +29,46 @@ cellAt(anchor,-1,3) = nullptr,(a-1)4
 class Block: public Subject
 {
 private:
-    
+    //danger! hard coded for 3*3 blocks, I block and O block need their own fns
+    // intergrad both right and left rotate
+    vector<vector<WhoIam>>& ifRotated(bool);
 protected:
-    Cell *anchor;
-    Cell* cellAt(Cell* ,int, int); 
+    Cell* anchor;
+    WhoIam my_type;
+    vector<vector<WhoIam>> small_grid;
 public:
-    virtual void left() = 0;
-    virtual void right() = 0;
-    virtual void down() = 0;
-    virtual void drop() = 0;
+
+    Block(Cell*, WhoIam);   
+
+    virtual void left();
+    virtual void right();
+    virtual void down();
+    virtual void drop();
         
-    virtual void rRotate() = 0;
-    virtual void lRotate() = 0;
+    virtual void rRotate();
+    virtual void lRotate();
+
+    virtual Info getInfo()const;
 };
 
+Cell* cellAt(Cell*, int, int);
+bool canFit(Cell* anchor, vector<vector<WhoIam>>& compare_with);
 
 class LBlock: public Block
 {
 private:
-    vector<vector<WhoIam>> small_grid;
+    
 public:
-    void left()override;
-    void right() override;
-    void down() override;
-    void drop() override;
+    
+    LBlock(Cell*);
+    
+    //void left()override;
+    //void right() override;
+    //void down() override;
+    //void drop() override;
 
-    void rRotate() override;
-    void lRotate() override;
+    //void rRotate() override;
+    //void lRotate() override;
 
 	Info getInfo() const override;
 };
