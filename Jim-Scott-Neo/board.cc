@@ -11,6 +11,7 @@ void Board::init(int row, int col) {
 	}
 	
 	//display = std::make_unique<TextDisplay>(row, col);
+	td = new TextDisplay{ row,col };
 
 	for (int r = 0; r < row; r++) {
 		for (int c = 0; c < col; c++) {
@@ -28,5 +29,26 @@ void Board::init(int row, int col) {
 				the_board.at(r).at(c).setLeft(the_board.at(r).at(c + 1));
 			}
 		}
+	}
+}
+
+void Board::movement(std::string valid_cmd) {
+	if (valid_cmd == changable_cmd.left) {//considering abbreviation
+		my_block->left();
+	}
+	else if (valid_cmd == changable_cmd.right) {
+		my_block->right();
+	}
+	else if (valid_cmd == changable_cmd.down) {
+		my_block->down();
+	}
+	else if (valid_cmd == changable_cmd.rRotate) {
+		my_block->rRotate;
+	}
+	else if (valid_cmd == changable_cmd.lRotate) {
+		my_block->lRotate;
+	}
+	else(valid_cmd == changable_cmd.drop){
+		my_block->drop;
 	}
 }

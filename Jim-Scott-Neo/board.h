@@ -11,13 +11,15 @@ class Observer;
 class Board{
 	std::vector<std::vector<Cell>> the_board;
 	std::unique_ptr<Block> my_block;
-	TextDisplay *td = nullptr;
+	TextDisplay* td;
 	std::unique_ptr<Observer> display;
+
 public:
+	CmdList changable_cmd;
 	void init(int row, int col);
-	bool isOver() const;
-	void newBlock(int level);
-	void movement(std::string direction);
+	//bool isOver() const;
+	bool newBlock(int level); //return false if no Block can be generated. Then game should be over.
+	void movement(std::string valid_cmd);
 
 	~Board();
 

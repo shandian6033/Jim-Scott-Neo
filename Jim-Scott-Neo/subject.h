@@ -10,7 +10,7 @@ class Subject {
 	std::vector<Observer*> who_looks_at_me;
 
 public:
-    void attach(Observer *p);
+    void attach(Observer* p);
     void notifyObservers();
     //void detach(Observer*); // not sure if needed
     virtual Info getInfo() const = 0; //not NVI

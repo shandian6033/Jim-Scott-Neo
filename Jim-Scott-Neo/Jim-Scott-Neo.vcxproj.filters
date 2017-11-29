@@ -41,5 +41,8 @@
     <ClCompile Include="board.cc">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="block.cc">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
