@@ -23,6 +23,7 @@ void Cell::setLeft(Cell &left) {
 
 void Cell::setPiece(WhoIam new_id) {
 	this->id = new_id;
+	notifyObservers();
 }
 
 Cell* Cell::getLeft()const{
