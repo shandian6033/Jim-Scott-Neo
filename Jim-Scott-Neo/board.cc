@@ -9,13 +9,14 @@ void Board::init(int row, int col) {
 		}
 		the_board.emplace_back(new_row);
 	}
-	
-	//display = std::make_unique<TextDisplay>(row, col);
-	td = new TextDisplay{ row,col };
+	score = 0;
+	hi_score = 0;
+	//unique_ptr<Observer>ob = dynamic_cast<unique_ptr<Observer>>(td);
+	//td = new TextDisplay{ row,col };
 
 	for (int r = 0; r < row; r++) {
 		for (int c = 0; c < col; c++) {
-			the_board.at(r).at(c).attach(td);
+			the_board.at(r).at(c).attach(&td);
 			if (r > 0) {
 				the_board.at(r).at(c).setUp(the_board.at(r - 1).at(c));
 			}
@@ -34,21 +35,26 @@ void Board::init(int row, int col) {
 
 void Board::movement(std::string valid_cmd) {
 	if (valid_cmd == changable_cmd.left) {//considering abbreviation
-		my_block->left();
+		cur_block->left();
 	}
 	else if (valid_cmd == changable_cmd.right) {
-		my_block->right();
+		cur_block->right();
 	}
 	else if (valid_cmd == changable_cmd.down) {
-		my_block->down();
+		cur_block->down();
 	}
 	else if (valid_cmd == changable_cmd.rRotate) {
-		my_block->rRotate;
+		cur_block->rRotate();
 	}
 	else if (valid_cmd == changable_cmd.lRotate) {
-		my_block->lRotate;
+		cur_block->lRotate();
 	}
 	else(valid_cmd == changable_cmd.drop){
-		my_block->drop;
+		my_block->drop();
 	}
+}
+
+bool Board::newBlock(int level) {
+	//cur_block = new LBlock{ &the_board.at(0).at(4) };
+	cur_block{}
 }

@@ -44,5 +44,8 @@
     <ClCompile Include="block.cc">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="textdisplay.cc">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

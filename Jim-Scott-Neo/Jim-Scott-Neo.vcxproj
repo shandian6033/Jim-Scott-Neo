@@ -68,6 +68,7 @@
     <ClCompile Include="board.cc" />
     <ClCompile Include="cell.cc" />
     <ClCompile Include="main.cc" />
+    <ClCompile Include="textdisplay.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="block.h" />

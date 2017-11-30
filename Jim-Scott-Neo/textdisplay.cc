@@ -13,7 +13,7 @@
 //};
 
 
-#endif // !TEXTDISPLAY_H
+//#endif // !TEXTDISPLAY_H
 
 
 TextDisplay:: TextDisplay(int width, int length) {
@@ -28,41 +28,41 @@ TextDisplay:: TextDisplay(int width, int length) {
 
 void TextDisplay:: notify(Subject &whoFrom) {
     Info info_I_got = whoFrom.getInfo();
-    if (info_I_got.id == O) {
+    if (info_I_got.id == WhoIam::O) {
         this->theDisplay[info_I_got.col][info_I_got.row] = 'O';
     }
-    else if (info_I_got.id == J) {
+    else if (info_I_got.id == WhoIam::J) {
         this->theDisplay[info_I_got.col][info_I_got.row] = 'J';
     }
-    else if (info_I_got.id == L) {
+    else if (info_I_got.id == WhoIam::L) {
         this->theDisplay[info_I_got.col][info_I_got.row] = 'L';
     }
-    else if (info_I_got.id == S) {
+    else if (info_I_got.id == WhoIam::S) {
         this->theDisplay[info_I_got.col][info_I_got.row] = 'S';
     }
-    else if (info_I_got.id == Z) {
+    else if (info_I_got.id == WhoIam::Z) {
         this->theDisplay[info_I_got.col][info_I_got.row] = 'Z';
     }
-    else if (info_I_got.id == I) {
+    else if (info_I_got.id == WhoIam::I) {
         this->theDisplay[info_I_got.col][info_I_got.row] = 'I';
     }
-    else if (info_I_got.id == T) {
+    else if (info_I_got.id == WhoIam::T) {
         this->theDisplay[info_I_got.col][info_I_got.row] = 'T';
     }
-    else if (info_I_got.id == NULL) {
+    else if (info_I_got.id == WhoIam::Null) {
         this->theDisplay[info_I_got.col][info_I_got.row] = '_';
     }
-    else if (info_I_got.id == Block) {
+    else if (info_I_got.id == WhoIam::Block) {
         //edit here for notify from Block;
     }
 }
 
-std::ostream & TextDisplay:: operator<<(std::ostream &out, const TextDisplay &td) {
-    for (int row = 0; row<td.length; ++row) {
-        for (int col = 0; col<td.width; ++col) {
-            out << td.theDisplay[row][col];
-        }
-        out << endl;
-    }
-    return out;
-}
+//std::ostream & TextDisplay:: operator<<(std::ostream &out, const TextDisplay &td) {
+//    for (int row = 0; row<td.length; ++row) {
+//        for (int col = 0; col<td.width; ++col) {
+//            out << td.theDisplay[row][col];
+//        }
+//        out << endl;
+//    }
+//    return out;
+//}

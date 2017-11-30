@@ -10,9 +10,13 @@ class Observer;
 
 class Board{
 	std::vector<std::vector<Cell>> the_board;
-	std::unique_ptr<Block> my_block;
-	TextDisplay* td;
+	Block* cur_block;
+	Block* next_block;
+
+	TextDisplay td{ 11,15 };//this may lost
 	std::unique_ptr<Observer> display;
+
+	int score, level, hi_score;
 
 public:
 	CmdList changable_cmd;
