@@ -4,25 +4,29 @@
 #include "block.h"
 #include "textdisplay.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 //class TextDisplay;
 class Observer;
 
 class Board{
 	std::vector<std::vector<Cell>> the_board;
-	Block cur_block;
-	Block next_block;
+	unique_ptr<Block> cur_block;
+	WhoIam next_block;
 
 	TextDisplay td{ 11,15 };//this may lost
 	std::unique_ptr<Observer> display;
 
 	int score, level, hi_score;
-
+	
+	ifstream source;
 public:
 	CmdList changable_cmd;
 	void init(int row, int col);
 	//bool isOver() const;
-	bool newBlock(int level); //return false if no Block can be generated. Then game should be over.
+	void nextBlock(int level);//set next_block
+	bool setCur(); //return false if no Block can be generated. Then game should be over.
 	void movement(std::string valid_cmd);
 
 	~Board();
