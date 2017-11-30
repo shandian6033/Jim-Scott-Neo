@@ -5,60 +5,72 @@
 // public
 Block::Block(Cell* anchor, WhoIam my_type) :anchor{ anchor }, my_type{my_type} {}
 void Block::rRotate() {
-
+    modifyCellsUnderGrid(true); //erase original WhoIam
     vector<vector<WhoIam>> temp = ifRotated(true); // rotate clockwise
     if (canFit(anchor,temp)) {
         small_grid.clear();
         small_grid = temp;
-        notifyObservers();
+        
     }
+    modifyCellsUnderGrid(false); //write original WhoIam
 }
 void Block::lRotate() {
-
+    modifyCellsUnderGrid(true);
     vector<vector<WhoIam>> temp = ifRotated(false); // rotate counter clockwise
     if (canFit(anchor,temp)) {
         small_grid.clear();
         small_grid = temp;
-        notifyObservers();
     }
+    modifyCellsUnderGrid(false);
 }
 void Block::left() {
+    modifyCellsUnderGrid(true);
     if (canFit(anchor->getLeft(), small_grid)) {
         anchor = anchor->getLeft();
-        notifyObservers();
     }
+    modifyCellsUnderGrid(false);
 }
 void Block::right() {
+    modifyCellsUnderGrid(true);
     if (canFit(anchor->getRight(), small_grid)) {
         anchor = anchor->getRight();
-        notifyObservers();
     }
+    modifyCellsUnderGrid(false);
 }
 void Block::down() {
+    modifyCellsUnderGrid(true);
     if (canFit(anchor->getDown(), small_grid)) {
         anchor = anchor->getDown();
-        notifyObservers();
     }
+    modifyCellsUnderGrid(true);
 }
 void Block::drop() {
+    modifyCellsUnderGrid(true);
     while (canFit(anchor->getDown(),small_grid)){
         anchor = anchor->getDown();
     }//droped to the lowest position.
-    
-    for (int r = 0;r < small_grid.capacity; r++) { //set states into actual cells
-        for (int c = 0;c < small_grid[0].capacity; c++) {
-            if (small_grid.at(r).at(c) != WhoIam::Null) {
-                cellAt(anchor, c, r)->setPiece(small_grid.at(r).at(c));
-            }
-        }
-    }
+    modifyCellsUnderGrid(false);
 
     anchor->eraseRow(); //erase row if possible
     anchor->getDown()->eraseRow;
     anchor->getDown()->getDown()->eraseRow();
     //notifyObservers();
 }
+bool Block::isSuccessful() {
+    return is_successful;
+}
+// protected
+void Block::modifyCellsUnderGrid(bool is_erase)const {
 
+    for (int r = 0;r < small_grid.capacity(); r++) {
+        for (int c = 0;c < small_grid.at(0).capacity(); c++) {
+            if (small_grid.at(r).at(c) == my_type) {
+                if (is_erase)cellAt(anchor, c, r)->setPiece(WhoIam::Null);
+                else cellAt(anchor, c, r)->setPiece(my_type);
+            }
+        }
+    }
+}
 // private
 vector<vector<WhoIam>>& Block::ifRotated(bool is_clockwise) {
 
@@ -140,16 +152,21 @@ bool canFit(Cell* anchor,const vector<vector<WhoIam>>& compare_with) { //waring,
     //iterate row and then column
     for (int r = 0;r < compare_with.capacity(); r++) {
         for (int c = 0;c < compare_with.at(0).capacity(); c++) {
-            WhoIam try_rotate = compare_with.at(r).at(c);
-            Cell* p = cellAt(anchor, r, c); //p is the actual cell on board 
-            if (p != nullptr) {
-                WhoIam what_on_board = p->getInfo().id;
-                if (try_rotate != WhoIam::Null && what_on_board != WhoIam::Null) {
-                    ans = false;
+            WhoIam what_on_me = compare_with.at(r).at(c);
+            if (what_on_me != WhoIam::Null) { //if what I have is not null, I contain something
+                Cell* p = cellAt(anchor, r, c); //p is the actual cell on board 
+                if (p != nullptr) {// p is a cell
+                    WhoIam what_on_cell = p->getInfo().id; //what state cell has?
+                    if (what_on_cell != WhoIam::Null) { //cell also has something on it, cannot fit
+                        ans = false;
+                        break;
+                    }
+                }
+                else {
+                    ans = false; //p is null, hit boundary ?? may need some thinking
                     break;
                 }
             }
-            else ans = false; //p is null, hit boundary ?? may need some thinking
         }
     }
     return ans;
