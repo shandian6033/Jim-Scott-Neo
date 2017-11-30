@@ -1,5 +1,5 @@
-#include "Block.h"
-#include "Cell.h"
+#include "block.h"
+#include "cell.h"
 
 // Block
 // public
@@ -52,7 +52,7 @@ void Block::drop() {
     modifyCellsUnderGrid(false);
 
     anchor->eraseRow(); //erase row if possible
-    anchor->getDown()->eraseRow;
+    anchor->getDown()->eraseRow();
     anchor->getDown()->getDown()->eraseRow();
     //notifyObservers();
 }
@@ -103,15 +103,97 @@ vector<vector<WhoIam>>& Block::ifRotated(bool is_clockwise) {
 // public
 LBlock::LBlock(Cell* anchor) :Block{ anchor, WhoIam::L } {
 
-    vector<WhoIam> row0{ WhoIam::Null,WhoIam::Null ,WhoIam::Null };
+    vector<WhoIam> row0{ WhoIam::L,WhoIam::L ,WhoIam::L };
     vector<WhoIam> row1{ WhoIam::Null,WhoIam::Null ,WhoIam::L};
-    vector<WhoIam> row2{ WhoIam::L,WhoIam::L ,WhoIam::L };
+    vector<WhoIam> row2{ WhoIam::Null,WhoIam::Null ,WhoIam::Null };
 
     small_grid.emplace_back(row0);
     small_grid.emplace_back(row1);
     small_grid.emplace_back(row2);
+
+    is_successful = canFit(anchor, small_grid);
+    if (is_successful) modifyCellsUnderGrid(false); //print the block to display;
 }
 
+
+// IBlock
+// public
+IBlock::IBlock(Cell* anchor) :Block{ anchor, WhoIam::I } {
+    
+    //a bug will appear when initializing I block,it is created on the second row. may cause unwanted termination of the game.
+
+    /*
+        - - - - - - - -  <- should be created on this row ???
+        - - I I I I - -  <- actual creation
+        - - - - - - - -
+        - - - - - - - -
+    
+    */
+    vector<WhoIam> row0{ WhoIam::Null,WhoIam::Null ,WhoIam::Null,WhoIam::Null };
+    vector<WhoIam> row1{ WhoIam::I,WhoIam::I ,WhoIam::I,WhoIam::I };
+    vector<WhoIam> row2{ WhoIam::Null,WhoIam::Null ,WhoIam::Null,WhoIam::Null };
+    vector<WhoIam> row3{ WhoIam::Null,WhoIam::Null ,WhoIam::Null,WhoIam::Null };
+
+    small_grid.emplace_back(row0);
+    small_grid.emplace_back(row1);
+    small_grid.emplace_back(row2);
+    small_grid.emplace_back(row3);
+
+    is_successful = canFit(anchor, small_grid);
+    if (is_successful) modifyCellsUnderGrid(false);
+}
+void IBlock::lRotate() {
+    modifyCellsUnderGrid(true);
+    iRotate();
+    if (!canFit(anchor, small_grid)) iRotate();
+    modifyCellsUnderGrid(false);
+}
+void IBlock::rRotate() {
+    modifyCellsUnderGrid(true);
+    iRotate();
+    if (!canFit(anchor, small_grid)) iRotate();
+    modifyCellsUnderGrid(false);
+}
+
+// private
+void IBlock::iRotate() {
+    if (small_grid.at(0).at(1) == my_type && small_grid.at(2).at(1) == my_type && small_grid.at(3).at(1) == my_type) {
+        small_grid.at(0).at(1) == WhoIam::Null;
+        small_grid.at(2).at(1) == WhoIam::Null;
+        small_grid.at(3).at(1) == WhoIam::Null;
+
+        small_grid.at(1).at(0) == my_type;
+        small_grid.at(1).at(2) == my_type;
+        small_grid.at(1).at(3) == my_type;
+    }
+    else if(small_grid.at(1).at(0) == my_type || small_grid.at(1).at(2) == my_type || small_grid.at(1).at(3) == my_type){
+        small_grid.at(1).at(0) == WhoIam::Null;
+        small_grid.at(1).at(2) == WhoIam::Null;
+        small_grid.at(1).at(3) == WhoIam::Null;
+        
+        small_grid.at(0).at(1) == my_type;
+        small_grid.at(2).at(1) == my_type;
+        small_grid.at(3).at(1) == my_type;
+    }
+}
+
+// OBlock
+// public
+OBlock::OBlock(Cell* anchor):Block{anchor,WhoIam::O} {
+
+    vector<WhoIam> row0{ WhoIam::O,WhoIam::O};
+    vector<WhoIam> row1{ WhoIam::O,WhoIam::O};
+
+    small_grid.emplace_back(row0);
+    small_grid.emplace_back(row1);
+
+    is_successful = canFit(anchor, small_grid);
+    if (is_successful) modifyCellsUnderGrid(false); //print the block to display;
+}
+void OBlock::rRotate() {}
+void OBlock::lRotate() {}
+
+// utility
 Cell* cellAt(Cell* start,int row_offset, int col_offset) {
 
     // in this fucion row_offset is positive means travel down, negative means travel up.

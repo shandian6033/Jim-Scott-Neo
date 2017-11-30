@@ -29,9 +29,6 @@ cellAt(anchor,-1,3) = nullptr,(a-1)4
 class Block
 {
 private:
-
-    bool is_successful; //the block is successfully generated or not, usd to check gameover
-
     //danger! hard coded for 3*3 blocks, I block and O block need their own fns
     // intergrad both right and left rotate
     vector<vector<WhoIam>>& ifRotated(bool);
@@ -39,7 +36,8 @@ protected:
     Cell* anchor;
     const WhoIam my_type;
     vector<vector<WhoIam>> small_grid;
-    
+    bool is_successful; //the block is successfully generated or not, usd to check gameover
+
     void modifyCellsUnderGrid(bool is_erase) const; //can erase the original type or set new type;
 public:
 
@@ -67,7 +65,6 @@ private:
 public:
     
     LBlock(Cell*);
-    
     //void left()override;
     //void right() override;
     //void down() override;
@@ -75,7 +72,28 @@ public:
 
     //void rRotate() override;
     //void lRotate() override;
+};
+
+class IBlock :public Block 
+{
+private:
+    void iRotate();
+public:
+    IBlock(Cell*);
+    
+    void rRotate() override;
+    void lRotate() override;
 
 };
+
+class OBlock :public Block
+{   
+public:
+    OBlock(Cell*);
+
+    void rRotate() override;
+    void lRotate() override;
+};
+
 
 #endif
