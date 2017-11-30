@@ -1,27 +1,26 @@
 #ifndef INFO_H
 #define INFO_H
-
-//Info contains all information of a cell, including position, shape, living_time...
+#include <string>
 enum class WhoIam { O, J, L, S, Z, I, T, Null };
 
 struct CmdList {
-	string left = "left";
-	string right = "right";
-	string down = "down";
-	string drop = "drop";
+	std::string left = "left";
+	std::string right = "right";
+	std::string down = "down";
+	std::string drop = "drop";
 
-	string rRotate = "clockwise";
-	string lRotate = "counterclockwise";
+	std::string rRotate = "clockwise";
+	std::string lRotate = "counterclockwise";
 
-	string levelup = "levelup";
-	string leveldown = "leveldown";
-	string norandom = "norandom";
-	string random = "random";
-	string restart = "restart";
-	string hint = "hint";
-	string sequence = "sequence";
+	std::string levelup = "levelup";
+	std::string leveldown = "leveldown";
+	std::string norandom = "norandom";
+	std::string random = "random";
+	std::string restart = "restart";
+	std::string hint = "hint";
+	std::string sequence = "sequence";
 
-	string quit = "quit";
+	std::string quit = "quit";
 };
 
 struct Info {

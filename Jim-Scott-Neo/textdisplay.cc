@@ -58,8 +58,8 @@ void TextDisplay:: notify(Subject &whoFrom) {
 }
 
 void TextDisplay::clear() {
-	for (int r = 0; r < length; c++) {
-		for (int c = 0; c < width; ++r) {
+	for (int r = 0; r < length; r++) {
+		for (int c = 0; c < width; ++c) {
 			theDisplay.at(r).at(c) = ' ';
 		}
 	}
@@ -98,7 +98,7 @@ std::ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 		out << "LLL" << endl << "  L" << endl;
 	}
 	else if (td.my_board->getNext() == WhoIam::I) {
-		out << endl << "IIII" << end;
+		out << endl << "IIII" << endl;
 	}
 	else if (td.my_board->getNext() == WhoIam::O) {
 		out << "OO" << endl << "OO" << endl;
