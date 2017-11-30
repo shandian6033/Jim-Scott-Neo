@@ -1,5 +1,5 @@
 #include "textdisplay.h"
-
+#include "board.h"
 
 //class TextDisplay: public Observer {
 //    std::vector<std::vector<char>> theDisplay;
@@ -16,53 +16,93 @@
 //#endif // !TEXTDISPLAY_H
 
 
-TextDisplay:: TextDisplay(int width, int length) {
-    int col;
-    int row;
-    for (col=0; col<length; col++) {
-        for (row=0; row<width; ++row) {
-            theDisplay[col].emplace_back('_');
+TextDisplay::TextDisplay(int width, int length, const Board& my_board) :theDisplay{}, length{ length }, width{ width }, my_board{ &my_board } {
+    for (int r=0; r<length; r++) {
+		std::vector<char> new_row;
+        for (int c=0; c<width; ++c) {
+            new_row.emplace_back(' ');
         }
+		theDisplay.emplace_back(' ');
     }
 }
 
 void TextDisplay:: notify(Subject &whoFrom) {
     Info info_I_got = whoFrom.getInfo();
     if (info_I_got.id == WhoIam::O) {
-        this->theDisplay[info_I_got.col][info_I_got.row] = 'O';
+        this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'O';
     }
     else if (info_I_got.id == WhoIam::J) {
-        this->theDisplay[info_I_got.col][info_I_got.row] = 'J';
+		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'J';
     }
     else if (info_I_got.id == WhoIam::L) {
-        this->theDisplay[info_I_got.col][info_I_got.row] = 'L';
+		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'L';
     }
     else if (info_I_got.id == WhoIam::S) {
-        this->theDisplay[info_I_got.col][info_I_got.row] = 'S';
+		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'S';
     }
     else if (info_I_got.id == WhoIam::Z) {
-        this->theDisplay[info_I_got.col][info_I_got.row] = 'Z';
+		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'Z';
     }
     else if (info_I_got.id == WhoIam::I) {
-        this->theDisplay[info_I_got.col][info_I_got.row] = 'I';
+		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'I';
     }
     else if (info_I_got.id == WhoIam::T) {
-        this->theDisplay[info_I_got.col][info_I_got.row] = 'T';
+		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'T';
     }
     else if (info_I_got.id == WhoIam::Null) {
-        this->theDisplay[info_I_got.col][info_I_got.row] = '_';
+		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = ' ';
     }
-    else if (info_I_got.id == WhoIam::Block) {
-        //edit here for notify from Block;
-    }
+	else {
+		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = '*';
+	}
 }
 
-//std::ostream & TextDisplay:: operator<<(std::ostream &out, const TextDisplay &td) {
-//    for (int row = 0; row<td.length; ++row) {
-//        for (int col = 0; col<td.width; ++col) {
-//            out << td.theDisplay[row][col];
-//        }
-//        out << endl;
-//    }
-//    return out;
-//}
+void TextDisplay::clear() {
+	for (int r = 0; r < length; c++) {
+		for (int c = 0; c < width; ++r) {
+			theDisplay.at(r).at(c) = ' ';
+		}
+	}
+}
+
+std::ostream &operator<<(std::ostream &out, const TextDisplay &td) {
+	out << "Level: " << td.my_board->getLevel() << endl;
+	out << "Score: " << td.my_board->getScore() << endl;
+	out << "Hi Score: " << td.my_board->getHi() << endl;
+	
+	for (int i = 0; i < td.width; i++) {
+		out << '-';
+	}
+	out << endl;
+	
+	for (int r = 0; r<td.length; ++r) {
+        for (int c = 0; c<td.width; ++c) {
+            out << td.theDisplay.at(r).at(c);
+        }
+        out << endl;
+    }
+
+	for (int i = 0; i < td.width; i++) {
+		out << '-';
+	}
+	out << endl;
+
+	out << "Next:" << endl;
+	if (td.my_board->getNext() == WhoIam::S) {
+		out << " SS" << endl << "SS" << endl;
+	}
+	else if (td.my_board->getNext() == WhoIam::Z) {
+
+	}
+	else if (td.my_board->getNext() == WhoIam::L) {
+		out << "LLL" << endl << "  L" << endl;
+	}
+	else if (td.my_board->getNext() == WhoIam::I) {
+		out << endl << "IIII" << end;
+	}
+	else if (td.my_board->getNext() == WhoIam::O) {
+		out << "OO" << endl << "OO" << endl;
+	}
+
+    return out;
+}

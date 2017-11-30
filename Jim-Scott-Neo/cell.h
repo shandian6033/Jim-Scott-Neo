@@ -32,6 +32,7 @@ public:
     Cell* getUp()const;
     Cell* getDown()const;
 
+	void grow();
     int eraseRow(); //erase the entire row if possible and return score earned by eliminate block
 	Info getInfo() const override;
 };

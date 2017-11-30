@@ -11,11 +11,13 @@
 class Observer;
 
 class Board{
+	int length, width;
+
 	std::vector<std::vector<Cell>> the_board;
 	unique_ptr<Block> cur_block;
 	WhoIam next_block;
 
-	TextDisplay td{ 11,15 };//this may lost
+	TextDisplay td{ 11,15,*this };//this may lost
 	std::unique_ptr<Observer> display;
 
 	int score, level, hi_score;
@@ -30,6 +32,9 @@ public:
 	void movement(std::string valid_cmd);
 
 	int getLevel()const;
+	int getScore()const;
+	int getHi()const;
+	WhoIam getNext()const;
 	void setLevel(int level);
 	//~Board() = default;
 

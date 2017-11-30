@@ -2,6 +2,9 @@
 #include <cstdlib>
 
 void Board::init(int row, int col) {
+	length = row;
+	width = col;
+
 	the_board.clear();
 	for (int r = 0; r < row; r++) {
 		std::vector<Cell> new_row;
@@ -14,6 +17,7 @@ void Board::init(int row, int col) {
 	hi_score = 0;
 	//unique_ptr<Observer>ob = dynamic_cast<unique_ptr<Observer>>(td);
 	//td = new TextDisplay{ row,col };
+	td.clear();
 
 	for (int r = 0; r < row; r++) {
 		for (int c = 0; c < col; c++) {
@@ -54,6 +58,13 @@ void Board::movement(std::string valid_cmd) {
 		score += cur_block->drop();
 		if (score > hi_score) {
 			hi_score = score;
+		}
+		for (int r = 0; r < length; r++) {
+			for (int c = 0; c < width; c++) {
+				if (the_board.at(r).at(c).getInfo().id != WhoIam::Null) {
+					the_board.at(r).at(c).grow();
+				}
+			}
 		}
 	}
 }
@@ -108,6 +119,18 @@ bool Board::setCur() {
 
 int Board::getLevel()const {
 	return level;
+}
+
+int Board::getScore()const {
+	return score;
+}
+
+int Board::getHi()const {
+	return hi_score;
+}
+
+WhoIam Board::getNext()const{
+	return next_block;
 }
 
 void Board::setLevel(int level) {

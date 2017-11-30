@@ -74,7 +74,6 @@
     <ClInclude Include="block.h" />
     <ClInclude Include="board.h" />
     <ClInclude Include="cell.h" />
-    <ClInclude Include="exception.h" />
     <ClInclude Include="info.h" />
     <ClInclude Include="observer.h" />
     <ClInclude Include="subject.h" />
@@ -82,7 +81,6 @@
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <CLanguageStandard>gnu99</CLanguageStandard>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
     </ClCompile>

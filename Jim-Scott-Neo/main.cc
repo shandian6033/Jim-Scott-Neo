@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 	int row = 15;
 	int col = 11;
 	b.init(row, col);
-	b.setLevel(0);
+	b.setLevel(1);
 
     for (int i = 1; i < argc; i++) {
         string flag = argv[i];
@@ -147,7 +147,7 @@ int main(int argc, char* argv[])
 				else {}; //error message here
 			}
 		}
-
+		cout << b;
     }
 
 }

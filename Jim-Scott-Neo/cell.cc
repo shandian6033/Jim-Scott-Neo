@@ -133,12 +133,16 @@ int Cell::upCopy() {
 
 
     if (up == nullptr) {
-        setPiece(WhoIam::Null);
+		setPiece(WhoIam::Null, isNull);
     }
     else {
-        setPiece(up->id);
+        setPiece(up->id, up->worth - 1);
         up->upCopy();
     }
 
 	return score;
+}
+
+void Cell::grow() {
+	living_time++;
 }
