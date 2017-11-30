@@ -29,7 +29,9 @@ public:
 	bool setCur(); //return false if no Block can be generated. Then game should be over.
 	void movement(std::string valid_cmd);
 
-	~Board();
+	int getLevel()const;
+	void setLevel(int level);
+	//~Board() = default;
 
 	friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };

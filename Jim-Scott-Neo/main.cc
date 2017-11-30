@@ -9,6 +9,12 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     //reading flags commands
+	Board b;
+	int row = 15;
+	int col = 11;
+	b.init(row, col);
+	b.setLevel(0);
+
     for (int i = 1; i < argc; i++) {
         string flag = argv[i];
         //cout << flag << endl;
@@ -46,7 +52,6 @@ int main(int argc, char* argv[])
 	string string_cmd;
 	string valid_cmd;
 	int n;
-	Board b;
     while (!cin.eof()) {
 
 		//seperate command time and command
@@ -64,7 +69,10 @@ int main(int argc, char* argv[])
 		}
 		//seperated
 		//string_cmd may need be modified
-		if (strncmp(b.changable_cmd.left.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//left
+		if (original_cmd == "I" || original_cmd == "J" || original_cmd == "L") {
+			valid_cmd = original_cmd;
+		}
+		else if (strncmp(b.changable_cmd.left.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//left
 			valid_cmd = b.changable_cmd.left;
 		}
 		else if (strncmp(b.changable_cmd.right.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//right
@@ -88,27 +96,56 @@ int main(int argc, char* argv[])
 		else if (strncmp(b.changable_cmd.leveldown.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//leveldown
 			valid_cmd = b.changable_cmd.leveldown;
 		}
+		else if (strncmp(b.changable_cmd.norandom.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//norandom
+			valid_cmd = b.changable_cmd.norandom;
+		}
+		else if (strncmp(b.changable_cmd.random.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//random
+			valid_cmd = b.changable_cmd.random;
+		}
+		else if (strncmp(b.changable_cmd.restart.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//restart
+			valid_cmd = b.changable_cmd.restart;
+		}
+		else if (strncmp(b.changable_cmd.hint.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//hint
+			valid_cmd = b.changable_cmd.hint;
+		}
+		else if (strncmp(b.changable_cmd.sequence.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//sequence
+			valid_cmd = b.changable_cmd.sequence;
+		}
+		else if (strncmp(b.changable_cmd.quit.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//quit
+			valid_cmd = b.changable_cmd.quit;
+		}
 		//modified
-		for (int i = 0; i < n; i++) {
-			if (valid_cmd == b.changable_cmd.left || valid_cmd == b.changable_cmd.right || valid_cmd == b.changable_cmd.down ||
-				valid_cmd == b.changable_cmd.drop || valid_cmd == b.changable_cmd.rRotate || valid_cmd == b.changable_cmd.lRotate) { // impliment first
-				//Board.Movement(cmd);
+
+		if (valid_cmd == b.changable_cmd.norandom) {} //impliment when we have level 3,4 //norandom
+		else if (valid_cmd == b.changable_cmd.random) {}//random
+
+		else if (valid_cmd == "I" || valid_cmd == "J" || valid_cmd == "L") {}
+
+		else if (valid_cmd == b.changable_cmd.restart) {//restart
+			b.init(row, col);
+		} // impliment first
+
+		else if (valid_cmd == b.changable_cmd.hint) {} //impliment last
+
+		else {
+			for (int i = 0; i < n; i++) {
+				if (valid_cmd == b.changable_cmd.left || valid_cmd == b.changable_cmd.right || valid_cmd == b.changable_cmd.down  ||
+					valid_cmd == b.changable_cmd.rRotate || valid_cmd == b.changable_cmd.lRotate) { // impliment first
+					b.movement(valid_cmd);
+				}
+				else if (valid_cmd == b.changable_cmd.drop) {
+					b.movement(valid_cmd);
+					b.nextBlock(b.getLevel());
+					if (!b.setCur())break;//game over here. You lose.
+				}
+				else if (valid_cmd == "levelup") {}
+				else if (valid_cmd == "leveldown") {}
+
+				else if (string_cmd == "sequence") {} //impliment for testing purpose
+
+				else if (string_cmd == "quit") break;
+				else {}; //error message here
 			}
-			else if (valid_cmd == "levelup") {}
-			else if (valid_cmd == "leveldown") {}
-
-			else if (string_cmd == "norandom") {} //impliment when we have level 3,4
-			else if (string_cmd == "random") {}
-
-			else if (string_cmd == "sequence file") {} //impliment for testing purpose
-			else if (string_cmd == "I" || string_cmd == "J" || string_cmd == "L") {}
-
-			else if (string_cmd == "restart") {} // impliment first
-
-			else if (string_cmd == "hint") {} //impliment last
-
-			else if (string_cmd == "quit") break;
-			else {}; //error message here
 		}
 
     }

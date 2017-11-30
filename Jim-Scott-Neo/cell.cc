@@ -2,7 +2,7 @@
 
 //public
 
-Cell::Cell(int row, int col) :r{ row }, c{ col }, living_time{ immortality }, id{ WhoIam::Null }, 
+Cell::Cell(int row, int col) :r{ row }, c{ col }, living_time{ isNull }, worth{ 0 }, id { WhoIam::Null },
 	left{ nullptr }, right{nullptr}, up{nullptr}, down{nullptr}{}
 
 void Cell::setUp(Cell &up){
@@ -21,8 +21,9 @@ void Cell::setLeft(Cell &left) {
 	this->left = &left;
 }
 
-void Cell::setPiece(WhoIam new_id) {
+void Cell::setPiece(WhoIam new_id, int level) {
 	this->id = new_id;
+	this->worth = level + 1;
 	notifyObservers();
 }
 
@@ -48,28 +49,27 @@ Info Cell::getInfo() const {
     return result;
 }
 
-void Cell::eraseRow() {
-
+int Cell::eraseRow() {
+	int score = -1;
     if (isRowClear()) {
-
-        upCopy();
+		score = 0;
+		score += upCopy();
         Cell* p = left;
 
         while (p != nullptr) {
-            p->upCopy();
+			score += p->upCopy();
             p = p->left;
         }
 
         p = right;
 
         while (p != nullptr) {
-            p->upCopy();
+			score += p->upCopy();
             p = p->right;
         }
 
     }
-
-
+	return score;
 
 }
 
@@ -99,7 +99,38 @@ bool Cell::isLeftClear()const {
     }
 }
 
-void Cell::upCopy() {
+int Cell::upCopy() {
+	int score = 0;
+	bool isLast = true;
+	if (left != nullptr) {
+		isLast = isLast && (left->living_time != living_time);
+		if (left->up) {
+			isLast = isLast && (left->up->living_time != living_time);
+		}
+		if (left->down) {
+			isLast = isLast && (left->down->living_time != living_time);
+		}
+	}
+	if (right != nullptr) {
+		isLast = isLast && (right->living_time != living_time);
+		if (right->up) {
+			isLast = isLast && (right->up->living_time != living_time);
+		}
+		if (right->down) {
+			isLast = isLast && (right->down->living_time != living_time);
+		}
+	}
+	if (up != nullptr) {
+		isLast = isLast && (up->living_time != living_time);
+	}
+	if (down != nullptr) {
+		isLast = isLast && (down->living_time != living_time);
+	}
+
+	if (isLast) {
+		score += worth ^ 2;
+	}
+
 
     if (up == nullptr) {
         setPiece(WhoIam::Null);
@@ -108,4 +139,6 @@ void Cell::upCopy() {
         setPiece(up->id);
         up->upCopy();
     }
+
+	return score;
 }

@@ -16,6 +16,12 @@ struct CmdList {
 	string levelup = "levelup";
 	string leveldown = "leveldown";
 	string norandom = "norandom";
+	string random = "random";
+	string restart = "restart";
+	string hint = "hint";
+	string sequence = "sequence";
+
+	string quit = "quit";
 };
 
 struct Info {

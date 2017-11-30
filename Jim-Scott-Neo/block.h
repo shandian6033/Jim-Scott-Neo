@@ -31,6 +31,7 @@ class Block
 private:
     //danger! hard coded for 3*3 blocks, I block and O block need their own fns
     // intergrad both right and left rotate
+	const int level;
     vector<vector<WhoIam>>& ifRotated(bool);
 protected:
     Cell* anchor;
@@ -42,12 +43,12 @@ protected:
 public:
 
 
-    Block(Cell*, WhoIam);   
+	Block(int, Cell*, WhoIam); ;
 
     virtual void left();
     virtual void right();
     virtual void down();
-    virtual void drop();
+    virtual int drop(); //return total score earns
         
     virtual void rRotate();
     virtual void lRotate();
@@ -64,7 +65,7 @@ private:
     
 public:
     
-    LBlock(Cell*);
+    LBlock(int, Cell*);
     //void left()override;
     //void right() override;
     //void down() override;
@@ -79,7 +80,7 @@ class IBlock :public Block
 private:
     void iRotate();
 public:
-    IBlock(Cell*);
+    IBlock(int, Cell*);
     
     void rRotate() override;
     void lRotate() override;
@@ -89,7 +90,7 @@ public:
 class OBlock :public Block
 {   
 public:
-    OBlock(Cell*);
+    OBlock(int, Cell*);
 
     void rRotate() override;
     void lRotate() override;

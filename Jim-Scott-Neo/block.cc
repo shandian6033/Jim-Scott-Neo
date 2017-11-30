@@ -3,7 +3,7 @@
 
 // Block
 // public
-Block::Block(Cell* anchor, WhoIam my_type) :anchor{ anchor }, my_type{my_type} {}
+Block::Block(int level, Cell* anchor, WhoIam my_type) :level{level}, anchor { anchor }, my_type{ my_type } {}
 void Block::rRotate() {
     modifyCellsUnderGrid(true); //erase original WhoIam
     vector<vector<WhoIam>> temp = ifRotated(true); // rotate clockwise
@@ -44,17 +44,35 @@ void Block::down() {
     }
     modifyCellsUnderGrid(true);
 }
-void Block::drop() {
+int Block::drop() {
+	int score = 0;
+	int count = 0;
+	int temp;
     modifyCellsUnderGrid(true);
     while (canFit(anchor->getDown(),small_grid)){
         anchor = anchor->getDown();
     }//droped to the lowest position.
     modifyCellsUnderGrid(false);
 
-    anchor->eraseRow(); //erase row if possible
-    anchor->getDown()->eraseRow();
-    anchor->getDown()->getDown()->eraseRow();
+	temp = anchor->eraseRow(); //erase row if possible
+	if (temp > -1) {
+		score += temp;
+		count++;
+	}
+	temp = anchor->getDown()->eraseRow();
+	if (temp > -1) {
+		score += temp;
+		count++;
+	}
+	temp = anchor->getDown()->getDown()->eraseRow();
+	if (temp > -1) {
+		score += temp;
+		count++;
+	}
     //notifyObservers();
+
+	score += (count + level) ^ 2;
+	return score;
 }
 bool Block::isSuccessful() {
     return is_successful;
@@ -65,8 +83,8 @@ void Block::modifyCellsUnderGrid(bool is_erase)const {
     for (int r = 0;r < small_grid.capacity(); r++) {
         for (int c = 0;c < small_grid.at(0).capacity(); c++) {
             if (small_grid.at(r).at(c) == my_type) {
-                if (is_erase)cellAt(anchor, c, r)->setPiece(WhoIam::Null);
-                else cellAt(anchor, c, r)->setPiece(my_type);
+                if (is_erase)cellAt(anchor, c, r)->setPiece(WhoIam::Null, isNull);
+                else cellAt(anchor, c, r)->setPiece(my_type, level);
             }
         }
     }
@@ -101,7 +119,7 @@ vector<vector<WhoIam>>& Block::ifRotated(bool is_clockwise) {
 
 // LBlock
 // public
-LBlock::LBlock(Cell* anchor) :Block{ anchor, WhoIam::L } {
+LBlock::LBlock(int level, Cell* anchor) :Block{ level, anchor, WhoIam::L } {
 
     vector<WhoIam> row0{ WhoIam::L,WhoIam::L ,WhoIam::L };
     vector<WhoIam> row1{ WhoIam::Null,WhoIam::Null ,WhoIam::L};
@@ -118,7 +136,7 @@ LBlock::LBlock(Cell* anchor) :Block{ anchor, WhoIam::L } {
 
 // IBlock
 // public
-IBlock::IBlock(Cell* anchor) :Block{ anchor, WhoIam::I } {
+IBlock::IBlock(int level, Cell* anchor) :Block{ level, anchor, WhoIam::I } {
     
     //a bug will appear when initializing I block,it is created on the second row. may cause unwanted termination of the game.
 
@@ -179,7 +197,7 @@ void IBlock::iRotate() {
 
 // OBlock
 // public
-OBlock::OBlock(Cell* anchor):Block{anchor,WhoIam::O} {
+OBlock::OBlock(int level, Cell* anchor):Block{ level,anchor,WhoIam::O} {
 
     vector<WhoIam> row0{ WhoIam::O,WhoIam::O};
     vector<WhoIam> row1{ WhoIam::O,WhoIam::O};
