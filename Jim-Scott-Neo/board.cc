@@ -157,6 +157,8 @@ bool Board::setCur() {
     Cell* iblock_prt = &horizontal_place_holders.at(4);
     Cell* otherblock_prt = &the_board.at(0).at(4);
     
+    //cur_block = make_unique<IBlock>(level, iblock_prt);
+
     if(next_block == WhoIam::S)cur_block = make_unique<SBlock>(level, otherblock_prt);
     else if (next_block == WhoIam::Z)cur_block = make_unique<ZBlock>(level, otherblock_prt);
     else if (next_block == WhoIam::L)cur_block = make_unique<LBlock>(level, otherblock_prt);

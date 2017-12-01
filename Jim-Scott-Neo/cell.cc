@@ -56,14 +56,14 @@ int Cell::eraseRow() {
 		score += upCopy();
 		Cell* p = left;
 
-		while (p != nullptr) {
+		while (p->id != WhoIam::Placeholder) { //clear left
 			score += p->upCopy();
 			p = p->left;
 		}
 
 		p = right;
 
-		while (p != nullptr) {
+		while (p != nullptr) { //clear right
 			score += p->upCopy();
 			p = p->right;
 		}
@@ -76,26 +76,26 @@ int Cell::eraseRow() {
 
 //private
 bool Cell::isRightClear()const {
-	if (this->right == nullptr) {
+	if (right == nullptr) {
 		return true;
 	}
-	else if (this->right->id == WhoIam::Null) {
+	else if (right->id == WhoIam::Null) {
 		return false;
 	}
 	else {
-		return this->right->isRightClear();
+		return right->isRightClear();
 	}
 }
 
 bool Cell::isLeftClear()const {
-	if (this->left == nullptr) {
+	if (left->id == WhoIam::Placeholder) {
 		return true;
 	}
-	else if (this->left->id == WhoIam::Null) {
+	else if (left->id == WhoIam::Null) {
 		return false;
 	}
 	else {
-		return this->left->isLeftClear();
+		return left->isLeftClear();
 	}
 }
 
