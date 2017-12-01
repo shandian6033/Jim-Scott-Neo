@@ -89,6 +89,7 @@ int main(int argc, char* argv[])
 
 		else if (string_cmd == "quit") break;
 		else {
+			bool isOver = false;
 			for (int i = 0; i < n; i++) {
 				if (valid_cmd == b.changable_cmd.left || valid_cmd == b.changable_cmd.right || valid_cmd == b.changable_cmd.down  ||
 					valid_cmd == b.changable_cmd.rRotate || valid_cmd == b.changable_cmd.lRotate) { // impliment first
@@ -97,7 +98,10 @@ int main(int argc, char* argv[])
 				else if (valid_cmd == b.changable_cmd.drop) {
 					b.movement(valid_cmd);
 					b.nextBlock();
-					if (!b.setCur())break;//game over here. You lose.
+					if (!b.setCur()) {
+						isOver = true;
+						break;
+					}//game over here. You lose.
 				}
 				else if (valid_cmd == "levelup") {}
 				else if (valid_cmd == "leveldown") {}
@@ -105,6 +109,10 @@ int main(int argc, char* argv[])
 				else if (string_cmd == "sequence") {} //impliment for testing purpose
 
 				else {}; //error message here
+			}
+			if (isOver) {
+				cout << "game over" << endl;
+				break;
 			}
 		}
 		cout << b;

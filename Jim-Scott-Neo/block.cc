@@ -71,7 +71,7 @@ int Block::drop() {
 
     eraseCheck(score, count);
 
-	score += (count + level) ^ 2;
+	if (count != 0)score += (count + level) *(count + level);
 	return score;
 }
 bool Block::isSuccessful() {

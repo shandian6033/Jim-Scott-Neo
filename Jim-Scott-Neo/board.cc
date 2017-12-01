@@ -8,7 +8,7 @@ void Board::init(int row, int col) {
 	the_board.clear();
 	for (int r = 0; r < row; r++) {
 		std::vector<Cell> new_row;
-		for (int c = 0; c < row; c++) {
+		for (int c = 0; c < col; c++) {
 			new_row.emplace_back(Cell(r, c));
 		}
 		the_board.emplace_back(new_row);
