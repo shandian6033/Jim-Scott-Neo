@@ -127,6 +127,7 @@ int main(int argc, char* argv[])
 
 		else if (valid_cmd == b.changable_cmd.hint) {} //impliment last
 
+		else if (string_cmd == "quit") break;
 		else {
 			for (int i = 0; i < n; i++) {
 				if (valid_cmd == b.changable_cmd.left || valid_cmd == b.changable_cmd.right || valid_cmd == b.changable_cmd.down  ||
@@ -143,7 +144,6 @@ int main(int argc, char* argv[])
 
 				else if (string_cmd == "sequence") {} //impliment for testing purpose
 
-				else if (string_cmd == "quit") break;
 				else {}; //error message here
 			}
 		}

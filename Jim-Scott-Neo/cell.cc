@@ -134,6 +134,7 @@ int Cell::upCopy() {
 
     if (up == nullptr) {
 		setPiece(WhoIam::Null, isNull);
+		living_time = isNull;
     }
     else {
         setPiece(up->id, up->worth - 1);

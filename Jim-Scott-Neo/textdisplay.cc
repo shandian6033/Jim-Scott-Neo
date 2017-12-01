@@ -22,7 +22,7 @@ TextDisplay::TextDisplay(int width, int length, const Board& my_board) :theDispl
         for (int c=0; c<width; ++c) {
             new_row.emplace_back(' ');
         }
-		theDisplay.emplace_back(' ');
+		theDisplay.emplace_back(new_row);
     }
 }
 
