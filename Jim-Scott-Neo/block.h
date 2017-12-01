@@ -57,7 +57,7 @@ public:
 };
 
 Cell* cellAt(Cell*, int, int);
-bool canFit(Cell* anchor, vector<vector<WhoIam>>& compare_with);
+bool canFit(Cell* anchor,const vector<vector<WhoIam>>& compare_with);
 
 class LBlock: public Block
 {

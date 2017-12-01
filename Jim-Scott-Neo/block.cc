@@ -4,7 +4,6 @@
 // Block
 // public
 Block::Block(int level, Cell* anchor, WhoIam my_type) :level{level}, anchor { anchor }, my_type{ my_type } {}
-
 void Block::rRotate() {
     modifyCellsUnderGrid(true); //erase original WhoIam
     vector<vector<WhoIam>> temp = ifRotated(true); // rotate clockwise
@@ -177,22 +176,22 @@ void IBlock::rRotate() {
 // private
 void IBlock::iRotate() {
     if (small_grid.at(0).at(1) == my_type && small_grid.at(2).at(1) == my_type && small_grid.at(3).at(1) == my_type) {
-        small_grid.at(0).at(1) == WhoIam::Null;
-        small_grid.at(2).at(1) == WhoIam::Null;
-        small_grid.at(3).at(1) == WhoIam::Null;
+        small_grid.at(0).at(1) = WhoIam::Null;
+        small_grid.at(2).at(1) = WhoIam::Null;
+        small_grid.at(3).at(1) = WhoIam::Null;
 
-        small_grid.at(1).at(0) == my_type;
-        small_grid.at(1).at(2) == my_type;
-        small_grid.at(1).at(3) == my_type;
+        small_grid.at(1).at(0) = my_type;
+        small_grid.at(1).at(2) = my_type;
+        small_grid.at(1).at(3) = my_type;
     }
     else if(small_grid.at(1).at(0) == my_type || small_grid.at(1).at(2) == my_type || small_grid.at(1).at(3) == my_type){
-        small_grid.at(1).at(0) == WhoIam::Null;
-        small_grid.at(1).at(2) == WhoIam::Null;
-        small_grid.at(1).at(3) == WhoIam::Null;
+        small_grid.at(1).at(0) = WhoIam::Null;
+        small_grid.at(1).at(2) = WhoIam::Null;
+        small_grid.at(1).at(3) = WhoIam::Null;
         
-        small_grid.at(0).at(1) == my_type;
-        small_grid.at(2).at(1) == my_type;
-        small_grid.at(3).at(1) == my_type;
+        small_grid.at(0).at(1) = my_type;
+        small_grid.at(2).at(1) = my_type;
+        small_grid.at(3).at(1) = my_type;
     }
 }
 
