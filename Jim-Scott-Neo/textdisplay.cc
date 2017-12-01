@@ -109,6 +109,6 @@ std::ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	else if (td.my_board->getNext() == WhoIam::O) {
 		out << "OO" << endl << "OO" << endl;
 	}
-
+    out << endl;
     return out;
 }

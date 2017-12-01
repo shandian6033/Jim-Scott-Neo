@@ -86,7 +86,7 @@ void Board::movement(std::string valid_cmd) {
 	}
 }
 
-void Board::nextBlock() {
+void Board::computeNextBlock() {
 	//cur_block = new LBlock{ &the_board.at(0).at(4) };
 	string type;
 	if (source >> type) {
@@ -133,8 +133,15 @@ bool Board::setCur() {
     Cell* iblock_prt = &place_hoders.at(4);
     Cell* otherblock_prt = &the_board.at(0).at(4);
     
-    cur_block = make_unique<LBlock>(level,otherblock_prt);
-	nextBlock();
+    if(next_block == WhoIam::S)cur_block = make_unique<SBlock>(level, otherblock_prt);
+    else if (next_block == WhoIam::Z)cur_block = make_unique<ZBlock>(level, otherblock_prt);
+    else if (next_block == WhoIam::L)cur_block = make_unique<LBlock>(level, otherblock_prt);
+    else if (next_block == WhoIam::J)cur_block = make_unique<JBlock>(level, otherblock_prt);
+    else if (next_block == WhoIam::T)cur_block = make_unique<TBlock>(level, otherblock_prt);
+    else if (next_block == WhoIam::I)cur_block = make_unique<IBlock>(level, iblock_prt);
+    else if (next_block == WhoIam::O)cur_block = make_unique<OBlock>(level, otherblock_prt);
+
+	computeNextBlock();
 	return cur_block->isSuccessful();
 }
 

@@ -15,9 +15,9 @@ int main(int argc, char* argv[])
 	int col = 11;
 	b.init(row, col);
 	b.setLevel(1);
-	b.nextBlock();
+	b.computeNextBlock();
 	b.setCur();
-	b.nextBlock();
+	//b.computeNextBlock();
 
     for (int i = 1; i < argc; i++) {
         string flag = argv[i];
@@ -97,7 +97,6 @@ int main(int argc, char* argv[])
 				}
 				else if (valid_cmd == b.changable_cmd.drop) {
 					b.movement(valid_cmd);
-					b.nextBlock();
 					if (!b.setCur()) {
 						isOver = true;
 						break;

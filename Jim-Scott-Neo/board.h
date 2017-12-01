@@ -23,11 +23,12 @@ class Board{
 	std::unique_ptr<Observer> display;
 
 	ifstream source;
+
+
 public:
 	CmdList changable_cmd;
 	void init(int row, int col);
-	//bool isOver() const;
-	void nextBlock();//set next_block
+	void computeNextBlock();//set next_block
 	bool setCur(); //return false if no Block can be generated. Then game should be over.
 	void movement(std::string valid_cmd);
 
