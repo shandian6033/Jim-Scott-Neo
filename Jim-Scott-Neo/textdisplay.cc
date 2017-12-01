@@ -92,13 +92,19 @@ std::ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 		out << " SS" << endl << "SS" << endl;
 	}
 	else if (td.my_board->getNext() == WhoIam::Z) {
-
+        out << "ZZ" << endl << " ZZ" << endl;
 	}
 	else if (td.my_board->getNext() == WhoIam::L) {
-		out << "LLL" << endl << "  L" << endl;
+		out << "LLL" << endl << "L" << endl;
 	}
+    else if (td.my_board->getNext() == WhoIam::J) {
+        out << "JJJ" << endl << "  J" << endl;
+    }
+    else if (td.my_board->getNext() == WhoIam::T) {
+        out << "TTT" << endl << " T" << endl;
+    }
 	else if (td.my_board->getNext() == WhoIam::I) {
-		out << endl << "IIII" << endl;
+		out << "IIII" << endl;
 	}
 	else if (td.my_board->getNext() == WhoIam::O) {
 		out << "OO" << endl << "OO" << endl;
