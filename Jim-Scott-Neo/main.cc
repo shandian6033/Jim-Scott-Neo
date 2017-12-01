@@ -13,10 +13,8 @@ int main(int argc, char* argv[])
 	Board b;
 	int row = 15;
 	int col = 11;
-	b.init(row, col);
 	b.setLevel(1);
-	b.computeNextBlock();
-	b.setCur();
+	b.init(row, col);
 	//b.computeNextBlock();
 
     for (int i = 1; i < argc; i++) {
@@ -77,14 +75,14 @@ int main(int argc, char* argv[])
 
 
 		bool isOver = false;
-		if (valid_cmd == b.changable_cmd.norandom) {//norandom
+		if (valid_cmd == b.changable_cmd.norandom) { //impliment when we have level 3,4 //nonrandom
 			string file;
 			cin >> file;
 			if (!b.setSeq(file)) {
 				cout << "invalid file" << endl;
 				continue;
 			}
-		} //impliment when we have level 3,4 
+		}  
 		else if (valid_cmd == b.changable_cmd.random) {}//random
 
 		else if (valid_cmd == "I" || valid_cmd == "J" || valid_cmd == "L") {}
@@ -104,7 +102,7 @@ int main(int argc, char* argv[])
 			}
 		} //impliment for testing purpose
 
-		else if (string_cmd == "quit") break;
+		else if (string_cmd == b.changable_cmd.quit) break;
 		else {
 			bool notvalid = false;
 			for (int i = 0; i < n; i++) {
@@ -119,8 +117,8 @@ int main(int argc, char* argv[])
 						break;
 					}//game over here. You lose.
 				}
-				else if (valid_cmd == "levelup") {}
-				else if (valid_cmd == "leveldown") {}
+				else if (valid_cmd == b.changable_cmd.levelup) { b.setLevel(b.getLevel() + 1); } //level up
+				else if (valid_cmd == b.changable_cmd.leveldown) { b.setLevel(b.getLevel() - 1); } //level down
 
 				else {//invalid cmd
 					notvalid = true;

@@ -77,6 +77,8 @@ void Board::init(int row, int col) {
         }
     }
 
+	computeNextBlock();
+	setCur();
 }
 
 void Board::movement(std::string valid_cmd) {
@@ -140,27 +142,75 @@ void Board::computeNextBlock() {
 		}
 	}
 	else {
-		int random = rand() % 36;//random is 0~35
 		if (level == 0 || level == 1) {
-			if (random < 3) {//[0,2] 3
+			int random = rand() % 12;//random is 0~11
+			if (random < 1) {//1
 				next_block = WhoIam::S;
 			}
-			else if (random < 6) {//[3,5] 3
+			else if (random < 2) {//1
 				next_block = WhoIam::Z;
 			}
-			else if (random < 12) {//[6,11] 6 
+			else if (random < 4) {//2 
 				next_block = WhoIam::L;
 			}
-			else if (random < 18) {//[11,17] 6
+			else if (random < 6) {//2
 				next_block = WhoIam::J;
 			}
-			else if (random < 24) {//[18,23] 6
+			else if (random < 8) {//2
 				next_block = WhoIam::O;
 			}
-			else if (random < 30) {//[24,29] 6
+			else if (random < 10) {//2
 				next_block = WhoIam::I;
 			}
-			else if (random < 36) {//[30,35] 6
+			else {//2
+				next_block = WhoIam::T;
+			}
+		}
+		else if (level == 2) {
+			int random = rand() % 7;//random is 0~6
+			if (random < 1) {//1
+				next_block = WhoIam::S;
+			}
+			else if (random < 2) {//1
+				next_block = WhoIam::Z;
+			}
+			else if (random < 3) {//1 
+				next_block = WhoIam::L;
+			}
+			else if (random < 4) {//1
+				next_block = WhoIam::J;
+			}
+			else if (random < 5) {//1
+				next_block = WhoIam::O;
+			}
+			else if (random < 6) {//1
+				next_block = WhoIam::I;
+			}
+			else {//1
+				next_block = WhoIam::T;
+			}
+		}
+		else if (level == 3 || level == 4) {
+			int random = rand() % 9;//random is 0~8
+			if (random < 2) {//2
+				next_block = WhoIam::S;
+			}
+			else if (random < 4) {//2
+				next_block = WhoIam::Z;
+			}
+			else if (random < 5) {//1 
+				next_block = WhoIam::L;
+			}
+			else if (random < 6) {//1
+				next_block = WhoIam::J;
+			}
+			else if (random < 7) {//1
+				next_block = WhoIam::O;
+			}
+			else if (random < 8) {//1
+				next_block = WhoIam::I;
+			}
+			else {//1
 				next_block = WhoIam::T;
 			}
 		}
@@ -203,7 +253,7 @@ WhoIam Board::getNext()const{
 }
 
 void Board::setLevel(int level) {
-	this->level = level;
+	if (level > -1 && level < 6)this->level = level;
 }
 
 bool Board::setSeq(string source) {
