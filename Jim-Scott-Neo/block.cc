@@ -42,7 +42,7 @@ void Block::down() {
     if (canFit(anchor->getDown(), small_grid)) {
         anchor = anchor->getDown();
     }
-    modifyCellsUnderGrid(true);
+    modifyCellsUnderGrid(false);
 }
 int Block::drop() {
 	int score = 0;
@@ -83,8 +83,11 @@ void Block::modifyCellsUnderGrid(bool is_erase)const {
     for (int r = 0;r < (int) small_grid.size(); r++) {
         for (int c = 0;c < (int) small_grid.at(0).size(); c++) {
             if (small_grid.at(r).at(c) == my_type) {
-                if (is_erase)cellAt(anchor, c, r)->setPiece(WhoIam::Null, isNull);
-                else cellAt(anchor, c, r)->setPiece(my_type, level);
+                if (is_erase) cellAt(anchor,r,c)->setPiece(WhoIam::Null, isNull);
+                else {
+                    Cell* temp = cellAt(anchor, r, c);
+                    temp->setPiece(my_type, level);
+                }
             }
         }
     }
@@ -219,26 +222,26 @@ Cell* cellAt(Cell* start,int row_offset, int col_offset) {
     Cell* ans = start;
     if(row_offset > 0){
         while (row_offset > 0 && ans !=nullptr) {
-            ans = start->getDown();
+            ans = ans->getDown();
             row_offset--;
         }
     }
     else if (row_offset < 0) {
         while (row_offset < 0 && ans != nullptr) {
-            ans = start->getUp();
+            ans = ans->getUp();
             row_offset++;
         }
     }
 
     if (col_offset > 0) {
         while (col_offset > 0 && ans != nullptr) {
-            ans = start->getRight();
+            ans = ans->getRight();
             col_offset--;
         }
     }
     else if(col_offset < 0){
         while (col_offset < 0 && ans != nullptr) {
-            ans = start->getLeft();
+            ans = ans->getLeft();
             col_offset++;
         }
     }
