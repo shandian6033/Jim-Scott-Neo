@@ -133,7 +133,7 @@ bool Board::setCur() {
     Cell* iblock_prt = &place_hoders.at(4);
     Cell* otherblock_prt = &the_board.at(0).at(4);
     
-    cur_block = make_unique<ZBlock>(level,otherblock_prt);
+    cur_block = make_unique<LBlock>(level,otherblock_prt);
 	nextBlock();
 	return cur_block->isSuccessful();
 }

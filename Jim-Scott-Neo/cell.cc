@@ -2,10 +2,10 @@
 
 //public
 
-Cell::Cell(int row, int col) :r{ row }, c{ col }, living_time{ isNull }, worth{ 0 }, id { WhoIam::Null },
-	left{ nullptr }, right{nullptr}, up{nullptr}, down{nullptr}{}
+Cell::Cell(int row, int col) :r{ row }, c{ col }, living_time{ isNull }, worth{ 0 }, id{ WhoIam::Null },
+left{ nullptr }, right{ nullptr }, up{ nullptr }, down{ nullptr } {}
 
-void Cell::setUp(Cell &up){
+void Cell::setUp(Cell &up) {
 	this->up = &up;
 }
 
@@ -27,48 +27,48 @@ void Cell::setPiece(WhoIam new_id, int level) {
 	notifyObservers();
 }
 
-Cell* Cell::getLeft()const{
-    return left;
+Cell* Cell::getLeft()const {
+	return left;
 }
-Cell* Cell::getRight()const{
-    return right;
+Cell* Cell::getRight()const {
+	return right;
 }
-Cell* Cell::getUp()const{
-    return up;
+Cell* Cell::getUp()const {
+	return up;
 }
-Cell* Cell::getDown()const{
-    return down;
+Cell* Cell::getDown()const {
+	return down;
 }
 
 Info Cell::getInfo() const {
-    Info result;
-    result.col = this->c;
-    result.row = this->r;
-    result.living_time = this->living_time;
-    result.id = this->id;
-    return result;
+	Info result;
+	result.col = this->c;
+	result.row = this->r;
+	result.living_time = this->living_time;
+	result.id = this->id;
+	return result;
 }
 
 int Cell::eraseRow() {
 	int score = -1;
-    if (isRowClear()) {
+	if (isRowClear()) {
 		score = 0;
 		score += upCopy();
-        Cell* p = left;
+		Cell* p = left;
 
-        while (p != nullptr) {
+		while (p != nullptr) {
 			score += p->upCopy();
-            p = p->left;
-        }
+			p = p->left;
+		}
 
-        p = right;
+		p = right;
 
-        while (p != nullptr) {
+		while (p != nullptr) {
 			score += p->upCopy();
-            p = p->right;
-        }
+			p = p->right;
+		}
 
-    }
+	}
 	return score;
 
 }
@@ -76,47 +76,52 @@ int Cell::eraseRow() {
 
 //private
 bool Cell::isRightClear()const {
-    if (this->right == nullptr) {
-        return true;
-    }
-    else if (this->right->id == WhoIam::Null) {
-        return false;
-    }
-    else {
-        return this->right->isRightClear();
-    }
+	if (this->right == nullptr) {
+		return true;
+	}
+	else if (this->right->id == WhoIam::Null) {
+		return false;
+	}
+	else {
+		return this->right->isRightClear();
+	}
 }
 
 bool Cell::isLeftClear()const {
-    if (this->left == nullptr) {
-        return true;
-    }
-    else if (this->left->id == WhoIam::Null) {
-        return false;
-    }
-    else {
-        return this->left->isLeftClear();
-    }
+	if (this->left == nullptr) {
+		return true;
+	}
+	else if (this->left->id == WhoIam::Null) {
+		return false;
+	}
+	else {
+		return this->left->isLeftClear();
+	}
+}
+
+int abs(int x) {
+	if (x < 0)return -x;
+	return x;
 }
 
 bool Cell::isLast()const {
-	const Cell* cur = this;
 	bool result = true;
 	for (int r = -3; r < 4; r++) {
-		for (int c = -3; r + c < 4 && r + c>-4 && r - c<4 && r - c>-4; c++) {
+		for (int c = abs(r) - 3; c < 4 - abs(r); c++) {
+			const Cell* cur = this;
 			for (int x = 0; x < r; x++) {
-				if (cur->left != nullptr)cur = cur->left;
-			}
-			for (int x = 0; x > r; x--) {
-				if (cur->right != nullptr)cur = cur->right;
-			}
-			for (int y = 0; y < c; y++) {
 				if (cur->up != nullptr)cur = cur->up;
 			}
-			for (int y = 0; y > c; y--) {
+			for (int x = 0; x > r; x--) {
 				if (cur->down != nullptr)cur = cur->down;
 			}
-			result = result && (cur->age() != living_time);
+			for (int y = 0; y < c; y++) {
+				if (cur->right != nullptr)cur = cur->right;
+			}
+			for (int y = 0; y > c; y--) {
+				if (cur->left != nullptr)cur = cur->left;
+			}
+			if (cur != this)result = result && (cur->age() != living_time);
 		}
 	}
 	return result;
@@ -124,21 +129,21 @@ bool Cell::isLast()const {
 
 int Cell::upCopy() {
 	int score = 0;
-	
+
 	if (isLast()) {
 		score += worth * worth;
 	}
 
 
-    if (up == nullptr) {
+	if (up == nullptr) {
 		setPiece(WhoIam::Null, isNull);
 		living_time = isNull;
-    }
-    else {
-        setPiece(up->id, up->worth - 1);
+	}
+	else {
+		setPiece(up->id, up->worth - 1);
 		living_time = up->age();
-        up->upCopy();
-    }
+		up->upCopy();
+	}
 
 	return score;
 }
