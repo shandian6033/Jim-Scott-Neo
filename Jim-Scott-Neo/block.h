@@ -32,7 +32,7 @@ private:
     //danger! hard coded for 3*3 blocks, I block and O block need their own fns
     // intergrad both right and left rotate
 	const int level;
-    vector<vector<WhoIam>>& ifRotated(bool);
+    vector<vector<WhoIam>> ifRotated(bool);
     void eraseCheck(int& score, int& count);
 protected:
     Cell* anchor;

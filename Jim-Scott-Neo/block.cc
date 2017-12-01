@@ -94,7 +94,7 @@ void Block::modifyCellsUnderGrid(bool is_erase)const {
     }
 }
 // private
-vector<vector<WhoIam>>& Block::ifRotated(bool is_clockwise) {
+vector<vector<WhoIam>> Block::ifRotated(bool is_clockwise) {
 
     vector<vector<WhoIam>> ans;
     ans.clear();
@@ -103,7 +103,7 @@ vector<vector<WhoIam>>& Block::ifRotated(bool is_clockwise) {
 
         vector<WhoIam> new_row0{ small_grid[2][0],small_grid[1][0] ,small_grid[0][0] };
         vector<WhoIam> new_row1{ small_grid[2][1],small_grid[1][1] ,small_grid[0][1] };
-        vector<WhoIam> new_row2{ small_grid[2][2],small_grid[0][2] ,small_grid[0][2] };
+        vector<WhoIam> new_row2{ small_grid[2][2],small_grid[1][2] ,small_grid[0][2] };
 
         ans.emplace_back(new_row0);
         ans.emplace_back(new_row1);
@@ -138,7 +138,7 @@ void Block::eraseCheck(int& score, int& count) {
 LBlock::LBlock(int level, Cell* anchor) :Block{ level, anchor, WhoIam::L } {
 
     vector<WhoIam> row0{ WhoIam::L,WhoIam::L ,WhoIam::L };
-    vector<WhoIam> row1{ WhoIam::Null,WhoIam::Null ,WhoIam::L};
+    vector<WhoIam> row1{ WhoIam::L,WhoIam::Null ,WhoIam::Null};
     vector<WhoIam> row2{ WhoIam::Null,WhoIam::Null ,WhoIam::Null };
 
     small_grid.emplace_back(row0);
