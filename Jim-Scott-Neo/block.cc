@@ -80,8 +80,8 @@ bool Block::isSuccessful() {
 // protected
 void Block::modifyCellsUnderGrid(bool is_erase)const {
 
-    for (int r = 0;r < (int) small_grid.capacity(); r++) {
-        for (int c = 0;c < (int) small_grid.at(0).capacity(); c++) {
+    for (int r = 0;r < (int) small_grid.size(); r++) {
+        for (int c = 0;c < (int) small_grid.at(0).size(); c++) {
             if (small_grid.at(r).at(c) == my_type) {
                 if (is_erase)cellAt(anchor, c, r)->setPiece(WhoIam::Null, isNull);
                 else cellAt(anchor, c, r)->setPiece(my_type, level);
@@ -250,8 +250,8 @@ bool canFit(Cell* anchor,const vector<vector<WhoIam>>& compare_with) { //waring,
 
     bool ans = true;
     //iterate row and then column
-    for (int r = 0;r < compare_with.capacity(); r++) {
-        for (int c = 0;c < compare_with.at(0).capacity(); c++) {
+    for (int r = 0;r < (int)compare_with.size(); r++) {
+        for (int c = 0;c < (int)compare_with.at(0).size(); c++) {
             WhoIam what_on_me = compare_with.at(r).at(c);
             if (what_on_me != WhoIam::Null) { //if what I have is not null, I contain something
                 Cell* p = cellAt(anchor, r, c); //p is the actual cell on board 
