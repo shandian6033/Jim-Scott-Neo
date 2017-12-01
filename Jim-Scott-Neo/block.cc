@@ -71,7 +71,7 @@ int Block::drop() {
 
     eraseCheck(score, count);
 
-	score += (count + level) ^ 2;
+	if (count != 0)score += (count + level) *(count + level);
 	return score;
 }
 bool Block::isSuccessful() {
@@ -178,13 +178,13 @@ IBlock::IBlock(int level, Cell* anchor) :Block{ level, anchor, WhoIam::I } {
 void IBlock::lRotate() {
     modifyCellsUnderGrid(true);
     iRotate();
-    if (!canFit(anchor, small_grid)) iRotate();
+    if (!canFit(anchor, small_grid )|| anchor->getInfo().row == -1) iRotate();
     modifyCellsUnderGrid(false);
 }
 void IBlock::rRotate() {
     modifyCellsUnderGrid(true);
     iRotate();
-    if (!canFit(anchor, small_grid)) iRotate();
+    if (!canFit(anchor, small_grid) || anchor->getInfo().row == -1) iRotate();
     modifyCellsUnderGrid(false);
 }
 

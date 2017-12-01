@@ -99,36 +99,34 @@ bool Cell::isLeftClear()const {
     }
 }
 
+bool Cell::isLast()const {
+	const Cell* cur = this;
+	bool result = true;
+	for (int r = -3; r < 4; r++) {
+		for (int c = -3; r + c < 4 && r + c>-4 && r - c<4 && r - c>-4; c++) {
+			for (int x = 0; x < r; x++) {
+				if (cur->left != nullptr)cur = cur->left;
+			}
+			for (int x = 0; x > r; x--) {
+				if (cur->right != nullptr)cur = cur->right;
+			}
+			for (int y = 0; y < c; y++) {
+				if (cur->up != nullptr)cur = cur->up;
+			}
+			for (int y = 0; y > c; y--) {
+				if (cur->down != nullptr)cur = cur->down;
+			}
+			result = result && (cur->age() != living_time);
+		}
+	}
+	return result;
+}
+
 int Cell::upCopy() {
 	int score = 0;
-	bool isLast = true;
-	if (left != nullptr) {
-		isLast = isLast && (left->living_time != living_time);
-		if (left->up) {
-			isLast = isLast && (left->up->living_time != living_time);
-		}
-		if (left->down) {
-			isLast = isLast && (left->down->living_time != living_time);
-		}
-	}
-	if (right != nullptr) {
-		isLast = isLast && (right->living_time != living_time);
-		if (right->up) {
-			isLast = isLast && (right->up->living_time != living_time);
-		}
-		if (right->down) {
-			isLast = isLast && (right->down->living_time != living_time);
-		}
-	}
-	if (up != nullptr) {
-		isLast = isLast && (up->living_time != living_time);
-	}
-	if (down != nullptr) {
-		isLast = isLast && (down->living_time != living_time);
-	}
-
-	if (isLast) {
-		score += worth ^ 2;
+	
+	if (isLast()) {
+		score += worth * worth;
 	}
 
 

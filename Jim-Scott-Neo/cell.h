@@ -18,6 +18,7 @@ class Cell:public Subject{
     //only WhoIam::I,O,J,Z,S,T,L,Null  will call this.
     //this fn will recursively call upper cell.upCopy()
     int upCopy();//return score earned by eliminating block
+	bool isLast()const;//used in upCopy(), tell me if there is anyone as old as me.
 public:
     Cell(int, int);
 

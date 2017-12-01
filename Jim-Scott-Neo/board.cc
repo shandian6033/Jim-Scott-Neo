@@ -2,13 +2,63 @@
 #include <cstdlib>
 
 void Board::init(int row, int col) {
+<<<<<<< HEAD
+    length = row;
+    width = col;
+
+    the_board.clear();
+    for (int r = 0; r < row + 1; r++) { //setup the_board
+        std::vector<Cell> new_row;
+        for (int c = 0; c < col; c++) {
+            new_row.emplace_back(Cell(r, c));
+        }
+        the_board.emplace_back(new_row);
+    }
+
+    for (int c = 0; c < col; c++) { //setup place_hoders
+        place_hoders.emplace_back(Cell(-1, c));
+    }
+
+
+    score = 0;
+    hi_score = 0;
+    td.clear();
+
+    for (int r = 0; r < row; r++) {// setup ptr relationship in the_board
+        for (int c = 0; c < col; c++) {
+            the_board.at(r).at(c).attach(&td);
+            if (r > 0) {
+                the_board.at(r).at(c).setUp(the_board.at(r - 1).at(c));
+            }
+            if (r < row - 1) {
+                the_board.at(r).at(c).setDown(the_board.at(r + 1).at(c));
+            }
+            if (c > 0) {
+                the_board.at(r).at(c).setLeft(the_board.at(r).at(c - 1));
+            }
+            if (c < col - 1) {
+                the_board.at(r).at(c).setRight(the_board.at(r).at(c + 1));
+            }
+        }
+    }
+
+    for (int c = 0; c < col; c++) {// setup prt relationship in place_holder
+        place_hoders.at(c).setDown(the_board.at(0).at(c));
+        if (c > 0) {
+            place_hoders.at(c).setLeft(place_hoders.at(c - 1));
+        }
+        if (c < col - 1) {
+            place_hoders.at(c).setRight(place_hoders.at(c + 1));
+        }
+    }
+=======
 	length = row;
 	width = col;
 
 	the_board.clear();
 	for (int r = 0; r < row; r++) {
 		std::vector<Cell> new_row;
-		for (int c = 0; c < row; c++) {
+		for (int c = 0; c < col; c++) {
 			new_row.emplace_back(Cell(r, c));
 		}
 		the_board.emplace_back(new_row);
@@ -36,6 +86,7 @@ void Board::init(int row, int col) {
 			}
 		}
 	}
+>>>>>>> 761efc97eaa22f76a9e0607c38fc71c585bfe5ab
 }
 
 void Board::movement(std::string valid_cmd) {
@@ -112,7 +163,7 @@ void Board::nextBlock() {
 }
 
 bool Board::setCur() {
-	cur_block = make_unique<LBlock>(level, &the_board.at(0).at(4));
+	cur_block = make_unique<IBlock>(level,&place_hoders.at(4));
 	nextBlock();
 	return cur_block->isSuccessful();
 }

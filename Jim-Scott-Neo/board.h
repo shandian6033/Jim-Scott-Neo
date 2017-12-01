@@ -12,16 +12,16 @@ class Observer;
 
 class Board{
 	int length, width;
+    int score, level, hi_score;
 
 	std::vector<std::vector<Cell>> the_board;
+    std::vector<Cell> place_hoders; //only used for IBlock
 	unique_ptr<Block> cur_block;
 	WhoIam next_block;
 
 	TextDisplay td{ 11,15,*this };//this may lost
 	std::unique_ptr<Observer> display;
 
-	int score, level, hi_score;
-	
 	ifstream source;
 public:
 	CmdList changable_cmd;
