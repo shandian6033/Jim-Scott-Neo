@@ -129,7 +129,11 @@ void Board::nextBlock() {
 }
 
 bool Board::setCur() {
-	cur_block = make_unique<IBlock>(level,&place_hoders.at(4));
+	
+    Cell* iblock_prt = &place_hoders.at(4);
+    Cell* otherblock_prt = &the_board.at(0).at(4);
+    
+    cur_block = make_unique<ZBlock>(level,otherblock_prt);
 	nextBlock();
 	return cur_block->isSuccessful();
 }
