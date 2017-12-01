@@ -36,7 +36,9 @@
     <ClInclude Include="normal_blocks.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="special_blocks.h" />
+    <ClInclude Include="special_blocks.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cc">

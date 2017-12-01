@@ -123,6 +123,21 @@ void Board::computeNextBlock() {
 		else if (type == "T") {
 			next_block = WhoIam::T;
 		}
+		else if (type == "S") {
+			next_block = WhoIam::S;
+		}
+		else if (type == "I") {
+			next_block = WhoIam::I;
+		}
+		else if (type == "J") {
+			next_block = WhoIam::J;
+		}
+		else if (type == "Z") {
+			next_block = WhoIam::Z;
+		}
+		else {
+			computeNextBlock();
+		}
 	}
 	else {
 		int random = rand() % 36;//random is 0~35
@@ -191,8 +206,9 @@ void Board::setLevel(int level) {
 	this->level = level;
 }
 
-void Board::setSeq(string source) {
+bool Board::setSeq(string source) {
 	sequence.open(source);
+	return sequence.is_open();
 }
 
 std::ostream &operator<<(std::ostream &out, const Board &b) {

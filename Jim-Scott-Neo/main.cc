@@ -55,11 +55,10 @@ int main(int argc, char* argv[])
     string original_cmd;
 	string string_cmd;
 	string valid_cmd;
-	int n;
 
 	cout << b;
     while (!cin.eof()) {
-
+		int n = 0;
 		//seperate command time and command
 		cin >> original_cmd;
 		stringstream(original_cmd) >> n;
@@ -76,7 +75,16 @@ int main(int argc, char* argv[])
 		//seperated
 		readCmd(original_cmd, string_cmd, valid_cmd, b.changable_cmd);
 
-		if (valid_cmd == b.changable_cmd.norandom) {} //impliment when we have level 3,4 //norandom
+
+		bool isOver = false;
+		if (valid_cmd == b.changable_cmd.norandom) {//norandom
+			string file;
+			cin >> file;
+			if (!b.setSeq(file)) {
+				cout << "invalid file" << endl;
+				continue;
+			}
+		} //impliment when we have level 3,4 
 		else if (valid_cmd == b.changable_cmd.random) {}//random
 
 		else if (valid_cmd == "I" || valid_cmd == "J" || valid_cmd == "L") {}
@@ -87,15 +95,18 @@ int main(int argc, char* argv[])
 
 		else if (valid_cmd == b.changable_cmd.hint) {} //impliment last
 
-		else if (string_cmd == "sequence") {
+		else if (valid_cmd == b.changable_cmd.sequence) { //sequence
 			string file;
 			cin >> file;
-			b.setSeq(file);
+			if (!b.setSeq(file)) {
+				cout << "invalid file" << endl;
+				continue;
+			}
 		} //impliment for testing purpose
 
 		else if (string_cmd == "quit") break;
 		else {
-			bool isOver = false;
+			bool notvalid = false;
 			for (int i = 0; i < n; i++) {
 				if (valid_cmd == b.changable_cmd.left || valid_cmd == b.changable_cmd.right || valid_cmd == b.changable_cmd.down  ||
 					valid_cmd == b.changable_cmd.rRotate || valid_cmd == b.changable_cmd.lRotate) { // impliment first
@@ -111,14 +122,20 @@ int main(int argc, char* argv[])
 				else if (valid_cmd == "levelup") {}
 				else if (valid_cmd == "leveldown") {}
 
-				else {}; //error message here
+				else {//invalid cmd
+					notvalid = true;
+					break;
+				}; 
 			}
-			if (isOver) {
-				cout << "game over" << endl;
-				break;
+
+			if (notvalid) {//invalid msg here
+				continue;
 			}
 		}
-		cout << b;
+		if (isOver) {
+			cout << "game over" << endl;
+		}
+		else { cout << b; }
     }
 
 }

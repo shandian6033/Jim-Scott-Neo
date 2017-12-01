@@ -38,7 +38,7 @@ public:
 	int getHi()const;
 	WhoIam getNext()const;
 	void setLevel(int level);
-	void setSeq(string source);
+	bool setSeq(string source);
 	//~Board() = default;
 
 	friend std::ostream &operator<<(std::ostream &out, const Board &b);
