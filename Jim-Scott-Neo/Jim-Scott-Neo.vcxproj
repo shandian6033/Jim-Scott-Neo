@@ -68,6 +68,8 @@
     <ClCompile Include="board.cc" />
     <ClCompile Include="cell.cc" />
     <ClCompile Include="main.cc" />
+    <ClCompile Include="normal_blocks.cc" />
+    <ClCompile Include="special_blocks.cc" />
     <ClCompile Include="subject.cc" />
     <ClCompile Include="textdisplay.cc" />
   </ItemGroup>
@@ -76,7 +78,9 @@
     <ClInclude Include="board.h" />
     <ClInclude Include="cell.h" />
     <ClInclude Include="info.h" />
+    <ClInclude Include="normal_blocks.h" />
     <ClInclude Include="observer.h" />
+    <ClInclude Include="special_blocks.h" />
     <ClInclude Include="subject.h" />
     <ClInclude Include="textdisplay.h" />
     <ClInclude Include="utility.h" />

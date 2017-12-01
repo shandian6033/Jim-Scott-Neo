@@ -60,42 +60,5 @@ public:
 Cell* cellAt(Cell*, int, int);
 bool canFit(Cell* anchor,const vector<vector<WhoIam>>& compare_with);
 
-class LBlock: public Block
-{
-private:
-    
-public:
-    
-    LBlock(int, Cell*);
-    //void left()override;
-    //void right() override;
-    //void down() override;
-    //void drop() override;
-
-    //void rRotate() override;
-    //void lRotate() override;
-};
-
-class IBlock :public Block 
-{
-private:
-    void iRotate();
-public:
-    IBlock(int, Cell*);
-    
-    void rRotate() override;
-    void lRotate() override;
-
-};
-
-class OBlock :public Block
-{   
-public:
-    OBlock(int, Cell*);
-
-    void rRotate() override;
-    void lRotate() override;
-};
-
 
 #endif

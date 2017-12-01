@@ -33,6 +33,10 @@
     <ClInclude Include="utility.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="normal_blocks.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="special_blocks.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cc">
@@ -53,5 +57,9 @@
     <ClCompile Include="subject.cc">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="normal_blocks.cc">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="special_blocks.cc" />
   </ItemGroup>
 </Project>

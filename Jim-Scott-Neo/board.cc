@@ -1,5 +1,7 @@
-#include "board.h"
 #include <cstdlib>
+#include "board.h"
+#include "normal_blocks.h"
+#include "special_blocks.h"
 
 void Board::init(int row, int col) {
 
