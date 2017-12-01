@@ -47,7 +47,6 @@ void Block::down() {
 int Block::drop() {
 	int score = 0;
 	int count = 0;
-	int temp;
     modifyCellsUnderGrid(true);
     while (canFit(anchor->getDown(),small_grid)){
         anchor = anchor->getDown();

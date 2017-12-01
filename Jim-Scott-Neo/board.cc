@@ -80,7 +80,7 @@ void Board::nextBlock() {
 			next_block = WhoIam::O;
 		}
 		else if (type == "T") {
-			next_block == WhoIam::T;
+			next_block = WhoIam::T;
 		}
 	}
 	else {
