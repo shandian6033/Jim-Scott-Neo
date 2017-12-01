@@ -3,23 +3,35 @@
 #define NORMAL_BLOCKS_H
 #include "block.h"
 
-class LBlock : public Block
+class SBlock : public Block
 {
-private:
-
 public:
-
-    LBlock(int, Cell*);
-    //void left()override;
-    //void right() override;
-    //void down() override;
-    //void drop() override;
-
-    //void rRotate() override;
-    //void lRotate() override;
+    SBlock(int, Cell*);
 };
 
+class ZBlock : public Block
+{
+public:
+    ZBlock(int, Cell*);
+};
 
+class LBlock : public Block
+{
+public:
+    LBlock(int, Cell*);
+};
+
+class JBlock : public Block
+{
+public:
+    JBlock(int, Cell*);
+};
+
+class TBlock : public Block
+{
+public:
+    TBlock(int, Cell*);
+};
 
 #endif // !NORMAL_BLOCKS_H
 
