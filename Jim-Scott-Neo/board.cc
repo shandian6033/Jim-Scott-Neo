@@ -89,7 +89,7 @@ void Board::movement(std::string valid_cmd) {
 void Board::computeNextBlock() {
 	//cur_block = new LBlock{ &the_board.at(0).at(4) };
 	string type;
-	if (source >> type) {
+	if (sequence >> type) {
 		if (type == "L") {
 			next_block = WhoIam::L;
 		}
