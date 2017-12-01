@@ -138,10 +138,15 @@ int Cell::upCopy() {
     }
     else {
         setPiece(up->id, up->worth - 1);
+		living_time = up->age();
         up->upCopy();
     }
 
 	return score;
+}
+
+int Cell::age()const {
+	return living_time;
 }
 
 void Cell::grow() {
