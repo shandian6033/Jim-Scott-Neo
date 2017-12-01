@@ -79,6 +79,7 @@
     <ClInclude Include="observer.h" />
     <ClInclude Include="subject.h" />
     <ClInclude Include="textdisplay.h" />
+    <ClInclude Include="utility.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

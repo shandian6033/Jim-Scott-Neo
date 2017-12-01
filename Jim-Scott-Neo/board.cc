@@ -32,7 +32,7 @@ void Board::init(int row, int col) {
 				the_board.at(r).at(c).setLeft(the_board.at(r).at(c - 1));
 			}
 			if (c < col - 1) {
-				the_board.at(r).at(c).setLeft(the_board.at(r).at(c + 1));
+				the_board.at(r).at(c).setRight(the_board.at(r).at(c + 1));
 			}
 		}
 	}
