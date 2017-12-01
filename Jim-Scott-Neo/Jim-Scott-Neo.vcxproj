@@ -61,7 +61,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <RemoteCppCompileToolExe>g++ 14</RemoteCppCompileToolExe>
+    <RemoteCppCompileToolExe>g++ </RemoteCppCompileToolExe>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="block.cc" />

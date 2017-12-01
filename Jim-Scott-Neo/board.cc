@@ -112,7 +112,7 @@ void Board::nextBlock(int level) {
 }
 
 bool Board::setCur() {
-	cur_block = make_unique<Block>(level, &the_board.at(0).at(4), next_block);
+	cur_block = make_unique<LBlock>(level, &the_board.at(0).at(4));
 	nextBlock(level);
 	return cur_block->isSuccessful();
 }

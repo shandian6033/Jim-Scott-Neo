@@ -14,6 +14,9 @@ int main(int argc, char* argv[])
 	int col = 11;
 	b.init(row, col);
 	b.setLevel(1);
+	b.nextBlock(b.getLevel());
+	b.setCur();
+	b.nextBlock(b.getLevel());
 
     for (int i = 1; i < argc; i++) {
         string flag = argv[i];
@@ -52,6 +55,8 @@ int main(int argc, char* argv[])
 	string string_cmd;
 	string valid_cmd;
 	int n;
+
+	cout << b;
     while (!cin.eof()) {
 
 		//seperate command time and command
