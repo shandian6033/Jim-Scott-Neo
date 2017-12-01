@@ -54,22 +54,23 @@ int Block::drop() {
     }//droped to the lowest position.
     modifyCellsUnderGrid(false);
 
-	temp = anchor->eraseRow(); //erase row if possible
-	if (temp > -1) {
-		score += temp;
-		count++;
-	}
-	temp = anchor->getDown()->eraseRow();
-	if (temp > -1) {
-		score += temp;
-		count++;
-	}
-	temp = anchor->getDown()->getDown()->eraseRow();
-	if (temp > -1) {
-		score += temp;
-		count++;
-	}
-    //notifyObservers();
+	//temp = anchor->eraseRow(); //erase row if possible
+	//if (temp > -1) {
+	//	score += temp;
+	//	count++;
+	//}
+	//temp = anchor->getDown()->eraseRow();
+	//if (temp > -1) {
+	//	score += temp;
+	//	count++;
+	//}
+	//temp = anchor->getDown()->getDown()->eraseRow();
+	//if (temp > -1) {
+	//	score += temp;
+	//	count++;
+	//}
+
+    eraseCheck(score, count);
 
 	score += (count + level) ^ 2;
 	return score;
@@ -119,7 +120,19 @@ vector<vector<WhoIam>>& Block::ifRotated(bool is_clockwise) {
     }
     return ans;
 }
-
+void Block::eraseCheck(int& score, int& count) {
+    for (int r = 0;r < (int)small_grid.size(); r++) {
+        for (int c = 0;c < (int)small_grid.at(0).size(); c++) {
+            if (small_grid.at(r).at(c) == my_type) {
+                int temp = cellAt(anchor,r, c)->eraseRow();
+                if (temp > -1) {
+                    score += temp;
+                    count++;
+                }
+            }
+        }
+    }
+}
 // LBlock
 // public
 LBlock::LBlock(int level, Cell* anchor) :Block{ level, anchor, WhoIam::L } {

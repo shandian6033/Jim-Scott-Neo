@@ -33,6 +33,7 @@ private:
     // intergrad both right and left rotate
 	const int level;
     vector<vector<WhoIam>>& ifRotated(bool);
+    void eraseCheck(int& score, int& count);
 protected:
     Cell* anchor;
     const WhoIam my_type;
