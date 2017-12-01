@@ -40,19 +40,19 @@ void Board::init(int row, int col) {
 
 void Board::movement(std::string valid_cmd) {
 	if (valid_cmd == changable_cmd.left) {//considering abbreviation
-		cur_block->left();
+		cur_block.get()->left();
 	}
 	else if (valid_cmd == changable_cmd.right) {
-		cur_block->right();
+		cur_block.get()->right();
 	}
 	else if (valid_cmd == changable_cmd.down) {
-		cur_block->down();
+		cur_block.get()->down();
 	}
 	else if (valid_cmd == changable_cmd.rRotate) {
-		cur_block->rRotate();
+		cur_block.get()->rRotate();
 	}
 	else if (valid_cmd == changable_cmd.lRotate) {
-		cur_block->lRotate();
+		cur_block.get()->lRotate();
 	}
 	else{
 		score += cur_block->drop();
@@ -69,7 +69,7 @@ void Board::movement(std::string valid_cmd) {
 	}
 }
 
-void Board::nextBlock(int level) {
+void Board::nextBlock() {
 	//cur_block = new LBlock{ &the_board.at(0).at(4) };
 	string type;
 	if (source >> type) {
@@ -113,7 +113,7 @@ void Board::nextBlock(int level) {
 
 bool Board::setCur() {
 	cur_block = make_unique<LBlock>(level, &the_board.at(0).at(4));
-	nextBlock(level);
+	nextBlock();
 	return cur_block->isSuccessful();
 }
 
@@ -134,7 +134,7 @@ WhoIam Board::getNext()const{
 }
 
 void Board::setLevel(int level) {
-	level = level;
+	this->level = level;
 }
 
 std::ostream &operator<<(std::ostream &out, const Board &b) {
