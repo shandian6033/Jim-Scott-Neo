@@ -7,9 +7,14 @@ void Board::init(int row, int col) {
 
     length = row;
     width = col;
+    score = 0;
+    hi_score = 0;
 
     the_board.clear();
-    for (int r = 0; r < row + 1; r++) { //setup the_board
+    horizontal_place_holders.clear();
+    vertical_place_holders.clear();
+
+    for (int r = 0; r < row; r++) { //setup the_board
         std::vector<Cell> new_row;
         for (int c = 0; c < col; c++) {
             new_row.emplace_back(Cell(r, c));
@@ -17,12 +22,15 @@ void Board::init(int row, int col) {
         the_board.emplace_back(new_row);
     }
 
-    for (int c = 0; c < col; c++) { //setup place_hoders
-        place_hoders.emplace_back(Cell(-1, c));
+    for (int c = 0; c < col; c++) { //setup row -1
+        horizontal_place_holders.emplace_back(Cell(-1, c));
     }
 
-    score = 0;
-    hi_score = 0;
+    for (int r = 0; r < row; r++) { //setup col -1
+        vertical_place_holders.emplace_back(Cell(r, -1));
+    }
+
+
     td.clear();
 
     for (int r = 0; r < row; r++) {// setup ptr relationship in the_board
@@ -37,19 +45,35 @@ void Board::init(int row, int col) {
             if (c > 0) {
                 the_board.at(r).at(c).setLeft(the_board.at(r).at(c - 1));
             }
+            else if(c == 0)
+            {
+                the_board.at(r).at(c).setLeft(vertical_place_holders.at(r));
+            }
             if (c < col - 1) {
                 the_board.at(r).at(c).setRight(the_board.at(r).at(c + 1));
             }
         }
     }
 
-    for (int c = 0; c < col; c++) {// setup prt relationship in place_holder
-        place_hoders.at(c).setDown(the_board.at(0).at(c));
+    for (int c = 0; c < col; c++) {// setup prt relationship in row -1
+        horizontal_place_holders.at(c).setPiece(WhoIam::Placeholder,-1);
+        horizontal_place_holders.at(c).setDown(the_board.at(0).at(c));
         if (c > 0) {
-            place_hoders.at(c).setLeft(place_hoders.at(c - 1));
+            horizontal_place_holders.at(c).setLeft(horizontal_place_holders.at(c - 1));
         }
         if (c < col - 1) {
-            place_hoders.at(c).setRight(place_hoders.at(c + 1));
+            horizontal_place_holders.at(c).setRight(horizontal_place_holders.at(c + 1));
+        }
+    }
+
+    for (int r = 0; r < row; r++) {// setup prt relationship in col -1
+        vertical_place_holders.at(r).setPiece(WhoIam::Placeholder, -1);
+        vertical_place_holders.at(r).setRight(the_board.at(r).at(0));
+        if (r > 0) {
+            vertical_place_holders.at(r).setUp(vertical_place_holders.at(r - 1));
+        }
+        if (r < row - 1) {
+            vertical_place_holders.at(r).setDown(vertical_place_holders.at(r + 1));
         }
     }
 
@@ -130,7 +154,7 @@ void Board::computeNextBlock() {
 
 bool Board::setCur() {
 	
-    Cell* iblock_prt = &place_hoders.at(4);
+    Cell* iblock_prt = &horizontal_place_holders.at(4);
     Cell* otherblock_prt = &the_board.at(0).at(4);
     
     if(next_block == WhoIam::S)cur_block = make_unique<SBlock>(level, otherblock_prt);

@@ -15,7 +15,8 @@ class Board{
     int score, level, hi_score;
 
 	std::vector<std::vector<Cell>> the_board;
-    std::vector<Cell> place_hoders; //only used for IBlock
+    std::vector<Cell> horizontal_place_holders; //row -1,only used for IBlock
+    std::vector<Cell> vertical_place_holders; //col -1, anchor can go out of the board
 	unique_ptr<Block> cur_block;
 	WhoIam next_block;
 
