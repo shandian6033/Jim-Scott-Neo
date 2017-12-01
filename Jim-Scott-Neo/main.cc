@@ -87,6 +87,12 @@ int main(int argc, char* argv[])
 
 		else if (valid_cmd == b.changable_cmd.hint) {} //impliment last
 
+		else if (string_cmd == "sequence") {
+			string file;
+			cin >> file;
+			b.setSeq(file);
+		} //impliment for testing purpose
+
 		else if (string_cmd == "quit") break;
 		else {
 			bool isOver = false;
@@ -104,8 +110,6 @@ int main(int argc, char* argv[])
 				}
 				else if (valid_cmd == "levelup") {}
 				else if (valid_cmd == "leveldown") {}
-
-				else if (string_cmd == "sequence") {} //impliment for testing purpose
 
 				else {}; //error message here
 			}

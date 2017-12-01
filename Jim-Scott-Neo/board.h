@@ -22,7 +22,7 @@ class Board{
 	TextDisplay td{ 11,15,*this };//this may lost
 	std::unique_ptr<Observer> display;
 
-	ifstream source;
+	ifstream sequence;
 
 
 public:
@@ -37,6 +37,7 @@ public:
 	int getHi()const;
 	WhoIam getNext()const;
 	void setLevel(int level);
+	void setSeq(string source);
 	//~Board() = default;
 
 	friend std::ostream &operator<<(std::ostream &out, const Board &b);

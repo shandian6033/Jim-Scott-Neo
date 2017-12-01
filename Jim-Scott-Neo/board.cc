@@ -165,6 +165,10 @@ void Board::setLevel(int level) {
 	this->level = level;
 }
 
+void Board::setSeq(string source) {
+	sequence.open(source);
+}
+
 std::ostream &operator<<(std::ostream &out, const Board &b) {
 	//out << "Level: " << b.level << endl;
 	//out << "Score: " << b.score << endl;
