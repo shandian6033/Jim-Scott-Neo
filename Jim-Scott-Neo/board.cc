@@ -9,6 +9,7 @@ void Board::init(int row, int col) {
 	length = row;
 	setLevel(0);
 	is_slow = 0;
+	lifetime = 10;
 	not_over = true;
 }
 
@@ -137,7 +138,8 @@ void Board::movement(std::string valid_cmd) {
 		for (int r = 0; r < length; r++) {
 			for (int c = 0; c < width; c++) {
 				if (the_board.at(r).at(c).getInfo().id != WhoIam::Null && the_board.at(r).at(c).getInfo().id != WhoIam::X) {
-					the_board.at(r).at(c).grow();
+					if(level != 5)the_board.at(r).at(c).grow();
+					else{ the_board.at(r).at(c).grow(lifetime); }
 				}
 			}
 		}
@@ -222,7 +224,7 @@ void Board::computeNextBlock() {
 				next_block = WhoIam::T;
 			}
 		}
-		else if (level == 3 || level == 4) {
+		else  {
 			int random = rand() % 9;//random is 0~8
 			if (random < 2) {//2
 				next_block = WhoIam::S;
@@ -291,6 +293,14 @@ void Board::setLevel(int level) {
 bool Board::setSeq(string source) {
 	sequence.open(source);
 	return sequence.is_open();
+}
+
+void Board::setLife(int lifetime) {
+	this->lifetime = lifetime;
+}
+
+void Board::clearSeq() {
+	sequence.clear();
 }
 
 std::ostream &operator<<(std::ostream &out, const Board &b) {

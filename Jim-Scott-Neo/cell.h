@@ -34,7 +34,7 @@ public:
     Cell* getDown()const;
 
 	int age()const;
-	void grow();
+	void grow(int lifetime = -1);
     int eraseRow(); //erase the entire row if possible and return score earned by eliminate block
 	Info getInfo() const override;
 };

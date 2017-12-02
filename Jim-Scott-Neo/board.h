@@ -14,6 +14,7 @@ class Board{
 	int length, width;
     int score, level, hi_score;
 	int is_slow;
+	int lifetime;//for lv5
 
 	std::vector<std::vector<Cell>> the_board;
     std::vector<Cell> horizontal_place_holders; //row -1,only used for IBlock
@@ -43,6 +44,8 @@ public:
 	WhoIam getNext()const;
 	void setLevel(int level);
 	bool setSeq(string source);
+	void setLife(int lifetime);
+	void clearSeq();
 	//~Board() = default;
 
 	friend std::ostream &operator<<(std::ostream &out, const Board &b);

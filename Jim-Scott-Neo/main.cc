@@ -85,26 +85,24 @@ int main(int argc, char* argv[])
 		readCmd(original_cmd, string_cmd, valid_cmd, b.changable_cmd);
 
 
-		if (valid_cmd == b.changable_cmd.norandom) { //impliment when we have level 3,4 //nonrandom
-			cin >> file_name;
+		if (valid_cmd == "I" || valid_cmd == "J" || valid_cmd == "L") {}
+		else if (valid_cmd == b.changable_cmd.norandom) { //impliment when we have level 3,4 //nonrandom
+			if (!(in >> file_name))cin >> file_name;
 			if (!b.setSeq(file_name)) {
 				cerr << "invalid file" << endl;
 				continue;
 			}
 		}  
-		else if (valid_cmd == b.changable_cmd.random) {}//random
-
-		else if (valid_cmd == "I" || valid_cmd == "J" || valid_cmd == "L") {}
-
+		else if (valid_cmd == b.changable_cmd.random) {
+			b.clearSeq();
+		}//random
 		else if (valid_cmd == b.changable_cmd.restart) {//restart
 			if (b.getLevel() == 0) {
 				if (!b.setSeq(file_name))cout << "cannot find sequence.txt" << endl;
 			}
 			b.restart();
 		} // impliment first
-
 		else if (valid_cmd == b.changable_cmd.hint) {} //impliment last
-
 		else if (valid_cmd == b.changable_cmd.sequence) { //sequence
 			cin >> file_name;
 			in.open(file_name);
@@ -113,7 +111,6 @@ int main(int argc, char* argv[])
 			}
 			continue;
 		} //impliment for testing purpose
-
 		else if(valid_cmd == b.changable_cmd.rename){
 			string old, new_name;
 			if (in >> old) {
@@ -125,7 +122,12 @@ int main(int argc, char* argv[])
 			}
 			setName(old, new_name, b.changable_cmd);
 		}
-
+		else if (valid_cmd == b.changable_cmd.life){
+			int lifetime;
+			if (in >> lifetime) {}
+			else { cin >> lifetime; }
+			b.setLife(lifetime);
+		}
 		else if (string_cmd == b.changable_cmd.quit) break;
 		else {
 			bool notvalid = false;

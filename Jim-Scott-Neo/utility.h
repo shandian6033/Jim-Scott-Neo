@@ -72,6 +72,7 @@ void setName(std::string old, std::string new_name, CmdList &myCmd) {
 	else if (old == myCmd.sequence)myCmd.sequence = new_name;
 	else if (old == myCmd.rename)myCmd.rename = new_name;
 	else if (old == myCmd.quit)myCmd.quit = new_name;
+	else if (old == myCmd.life)myCmd.life = new_name;
 }
 #endif // !UTILITY_H
 
