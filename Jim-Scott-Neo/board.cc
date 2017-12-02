@@ -10,7 +10,6 @@ void Board::init(int row, int col) {
 	setLevel(0);
 	is_slow = 0;
 	not_over = true;
-	restart();
 }
 
 void Board::restart() {
@@ -287,9 +286,6 @@ WhoIam Board::getNext()const{
 
 void Board::setLevel(int level) {
 	if (level > -1 && level < 6)this->level = level;
-	if (this->level == 0) {
-		if (!setSeq("sequence.txt"))cout << "not find sequence.txt" << endl;
-	}
 }
 
 bool Board::setSeq(string source) {

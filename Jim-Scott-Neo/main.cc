@@ -10,12 +10,13 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     //reading flags commands
-	string file_name;
+	string file_name = "seqeunce.txt";
 	Board b;
 	int row = 15;
 	int col = 11;
 	//b.computeNextBlock();
 
+	b.init(row, col);
     for (int i = 1; i < argc; i++) {
         string flag = argv[i];
         //cout << flag << endl;
@@ -34,7 +35,7 @@ int main(int argc, char* argv[])
         }
         else if (flag == "-scriptfile"){
             file_name = argv[i + 1];
-			b.setSeq(file_name);
+			if (b.getLevel() != 0)b.setSeq(file_name);
             i++;
         }
         else if (flag == "-statlevel") {
@@ -55,7 +56,10 @@ int main(int argc, char* argv[])
 
 	ifstream in;
 	//game start here
-	b.init(row, col);
+	if (b.getLevel() == 0) {
+		if (!b.setSeq(file_name))cout << "cannot find sequence.txt" << endl;
+	}
+	b.restart();
 	cout << b;
     while (true) {
 		int n = 0;
@@ -93,6 +97,9 @@ int main(int argc, char* argv[])
 		else if (valid_cmd == "I" || valid_cmd == "J" || valid_cmd == "L") {}
 
 		else if (valid_cmd == b.changable_cmd.restart) {//restart
+			if (b.getLevel() == 0) {
+				if (!b.setSeq(file_name))cout << "cannot find sequence.txt" << endl;
+			}
 			b.restart();
 		} // impliment first
 
