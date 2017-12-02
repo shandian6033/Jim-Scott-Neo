@@ -66,8 +66,8 @@ int main(int argc, char* argv[])
 		//read command
 		if (in >> original_cmd) {}
 		else {
-			if (cin.eof())break;
 			cin >> original_cmd;
+			if (cin.eof())break;
 		}
 		//seperate command time and command
 		stringstream(original_cmd) >> n;
