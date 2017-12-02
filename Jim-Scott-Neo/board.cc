@@ -95,9 +95,11 @@ void Board::restart() {
 void Board::movement(std::string valid_cmd) {
 	if (valid_cmd == changable_cmd.left) {//considering abbreviation
 		cur_block.get()->left();
+		if (level > 2) cur_block.get()->down();
 	}
 	else if (valid_cmd == changable_cmd.right) {
 		cur_block.get()->right();
+		if (level > 2) cur_block.get()->down();
 	}
 	else if (valid_cmd == changable_cmd.down) {
 		cur_block.get()->down();
@@ -113,7 +115,7 @@ void Board::movement(std::string valid_cmd) {
 		temp = cur_block->drop();
 		score += temp;
 
-		if (level == 4) {
+		if (level == 4 || level == 6) {
 			if (temp == 0)is_slow++;
 			else is_slow = 0;
 
@@ -140,7 +142,7 @@ void Board::movement(std::string valid_cmd) {
 		for (int r = 0; r < length; r++) {
 			for (int c = 0; c < width; c++) {
 				if (the_board.at(r).at(c).getInfo().id != WhoIam::Null && the_board.at(r).at(c).getInfo().id != WhoIam::X) {
-					if(level != 5)the_board.at(r).at(c).grow();
+					if(level < 5)the_board.at(r).at(c).grow();
 					else{ the_board.at(r).at(c).grow(lifetime); }
 				}
 			}
@@ -289,7 +291,7 @@ WhoIam Board::getNext()const{
 }
 
 void Board::setLevel(int level) {
-	if (level > -1 && level < 6)this->level = level;
+	if (level > -1 && level < 7)this->level = level;
 }
 
 bool Board::setSeq(string source) {
