@@ -8,13 +8,14 @@
 class Board;
 
 class GraphicsDisplay: public Observer{
-    const int cell_size = 46;
+    const int cell_size = 40;
+    const int global_offset = 3; //# of blocks
     const int width, height; // # of blocks
     const int win_width, win_height; // # of pixels
     const Board* my_board;
     Xwindow xw;
 
-    
+    void displayNextBlock(WhoIam);
     
  public:
   GraphicsDisplay(int width, int length, const Board& my_board);
