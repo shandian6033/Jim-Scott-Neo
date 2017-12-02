@@ -38,7 +38,7 @@ public:
 	void init(int row, int col);
 	void restart();
 	void computeNextBlock();//set next_block
-	void setCur(); //return false if no Block can be generated. Then game should be over.
+	void setCur(WhoIam); //return false if no Block can be generated. Then game should be over.
 	void movement(std::string valid_cmd);
 
 	int getLevel()const;

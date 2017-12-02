@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
 		//seperate command time and command
 		stringstream(original_cmd) >> n;
 		std::string s = std::to_string(n);
-		int digit = s.length();
+		int digit = static_cast<int>(s.length());
 		if (n != 0)stringstream(original_cmd).ignore(digit) >> string_cmd;
 		else {
 			if (original_cmd.at(0) == '0')continue; //should start reading new cmd
@@ -85,7 +85,27 @@ int main(int argc, char* argv[])
 		readCmd(original_cmd, string_cmd, valid_cmd, b.changable_cmd);
 
 
-		if (valid_cmd == "I" || valid_cmd == "J" || valid_cmd == "L") {}
+		if (string_cmd == "I") {
+			b.setCur(WhoIam::I);
+		}
+		else if (string_cmd == "L") {
+			b.setCur(WhoIam::L);
+		}
+		else if (string_cmd == "J") {
+			b.setCur(WhoIam::J);
+		}
+		else if (string_cmd == "Z") {
+			b.setCur(WhoIam::Z);
+		}
+		else if (string_cmd == "S") {
+			b.setCur(WhoIam::S);
+		}
+		else if (string_cmd == "O") {
+			b.setCur(WhoIam::O);
+		}
+		else if (string_cmd == "T") {
+			b.setCur(WhoIam::T);
+		}
 		else if (valid_cmd == b.changable_cmd.norandom) { //impliment when we have level 3,4 //nonrandom
 			if (!(in >> file_name))cin >> file_name;
 			if (!b.setSeq(file_name)) {
@@ -138,7 +158,7 @@ int main(int argc, char* argv[])
 				}
 				else if (valid_cmd == b.changable_cmd.drop) {
 					b.movement(valid_cmd);
-					b.setCur();
+					b.setCur(b.getNext());
 					if (!b.not_over) break;//game over here. You lose.
 				}
 				else if (valid_cmd == b.changable_cmd.levelup) { b.setLevel(b.getLevel() + 1); } //level up

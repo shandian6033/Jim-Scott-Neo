@@ -87,7 +87,7 @@ void Board::restart() {
     }
 
 	computeNextBlock();
-	setCur();
+	setCur(next_block);
 
 	if (level == 0)setLevel(0);
 }
@@ -95,11 +95,9 @@ void Board::restart() {
 void Board::movement(std::string valid_cmd) {
 	if (valid_cmd == changable_cmd.left) {//considering abbreviation
 		cur_block.get()->left();
-		if (level > 2) cur_block.get()->down();
 	}
 	else if (valid_cmd == changable_cmd.right) {
 		cur_block.get()->right();
-		if (level > 2) cur_block.get()->down();
 	}
 	else if (valid_cmd == changable_cmd.down) {
 		cur_block.get()->down();
@@ -255,20 +253,20 @@ void Board::computeNextBlock() {
 	}
 }
 
-void Board::setCur() {
+void Board::setCur(WhoIam next) {
 	
     Cell* iblock_prt = &horizontal_place_holders.at(4);
     Cell* otherblock_prt = &the_board.at(0).at(4);
     
     //cur_block = make_unique<IBlock>(level, iblock_prt);
 
-    if(next_block == WhoIam::S)cur_block = make_unique<SBlock>(level, otherblock_prt);
-    else if (next_block == WhoIam::Z)cur_block = make_unique<ZBlock>(level, otherblock_prt);
-    else if (next_block == WhoIam::L)cur_block = make_unique<LBlock>(level, otherblock_prt);
-    else if (next_block == WhoIam::J)cur_block = make_unique<JBlock>(level, otherblock_prt);
-    else if (next_block == WhoIam::T)cur_block = make_unique<TBlock>(level, otherblock_prt);
-    else if (next_block == WhoIam::I)cur_block = make_unique<IBlock>(level, iblock_prt);
-    else if (next_block == WhoIam::O)cur_block = make_unique<OBlock>(level, otherblock_prt);
+    if(next == WhoIam::S)cur_block = make_unique<SBlock>(level, otherblock_prt);
+    else if (next == WhoIam::Z)cur_block = make_unique<ZBlock>(level, otherblock_prt);
+    else if (next == WhoIam::L)cur_block = make_unique<LBlock>(level, otherblock_prt);
+    else if (next == WhoIam::J)cur_block = make_unique<JBlock>(level, otherblock_prt);
+    else if (next == WhoIam::T)cur_block = make_unique<TBlock>(level, otherblock_prt);
+    else if (next == WhoIam::I)cur_block = make_unique<IBlock>(level, iblock_prt);
+    else if (next == WhoIam::O)cur_block = make_unique<OBlock>(level, otherblock_prt);
 
 	computeNextBlock();
 	not_over = cur_block->isSuccessful();
