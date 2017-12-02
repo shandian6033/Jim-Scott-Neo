@@ -10,7 +10,7 @@ void Block::rRotate() {
     if (canFit(anchor,temp)) {
         small_grid.clear();
         small_grid = temp;
-        
+        if (level > 2) down();
     }
     modifyCellsUnderGrid(false); //write original WhoIam
 }
@@ -20,6 +20,7 @@ void Block::lRotate() {
     if (canFit(anchor,temp)) {
         small_grid.clear();
         small_grid = temp;
+        if (level > 2) down();
     }
     modifyCellsUnderGrid(false);
 }
@@ -27,6 +28,7 @@ void Block::left() {
     modifyCellsUnderGrid(true);
     if (canFit(anchor->getLeft(), small_grid)) {
         anchor = anchor->getLeft();
+        if (level > 2) down();
     }
     modifyCellsUnderGrid(false);
 }
@@ -34,6 +36,7 @@ void Block::right() {
     modifyCellsUnderGrid(true);
     if (canFit(anchor->getRight(), small_grid)) {
         anchor = anchor->getRight();
+        if (level > 2) down();
     }
     modifyCellsUnderGrid(false);
 }
@@ -173,8 +176,8 @@ bool canFit(Cell* anchor,const vector<vector<WhoIam>>& compare_with) { //waring,
 
     bool ans = true;
     //iterate row and then column
-    for (int r = 0;r < (int)compare_with.size(); r++) {
-        for (int c = 0;c < (int)compare_with.at(0).size(); c++) {
+    for (int r = 0;r < static_cast<int>(compare_with.size()); r++) {
+        for (int c = 0;c < static_cast<int>(compare_with.at(0).size()); c++) {
             WhoIam what_on_me = compare_with.at(r).at(c);
             if (what_on_me != WhoIam::Null) { //if what I have is not null, I contain something
                 Cell* p = cellAt(anchor, r, c); //p is the actual cell on board 
