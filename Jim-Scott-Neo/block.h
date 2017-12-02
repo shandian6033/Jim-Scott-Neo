@@ -40,9 +40,8 @@ protected:
     vector<vector<WhoIam>> small_grid;
     bool is_successful; //the block is successfully generated or not, usd to check gameover
 
-    void modifyCellsUnderGrid(bool is_erase) const; //can erase the original type or set new type;
+     //can erase the original type or set new type;
 public:
-
 
 	Block(int, Cell*, WhoIam); ;
 
@@ -54,6 +53,7 @@ public:
     virtual void rRotate();
     virtual void lRotate();
 
+    void modifyCellsUnderGrid(bool is_erase) const;
     bool isSuccessful();
 };
 

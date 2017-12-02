@@ -272,6 +272,12 @@ void Board::setCur(WhoIam next) {
 	not_over = cur_block->isSuccessful();
 }
 
+void Board::changeBlock(WhoIam what_block) {
+
+    cur_block.get()->modifyCellsUnderGrid(true);
+    setCur(what_block);
+}
+
 int Board::getLevel()const {
 	return level;
 }

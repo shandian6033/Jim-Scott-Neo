@@ -86,25 +86,25 @@ int main(int argc, char* argv[])
 
 
 		if (string_cmd == "I") {
-			b.setCur(WhoIam::I);
+			b.changeBlock(WhoIam::I);
 		}
 		else if (string_cmd == "L") {
-			b.setCur(WhoIam::L);
+			b.changeBlock(WhoIam::L);
 		}
 		else if (string_cmd == "J") {
-			b.setCur(WhoIam::J);
+			b.changeBlock(WhoIam::J);
 		}
 		else if (string_cmd == "Z") {
-			b.setCur(WhoIam::Z);
+			b.changeBlock(WhoIam::Z);
 		}
 		else if (string_cmd == "S") {
-			b.setCur(WhoIam::S);
+			b.changeBlock(WhoIam::S);
 		}
 		else if (string_cmd == "O") {
-			b.setCur(WhoIam::O);
+			b.changeBlock(WhoIam::O);
 		}
 		else if (string_cmd == "T") {
-			b.setCur(WhoIam::T);
+			b.changeBlock(WhoIam::T);
 		}
 		else if (valid_cmd == b.changable_cmd.norandom) { //impliment when we have level 3,4 //nonrandom
 			if (!(in >> file_name))cin >> file_name;

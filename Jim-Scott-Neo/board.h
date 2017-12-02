@@ -26,8 +26,6 @@ class Board{
 	TextDisplay td{ 11,15,*this };
     //GraphicsDisplay gd{ 11,15,*this };
 
-	std::unique_ptr<Observer> display;
-
 	ifstream sequence;
 
 
@@ -38,8 +36,9 @@ public:
 	void init(int row, int col);
 	void restart();
 	void computeNextBlock();//set next_block
-	void setCur(WhoIam); //return false if no Block can be generated. Then game should be over.
-	void movement(std::string valid_cmd);
+	void setCur(WhoIam); //set not_over to false if no Block can be generated. Then game should be over.
+    void changeBlock(WhoIam); // redefine block type and cur position 
+    void movement(std::string valid_cmd);
 
 	int getLevel()const;
 	int getScore()const;
@@ -49,7 +48,6 @@ public:
 	bool setSeq(string source);
 	void setLife(int lifetime);
 	void clearSeq();
-	//~Board() = default;
 
 	friend std::ostream &operator<<(std::ostream &out,Board &b);
 };
