@@ -19,6 +19,7 @@ struct CmdList {
 	std::string restart = "restart";
 	std::string hint = "hint";
 	std::string sequence = "sequence";
+	std::string rename = "rename";
 
 	std::string quit = "quit";
 };

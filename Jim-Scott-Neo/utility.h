@@ -55,5 +55,23 @@ void readCmd(std::string original_cmd, std::string string_cmd,std::string &valid
 		valid_cmd = string_cmd;
 	}
 }
+
+void setName(std::string old, std::string new_name, CmdList &myCmd) {
+	if (old == myCmd.down)myCmd.down = new_name;
+	else if (old == myCmd.drop)myCmd.drop = new_name;
+	else if (old == myCmd.left)myCmd.left = new_name;
+	else if (old == myCmd.right)myCmd.right = new_name;
+	else if (old == myCmd.rRotate)myCmd.rRotate = new_name;
+	else if (old == myCmd.lRotate)myCmd.lRotate = new_name;
+	else if (old == myCmd.levelup)myCmd.levelup = new_name;
+	else if (old == myCmd.leveldown)myCmd.leveldown = new_name;
+	else if (old == myCmd.norandom)myCmd.norandom = new_name;
+	else if (old == myCmd.random)myCmd.random = new_name;
+	else if (old == myCmd.restart)myCmd.restart = new_name;
+	else if (old == myCmd.hint)myCmd.hint = new_name;
+	else if (old == myCmd.sequence)myCmd.sequence = new_name;
+	else if (old == myCmd.rename)myCmd.rename = new_name;
+	else if (old == myCmd.quit)myCmd.quit = new_name;
+}
 #endif // !UTILITY_H
 

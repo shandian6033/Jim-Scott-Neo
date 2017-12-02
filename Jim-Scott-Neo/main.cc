@@ -114,6 +114,18 @@ int main(int argc, char* argv[])
 			continue;
 		} //impliment for testing purpose
 
+		else if(valid_cmd == b.changable_cmd.rename){
+			string old, new_name;
+			if (in >> old) {
+				in >> new_name;
+			}
+			else {
+				cin >> old;
+				cin >> new_name;
+			}
+			setName(old, new_name, b.changable_cmd);
+		}
+
 		else if (string_cmd == b.changable_cmd.quit) break;
 		else {
 			bool notvalid = false;
