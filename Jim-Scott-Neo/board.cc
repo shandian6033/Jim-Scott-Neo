@@ -293,7 +293,6 @@ void Board::setLevel(int level) {
 }
 
 bool Board::setSeq(string source) {
-	sequence.close();
 	sequence.open(source);
 	return sequence.is_open();
 }
