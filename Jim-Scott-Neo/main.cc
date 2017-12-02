@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 			if (b.getLevel() != 0)b.setSeq(file_name);
             i++;
         }
-        else if (flag == "-statlevel") {
+        else if (flag == "-startlevel") {
             string temp = argv[i + 1];
             stringstream iss{ temp };
             int level;
