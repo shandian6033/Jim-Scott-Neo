@@ -10,7 +10,8 @@ class GraphicsDisplay: public Observer{
     const int cell_size = 46;
     const int win_width, win_height;
     const Board* my_board;
-  Xwindow xw;
+    Xwindow xw;
+    void updateText();
  public:
   GraphicsDisplay(int width, int length, const Board& my_board);
 
