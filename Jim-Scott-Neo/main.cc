@@ -53,13 +53,19 @@ int main(int argc, char* argv[])
 	string string_cmd;
 	string valid_cmd;
 
+	ifstream in;
 	//game start here
 	b.init(row, col);
 	cout << b;
-    while (!cin.eof()) {
+    while (true) {
 		int n = 0;
+		//read command
+		if (in >> original_cmd) {}
+		else {
+			if (cin.eof())break;
+			cin >> original_cmd;
+		}
 		//seperate command time and command
-		cin >> original_cmd;
 		stringstream(original_cmd) >> n;
 		std::string s = std::to_string(n);
 		int digit = s.length();
@@ -75,12 +81,10 @@ int main(int argc, char* argv[])
 		readCmd(original_cmd, string_cmd, valid_cmd, b.changable_cmd);
 
 
-		bool isOver = false;
 		if (valid_cmd == b.changable_cmd.norandom) { //impliment when we have level 3,4 //nonrandom
-			/*string file;
-			cin >> file;*/
+			cin >> file_name;
 			if (!b.setSeq(file_name)) {
-				cout << "invalid file" << endl;
+				cerr << "invalid file" << endl;
 				continue;
 			}
 		}  
@@ -96,10 +100,11 @@ int main(int argc, char* argv[])
 
 		else if (valid_cmd == b.changable_cmd.sequence) { //sequence
 			cin >> file_name;
-			if (!b.setSeq(file_name)) {
-				cout << "invalid file" << endl;
-				continue;
+			in.open(file_name);
+			if (!in.is_open()) {
+				cerr << "invalid file" << endl;
 			}
+			continue;
 		} //impliment for testing purpose
 
 		else if (string_cmd == b.changable_cmd.quit) break;
@@ -112,10 +117,8 @@ int main(int argc, char* argv[])
 				}
 				else if (valid_cmd == b.changable_cmd.drop) {
 					b.movement(valid_cmd);
-					if (!b.setCur()) {
-						isOver = true;
-						break;
-					}//game over here. You lose.
+					b.setCur();
+					if (!b.not_over) break;//game over here. You lose.
 				}
 				else if (valid_cmd == b.changable_cmd.levelup) { b.setLevel(b.getLevel() + 1); } //level up
 				else if (valid_cmd == b.changable_cmd.leveldown) { b.setLevel(b.getLevel() - 1); } //level down
@@ -130,7 +133,7 @@ int main(int argc, char* argv[])
 				continue;
 			}
 		}
-		if (isOver) {
+		if (!b.not_over) {
 			cout << "game over" << endl;
 		}
 		else { cout << b; }

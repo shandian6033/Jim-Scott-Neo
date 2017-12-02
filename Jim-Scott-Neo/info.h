@@ -1,7 +1,7 @@
 #ifndef INFO_H
 #define INFO_H
 #include <string>
-enum class WhoIam { O, J, L, S, Z, I, T, Null,Placeholder};
+enum class WhoIam { O, J, L, S, Z, I, T, X, Null, Placeholder};
 
 struct CmdList {
 	std::string left = "left";

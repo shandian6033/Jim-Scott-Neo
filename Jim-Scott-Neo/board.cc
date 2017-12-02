@@ -8,11 +8,13 @@ void Board::init(int row, int col) {
 	width = col;
 	length = row;
 	setLevel(0);
+	is_slow = 0;
+	not_over = true;
 	restart();
 }
 
 void Board::restart() {
-
+	not_over = true;
     score = 0;
 
     the_board.clear();
@@ -104,14 +106,38 @@ void Board::movement(std::string valid_cmd) {
 	else if (valid_cmd == changable_cmd.lRotate) {
 		cur_block.get()->lRotate();
 	}
-	else{
-		score += cur_block->drop();
+	else{//drop here
+		int temp;
+		temp = cur_block->drop();
+		score += temp;
+
+		if (level == 4) {
+			if (temp == 0)is_slow++;
+			else is_slow = 0;
+
+			if (is_slow == 5) {
+				if (the_board.at(0).at(5).getInfo().id != WhoIam::Null) {//game over //must temp == 0
+					not_over = false;
+				}
+				for (int r = 1; r < length; ++r) {
+					if(the_board.at(r).at(5).getInfo().id != WhoIam::Null){
+						the_board.at(r - 1).at(5).setPiece(WhoIam::X, isNull);
+						temp = the_board.at(r - 1).at(5).eraseRow();
+
+						if (temp > 0)score += 25;
+						break;
+					}
+				}
+				is_slow = 0;
+			}
+		}
+
 		if (score > hi_score) {
 			hi_score = score;
 		}
 		for (int r = 0; r < length; r++) {
 			for (int c = 0; c < width; c++) {
-				if (the_board.at(r).at(c).getInfo().id != WhoIam::Null) {
+				if (the_board.at(r).at(c).getInfo().id != WhoIam::Null && the_board.at(r).at(c).getInfo().id != WhoIam::X) {
 					the_board.at(r).at(c).grow();
 				}
 			}
@@ -224,7 +250,7 @@ void Board::computeNextBlock() {
 	}
 }
 
-bool Board::setCur() {
+void Board::setCur() {
 	
     Cell* iblock_prt = &horizontal_place_holders.at(4);
     Cell* otherblock_prt = &the_board.at(0).at(4);
@@ -240,7 +266,7 @@ bool Board::setCur() {
     else if (next_block == WhoIam::O)cur_block = make_unique<OBlock>(level, otherblock_prt);
 
 	computeNextBlock();
-	return cur_block->isSuccessful();
+	not_over = cur_block->isSuccessful();
 }
 
 int Board::getLevel()const {
