@@ -4,42 +4,47 @@
 #include "special_blocks.h"
 
 void Board::init(int row, int col) {
+	hi_score = 0;
+	width = col;
+	length = row;
+	setLevel(0);
+	restart();
+}
 
-    length = row;
-    width = col;
+void Board::restart() {
+
     score = 0;
-    hi_score = 0;
 
     the_board.clear();
     horizontal_place_holders.clear();
     vertical_place_holders.clear();
 
-    for (int r = 0; r < row; r++) { //setup the_board
+    for (int r = 0; r < length; r++) { //setup the_board
         std::vector<Cell> new_row;
-        for (int c = 0; c < col; c++) {
+        for (int c = 0; c < width; c++) {
             new_row.emplace_back(Cell(r, c));
         }
         the_board.emplace_back(new_row);
     }
 
-    for (int c = 0; c < col; c++) { //setup row -1
+    for (int c = 0; c < width; c++) { //setup row -1
         horizontal_place_holders.emplace_back(Cell(-1, c));
     }
 
-    for (int r = 0; r < row; r++) { //setup col -1
+    for (int r = 0; r < length; r++) { //setup col -1
         vertical_place_holders.emplace_back(Cell(r, -1));
     }
 
 
     td.clear();
 
-    for (int r = 0; r < row; r++) {// setup ptr relationship in the_board
-        for (int c = 0; c < col; c++) {
+    for (int r = 0; r < length; r++) {// setup ptr relationship in the_board
+        for (int c = 0; c < width; c++) {
             the_board.at(r).at(c).attach(&td);
             if (r > 0) {
                 the_board.at(r).at(c).setUp(the_board.at(r - 1).at(c));
             }
-            if (r < row - 1) {
+            if (r < length - 1) {
                 the_board.at(r).at(c).setDown(the_board.at(r + 1).at(c));
             }
             if (c > 0) {
@@ -49,30 +54,30 @@ void Board::init(int row, int col) {
             {
                 the_board.at(r).at(c).setLeft(vertical_place_holders.at(r));
             }
-            if (c < col - 1) {
+            if (c < width - 1) {
                 the_board.at(r).at(c).setRight(the_board.at(r).at(c + 1));
             }
         }
     }
 
-    for (int c = 0; c < col; c++) {// setup prt relationship in row -1
+    for (int c = 0; c < width; c++) {// setup prt relationship in row -1
         horizontal_place_holders.at(c).setPiece(WhoIam::Placeholder,-1);
         horizontal_place_holders.at(c).setDown(the_board.at(0).at(c));
         if (c > 0) {
             horizontal_place_holders.at(c).setLeft(horizontal_place_holders.at(c - 1));
         }
-        if (c < col - 1) {
+        if (c < width - 1) {
             horizontal_place_holders.at(c).setRight(horizontal_place_holders.at(c + 1));
         }
     }
 
-    for (int r = 0; r < row; r++) {// setup prt relationship in col -1
+    for (int r = 0; r < length; r++) {// setup prt relationship in col -1
         vertical_place_holders.at(r).setPiece(WhoIam::Placeholder, -1);
         vertical_place_holders.at(r).setRight(the_board.at(r).at(0));
         if (r > 0) {
             vertical_place_holders.at(r).setUp(vertical_place_holders.at(r - 1));
         }
-        if (r < row - 1) {
+        if (r < length - 1) {
             vertical_place_holders.at(r).setDown(vertical_place_holders.at(r + 1));
         }
     }

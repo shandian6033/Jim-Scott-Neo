@@ -29,6 +29,7 @@ class Board{
 public:
 	CmdList changable_cmd;
 	void init(int row, int col);
+	void restart();
 	void computeNextBlock();//set next_block
 	bool setCur(); //return false if no Block can be generated. Then game should be over.
 	void movement(std::string valid_cmd);

@@ -14,7 +14,6 @@ int main(int argc, char* argv[])
 	Board b;
 	int row = 15;
 	int col = 11;
-	b.setLevel(0);
 	//b.computeNextBlock();
 
     for (int i = 1; i < argc; i++) {
@@ -90,7 +89,7 @@ int main(int argc, char* argv[])
 		else if (valid_cmd == "I" || valid_cmd == "J" || valid_cmd == "L") {}
 
 		else if (valid_cmd == b.changable_cmd.restart) {//restart
-			b.init(row, col);
+			b.restart();
 		} // impliment first
 
 		else if (valid_cmd == b.changable_cmd.hint) {} //impliment last

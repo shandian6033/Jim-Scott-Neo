@@ -50,7 +50,7 @@ void TextDisplay:: notify(Subject &whoFrom) {
 		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'T';
     }
     else if (info_I_got.id == WhoIam::Null) {
-		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = '-';
+		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = ' ';
     }
 	else {
 		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = '*';
@@ -60,7 +60,7 @@ void TextDisplay:: notify(Subject &whoFrom) {
 void TextDisplay::clear() {
 	for (int r = 0; r < length; r++) {
 		for (int c = 0; c < width; ++c) {
-			theDisplay.at(r).at(c) = '-';
+			theDisplay.at(r).at(c) = ' ';
 		}
 	}
 }
