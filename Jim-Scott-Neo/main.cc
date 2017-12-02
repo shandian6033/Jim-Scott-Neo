@@ -125,6 +125,7 @@ int main(int argc, char* argv[])
 		else if (valid_cmd == b.changable_cmd.hint) {} //impliment last
 		else if (valid_cmd == b.changable_cmd.sequence) { //sequence
 			cin >> file_name;
+			in.close();
 			in.open(file_name);
 			if (!in.is_open()) {
 				cerr << "invalid file" << endl;
