@@ -275,7 +275,19 @@ void Board::setCur(WhoIam next) {
 void Board::changeBlock(WhoIam what_block) {
 
     cur_block.get()->modifyCellsUnderGrid(true);
-    setCur(what_block);
+
+    Cell* iblock_prt = &horizontal_place_holders.at(4);
+    Cell* otherblock_prt = &the_board.at(0).at(4);
+
+    //cur_block = make_unique<IBlock>(level, iblock_prt);
+
+    if (what_block == WhoIam::S)cur_block = make_unique<SBlock>(level, otherblock_prt);
+    else if (what_block == WhoIam::Z)cur_block = make_unique<ZBlock>(level, otherblock_prt);
+    else if (what_block == WhoIam::L)cur_block = make_unique<LBlock>(level, otherblock_prt);
+    else if (what_block == WhoIam::J)cur_block = make_unique<JBlock>(level, otherblock_prt);
+    else if (what_block == WhoIam::T)cur_block = make_unique<TBlock>(level, otherblock_prt);
+    else if (what_block == WhoIam::I)cur_block = make_unique<IBlock>(level, iblock_prt);
+    else if (what_block == WhoIam::O)cur_block = make_unique<OBlock>(level, otherblock_prt);
 }
 
 int Board::getLevel()const {
