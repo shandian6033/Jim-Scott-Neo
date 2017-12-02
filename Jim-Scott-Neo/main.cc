@@ -10,11 +10,11 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     //reading flags commands
+	string file_name;
 	Board b;
 	int row = 15;
 	int col = 11;
-	b.setLevel(1);
-	b.init(row, col);
+	b.setLevel(0);
 	//b.computeNextBlock();
 
     for (int i = 1; i < argc; i++) {
@@ -28,14 +28,14 @@ int main(int argc, char* argv[])
             stringstream iss { temp };
             int seed;
             if (iss >> seed) {
-                //set seed
+				srand(seed);
                 i++;
             }
             else cerr << "please enter valid seed" << endl;
         }
         else if (flag == "-scriptfile"){
-            string file_name = argv[i + 1];
-            //set order of generated block using file_name
+            file_name = argv[i + 1];
+			b.setSeq(file_name);
             i++;
         }
         else if (flag == "-statlevel") {
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
             stringstream iss{ temp };
             int level;
             if (iss >> level) {
-                //set the seed using ""
+				b.setLevel(level);
                 i++;
             }
             else cerr << "please enter valid level" <<endl;
@@ -54,6 +54,8 @@ int main(int argc, char* argv[])
 	string string_cmd;
 	string valid_cmd;
 
+	//game start here
+	b.init(row, col);
 	cout << b;
     while (!cin.eof()) {
 		int n = 0;
@@ -76,9 +78,9 @@ int main(int argc, char* argv[])
 
 		bool isOver = false;
 		if (valid_cmd == b.changable_cmd.norandom) { //impliment when we have level 3,4 //nonrandom
-			string file;
-			cin >> file;
-			if (!b.setSeq(file)) {
+			/*string file;
+			cin >> file;*/
+			if (!b.setSeq(file_name)) {
 				cout << "invalid file" << endl;
 				continue;
 			}
@@ -94,9 +96,8 @@ int main(int argc, char* argv[])
 		else if (valid_cmd == b.changable_cmd.hint) {} //impliment last
 
 		else if (valid_cmd == b.changable_cmd.sequence) { //sequence
-			string file;
-			cin >> file;
-			if (!b.setSeq(file)) {
+			cin >> file_name;
+			if (!b.setSeq(file_name)) {
 				cout << "invalid file" << endl;
 				continue;
 			}

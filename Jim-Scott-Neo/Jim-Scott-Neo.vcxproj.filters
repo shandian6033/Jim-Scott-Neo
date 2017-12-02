@@ -62,6 +62,8 @@
     <ClCompile Include="normal_blocks.cc">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="special_blocks.cc" />
+    <ClCompile Include="special_blocks.cc">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

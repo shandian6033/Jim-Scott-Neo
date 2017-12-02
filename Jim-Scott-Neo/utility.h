@@ -51,7 +51,9 @@ void readCmd(std::string original_cmd, std::string string_cmd,std::string &valid
 	else if (strncmp(changable_cmd.quit.c_str(), string_cmd.c_str(), strlen(string_cmd.c_str())) == 0) {//quit
 		valid_cmd = changable_cmd.quit;
 	}
-	//modified
+	else {
+		valid_cmd = string_cmd;
+	}
 }
 #endif // !UTILITY_H
 

@@ -79,6 +79,8 @@ void Board::init(int row, int col) {
 
 	computeNextBlock();
 	setCur();
+
+	if (level == 0)setLevel(0);
 }
 
 void Board::movement(std::string valid_cmd) {
@@ -254,6 +256,9 @@ WhoIam Board::getNext()const{
 
 void Board::setLevel(int level) {
 	if (level > -1 && level < 6)this->level = level;
+	if (this->level == 0) {
+		if (!setSeq("sequence.txt"))cout << "not find sequence.txt" << endl;
+	}
 }
 
 bool Board::setSeq(string source) {
