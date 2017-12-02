@@ -308,7 +308,7 @@ void Board::clearSeq() {
 std::ostream &operator<<(std::ostream &out, Board &b) {
 
 	out << b.td;
-    //b.gd.updateGraphic();
+    //b.gd.updateText();
 
 	return out;
 }
