@@ -305,14 +305,10 @@ void Board::clearSeq() {
 	sequence.clear();
 }
 
-std::ostream &operator<<(std::ostream &out, const Board &b) {
-	//out << "Level: " << b.level << endl;
-	//out << "Score: " << b.score << endl;
-	//out << "Hi Score: " << b.hi_score << endl;
-	//out << "-----------" << endl; //upper bound, hard code
+std::ostream &operator<<(std::ostream &out, Board &b) {
+
 	out << b.td;
-	//out << "-----------" << endl; //lower bound, hard code
-	//out << "Next:" << endl;
-	//out << *(b.cur_block);
+    //b.gd.updateGraphic();
+
 	return out;
 }

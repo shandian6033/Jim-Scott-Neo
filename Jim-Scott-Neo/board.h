@@ -51,7 +51,7 @@ public:
 	void clearSeq();
 	//~Board() = default;
 
-	friend std::ostream &operator<<(std::ostream &out, const Board &b);
+	friend std::ostream &operator<<(std::ostream &out,Board &b);
 };
 
 #endif // !BOARD_H
