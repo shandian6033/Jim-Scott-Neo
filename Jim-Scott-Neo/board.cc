@@ -129,6 +129,14 @@ void Board::movement(std::string valid_cmd) {
 						if (temp > 0)score += (level + 1) * (level + 1);
 						break;
 					}
+					else if (r == length - 1 && the_board.at(r).at(5).getInfo().id == WhoIam::Null) {
+						the_board.at(r).at(5).setPiece(WhoIam::X, isNull);
+
+						temp = the_board.at(r).at(5).eraseRow();
+
+						if (temp > 0)score += (level + 1) * (level + 1);
+						break;
+					}
 				}
 				is_slow = 0;
 			}
