@@ -124,7 +124,7 @@ void Board::movement(std::string valid_cmd) {
 						the_board.at(r - 1).at(5).setPiece(WhoIam::X, isNull);
 						temp = the_board.at(r - 1).at(5).eraseRow();
 
-						if (temp > 0)score += 25;
+						if (temp > 0)score += (level + 1) * (level + 1);
 						break;
 					}
 				}

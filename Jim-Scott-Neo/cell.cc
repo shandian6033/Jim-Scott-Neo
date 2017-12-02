@@ -152,13 +152,12 @@ int Cell::age()const {
 	return living_time;
 }
 
-void Cell::grow(int lifetime = -1) {
+void Cell::grow(int lifetime) {
 	living_time++;
 	if (lifetime > 0) {//means it is lv5 now
 		if (living_time >= lifetime) {
-			id = WhoIam::Null;
 			living_time = isNull;
-			worth = 0;
+			setPiece(WhoIam::Null, isNull);
 		}
 	}
 }
