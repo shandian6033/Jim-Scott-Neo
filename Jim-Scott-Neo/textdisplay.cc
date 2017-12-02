@@ -16,51 +16,51 @@
 //#endif // !TEXTDISPLAY_H
 
 
-TextDisplay::TextDisplay(int width, int length, const Board& my_board) :theDisplay{}, length{ length }, width{ width }, my_board{ &my_board } {
+TextDisplay::TextDisplay(int width, int length, const Board& my_board) :the_display{}, length{ length }, width{ width }, my_board{ &my_board } {
     for (int r=0; r<length; r++) {
 		std::vector<char> new_row;
         for (int c=0; c<width; ++c) {
             new_row.emplace_back(' ');
         }
-		theDisplay.emplace_back(new_row);
+		the_display.emplace_back(new_row);
     }
 }
 
 void TextDisplay:: notify(Subject &whoFrom) {
     Info info_I_got = whoFrom.getInfo();
     if (info_I_got.id == WhoIam::O) {
-        this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'O';
+        this->the_display.at(info_I_got.row).at(info_I_got.col) = 'O';
     }
     else if (info_I_got.id == WhoIam::J) {
-		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'J';
+		this->the_display.at(info_I_got.row).at(info_I_got.col) = 'J';
     }
     else if (info_I_got.id == WhoIam::L) {
-		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'L';
+		this->the_display.at(info_I_got.row).at(info_I_got.col) = 'L';
     }
     else if (info_I_got.id == WhoIam::S) {
-		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'S';
+		this->the_display.at(info_I_got.row).at(info_I_got.col) = 'S';
     }
     else if (info_I_got.id == WhoIam::Z) {
-		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'Z';
+		this->the_display.at(info_I_got.row).at(info_I_got.col) = 'Z';
     }
     else if (info_I_got.id == WhoIam::I) {
-		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'I';
+		this->the_display.at(info_I_got.row).at(info_I_got.col) = 'I';
     }
     else if (info_I_got.id == WhoIam::T) {
-		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = 'T';
+		this->the_display.at(info_I_got.row).at(info_I_got.col) = 'T';
     }
     else if (info_I_got.id == WhoIam::Null) {
-		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = ' ';
+		this->the_display.at(info_I_got.row).at(info_I_got.col) = ' ';
     }
 	else {
-		this->theDisplay.at(info_I_got.row).at(info_I_got.col) = '*';
+		this->the_display.at(info_I_got.row).at(info_I_got.col) = '*';
 	}
 }
 
 void TextDisplay::clear() {
 	for (int r = 0; r < length; r++) {
 		for (int c = 0; c < width; ++c) {
-			theDisplay.at(r).at(c) = ' ';
+			the_display.at(r).at(c) = ' ';
 		}
 	}
 }
@@ -77,7 +77,7 @@ std::ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	
 	for (int r = 0; r<td.length; ++r) {
         for (int c = 0; c<td.width; ++c) {
-            out << td.theDisplay.at(r).at(c);
+            out << td.the_display.at(r).at(c);
         }
         out << endl;
     }

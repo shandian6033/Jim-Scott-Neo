@@ -7,7 +7,7 @@
 class Board;
 
 class TextDisplay: public Observer {
-	std::vector<std::vector<char>> theDisplay;
+	std::vector<std::vector<char>> the_display;
 	const int length, width;
 	const Board* my_board;
 public:
