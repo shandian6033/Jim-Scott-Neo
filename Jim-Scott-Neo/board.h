@@ -3,6 +3,7 @@
 #include "cell.h"
 #include "block.h"
 #include "textdisplay.h"
+//#include "graphicsdisplay.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -22,7 +23,9 @@ class Board{
 	unique_ptr<Block> cur_block;
 	WhoIam next_block;
 
-	TextDisplay td{ 11,15,*this };//this may lost
+	TextDisplay td{ 11,15,*this };
+    //GraphicsDisplay gd{ 11,15,*this };
+
 	std::unique_ptr<Observer> display;
 
 	ifstream sequence;

@@ -39,10 +39,12 @@ void Board::restart() {
 
 
     td.clear();
+    //gd.clear();
 
     for (int r = 0; r < length; r++) {// setup ptr relationship in the_board
         for (int c = 0; c < width; c++) {
             the_board.at(r).at(c).attach(&td);
+            //the_board.at(r).at(c).attach(&gd);
             if (r > 0) {
                 the_board.at(r).at(c).setUp(the_board.at(r - 1).at(c));
             }
