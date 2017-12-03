@@ -163,49 +163,49 @@ void Board::movement(std::string valid_cmd) {
 }
 
 void Board::hint() {//will print
-	int compare = 0;
-	Cell* best_anchor = cur_block.get()->getAnchor();
-	
-	int c = cur_block.get()->getAnchor()->getInfo().col;
+    int compare = 0;
+    Cell* best_anchor = cur_block.get()->getAnchor();
 
-	if (cur_block.get()->getid() == WhoIam::S)temp_block = make_unique<SBlock>(level, cur_block.get()->getAnchor());
-	else if (cur_block.get()->getid() == WhoIam::Z)temp_block = make_unique<ZBlock>(level, cur_block.get()->getAnchor());
-	else if (cur_block.get()->getid() == WhoIam::L)temp_block = make_unique<LBlock>(level, cur_block.get()->getAnchor());
-	else if (cur_block.get()->getid() == WhoIam::J)temp_block = make_unique<JBlock>(level, cur_block.get()->getAnchor());
-	else if (cur_block.get()->getid() == WhoIam::T)temp_block = make_unique<TBlock>(level, cur_block.get()->getAnchor());
-	else if (cur_block.get()->getid() == WhoIam::I)temp_block = make_unique<IBlock>(level, cur_block.get()->getAnchor());
-	else if (cur_block.get()->getid() == WhoIam::O)temp_block = make_unique<OBlock>(level, cur_block.get()->getAnchor());
-	temp_block.get()->setGrid(cur_block.get()->getGrid());
-	temp_block.get()->setH();
+    int c = cur_block.get()->getAnchor()->getInfo().col;
 
-	cur_block.get()->modifyCellsUnderGrid(true);
+    if (cur_block.get()->getid() == WhoIam::S)temp_block = make_unique<SBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::Z)temp_block = make_unique<ZBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::L)temp_block = make_unique<LBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::J)temp_block = make_unique<JBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::T)temp_block = make_unique<TBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::I)temp_block = make_unique<IBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::O)temp_block = make_unique<OBlock>(level, cur_block.get()->getAnchor());
+    temp_block.get()->setGrid(cur_block.get()->getGrid());
+    temp_block.get()->setH();
 
-	for (int i = 0; i < width; ++i) {//try move
-		temp_block.get()->setAnchor(cur_block.get()->getAnchor());
-		if (i > c) {
-			for (int move_r = 0; move_r < i - c; ++move_r) {
-				temp_block.get()->right();
-			}
-		}
-		else {
-			for (int move_l = 0; move_l < c - i; ++move_l) {
-				temp_block.get()->left();
-			}
-		}
-		for (int j = 0; j < length; ++j) {
-			temp_block.get()->down();
-		}
-		int my_row = temp_block.get()->getAnchor()->getInfo().row;
-		if (my_row > compare) {
-			compare = my_row;
-			best_anchor = temp_block.get()->getAnchor();
-		}
-	}
-	temp_block.get()->setAnchor(best_anchor);
-	temp_block.get()->modifyCellsUnderGrid(false);
-	cout << *this;
-	temp_block.get()->modifyCellsUnderGrid(true);
-	cur_block.get()->modifyCellsUnderGrid(false);
+    cur_block.get()->modifyCellsUnderGrid(true);
+
+    for (int i = 0; i < width; ++i) {//try move
+        temp_block.get()->setAnchor(cur_block.get()->getAnchor());
+        if (i > c) {
+            for (int move_r = 0; move_r < i - c; ++move_r) {
+                temp_block.get()->right();
+            }
+        }
+        else {
+            for (int move_l = 0; move_l < c - i; ++move_l) {
+                temp_block.get()->left();
+            }
+        }
+        for (int j = 0; j < length; ++j) {
+            temp_block.get()->down();
+        }
+        int my_row = temp_block.get()->getAnchor()->getInfo().row;
+        if (my_row > compare) {
+            compare = my_row;
+            best_anchor = temp_block.get()->getAnchor();
+        }
+    }
+    temp_block.get()->setAnchor(best_anchor);
+    temp_block.get()->modifyCellsUnderGrid(false);
+    cout << *this;
+    temp_block.get()->modifyCellsUnderGrid(true);
+    cur_block.get()->modifyCellsUnderGrid(false);
 }
 
 void Board::computeNextBlock() {
