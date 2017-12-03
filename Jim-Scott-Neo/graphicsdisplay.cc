@@ -47,7 +47,10 @@ void GraphicsDisplay::notify(Subject &whoFrom) {
         xw.fillRectangle(x * cell_size, y * cell_size, cell_size, cell_size, Xwindow::DarkRed);
         break;
     case WhoIam::H:
-        xw.fillRectangle(x * cell_size, y * cell_size, cell_size, cell_size, Xwindow::Black);
+        xw.fillRectangle(x * cell_size, y * cell_size, cell_size, 3, Xwindow::Black);
+        xw.fillRectangle(x * cell_size, y * cell_size, 3, cell_size, Xwindow::Black);
+        xw.fillRectangle((x+1) * cell_size - 3, y* cell_size, 3, cell_size, Xwindow::Black);
+        xw.fillRectangle(x * cell_size, (y+1) * cell_size - 3,cell_size, 3, Xwindow::Black);
         break;
     default:
         xw.fillRectangle(x * cell_size, y * cell_size, cell_size, cell_size, Xwindow::Background);
