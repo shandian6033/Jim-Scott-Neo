@@ -19,6 +19,7 @@ void Board::init(int row, int col) {
 void Board::restart() {
 	not_over = true;
     score = 0;
+	is_slow = 0;
 
     the_board.clear();
     horizontal_place_holders.clear();
