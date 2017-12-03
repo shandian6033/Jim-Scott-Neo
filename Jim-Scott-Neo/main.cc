@@ -14,14 +14,12 @@ int main(int argc, char* argv[])
 	Board b;
 	int row = 15;
 	int col = 11;
-	//b.computeNextBlock();
-
-	b.init(row, col);
+	
     for (int i = 1; i < argc; i++) {
         string flag = argv[i];
         //cout << flag << endl;
         if (flag == "-text") {
-            // impliment for only text display (no graphic display)
+            b.has_graphic = false;
         }
         else if (flag == "-seed") {
             string temp = argv[i+1];
@@ -49,6 +47,8 @@ int main(int argc, char* argv[])
             else cerr << "please enter valid level" <<endl;
         }
     }
+    b.init(row, col);
+
     // runtime commands
     string original_cmd;
 	string string_cmd;

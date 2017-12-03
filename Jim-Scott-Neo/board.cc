@@ -11,6 +11,9 @@ void Board::init(int row, int col) {
 	is_slow = 0;
 	lifetime = 10;
 	not_over = true;
+
+    if (has_graphic) gd = make_unique<GraphicsDisplay>(width,length, *this );
+
 }
 
 void Board::restart() {
@@ -39,12 +42,13 @@ void Board::restart() {
 
 
     td.clear();
-    //gd.clear();
+    if(gd.get() != nullptr) gd.get()->clear();
 
     for (int r = 0; r < length; r++) {// setup ptr relationship in the_board
         for (int c = 0; c < width; c++) {
-            the_board.at(r).at(c).attach(&td);
-            //the_board.at(r).at(c).attach(&gd);
+            the_board.at(r).at(c).attach(&td); // text display
+            if (gd.get() != nullptr) the_board.at(r).at(c).attach(gd.get()); // graphic display
+
             if (r > 0) {
                 the_board.at(r).at(c).setUp(the_board.at(r - 1).at(c));
             }
@@ -387,7 +391,7 @@ void Board::clearSeq() {
 std::ostream &operator<<(std::ostream &out, Board &b) {
 
 	out << b.td;
-    //b.gd.updateText();
+    if(b.gd.get() != nullptr) b.gd.get()->updateText();
 
 	return out;
 }

@@ -3,7 +3,7 @@
 #include "cell.h"
 #include "block.h"
 #include "textdisplay.h"
-//#include "graphicsdisplay.h"
+#include "graphicsdisplay.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -25,6 +25,8 @@ class Board{
 	WhoIam next_block;
 
 	TextDisplay td{ 11,15,*this };
+    unique_ptr<GraphicsDisplay>gd;
+    
     //GraphicsDisplay gd{ 11,15,*this };
 
 	ifstream sequence;
@@ -32,6 +34,7 @@ class Board{
 
 public:
 	bool not_over;
+    bool has_graphic = true;
 
 	CmdList changable_cmd;
 	void init(int row, int col);
