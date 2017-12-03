@@ -3,7 +3,7 @@
 
 // Block
 // public
-Block::Block(int level, Cell* anchor, WhoIam my_type) :level{level}, anchor { anchor }, my_type{ my_type } {}
+Block::Block(int level, Cell* anchor, WhoIam my_type) :anchor { anchor }, my_type{ my_type },level{ level }{}
 void Block::rRotate() {
     //modifyCellsUnderGrid(true); //erase original WhoIam
     vector<vector<WhoIam>> temp = ifRotated(true); // rotate clockwise

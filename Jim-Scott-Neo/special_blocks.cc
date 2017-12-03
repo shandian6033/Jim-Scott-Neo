@@ -20,13 +20,15 @@ IBlock::IBlock(int level, Cell* anchor) :Block{ level, anchor, WhoIam::I } {
 void IBlock::lRotate() {
     modifyCellsUnderGrid(true);
     iRotate();
-    if (!canFit(anchor, small_grid) || anchor->getInfo().row == -1) iRotate();
+    if (!canFit(anchor, small_grid) || anchor->getInfo().row == -1) iRotate();   
+    else if (level > 2) down();
     modifyCellsUnderGrid(false);
 }
 void IBlock::rRotate() {
     modifyCellsUnderGrid(true);
     iRotate();
     if (!canFit(anchor, small_grid) || anchor->getInfo().row == -1) iRotate();
+    else if (level > 2) down();
     modifyCellsUnderGrid(false);
 }
 
@@ -65,5 +67,9 @@ OBlock::OBlock(int level, Cell* anchor) :Block{ level,anchor,WhoIam::O } {
     is_successful = canFit(anchor, small_grid);
     if (is_successful) modifyCellsUnderGrid(false); //print the block to display;
 }
-void OBlock::rRotate() {}
-void OBlock::lRotate() {}
+void OBlock::rRotate() {
+    if (level > 2) down();
+}
+void OBlock::lRotate() {
+    if (level > 2) down();
+}

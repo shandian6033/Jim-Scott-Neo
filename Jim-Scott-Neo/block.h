@@ -31,7 +31,6 @@ class Block
 private:
     //danger! hard coded for 3*3 blocks, I block and O block need their own fns
     // intergrad both right and left rotate
-	const int level;
     vector<vector<WhoIam>> ifRotated(bool);
     void eraseCheck(int& score, int& count);
 protected:
@@ -39,7 +38,7 @@ protected:
     WhoIam my_type;
     vector<vector<WhoIam>> small_grid;
     bool is_successful; //the block is successfully generated or not, usd to check gameover
-
+    const int level;
      //can erase the original type or set new type;
 public:
 
