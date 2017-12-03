@@ -10,7 +10,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     //reading flags commands
-	string file_name = "seqeunce.txt";
+	string file_name = "sequence.txt";
 	Board b;
 	int row = 15;
 	int col = 11;
