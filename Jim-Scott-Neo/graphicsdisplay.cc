@@ -11,13 +11,13 @@ GraphicsDisplay::GraphicsDisplay(int width, int length, const Board& my_board)
 
 void GraphicsDisplay::clear() {
     
-    xw.fillRectangle(0, 0, win_width, 5, Xwindow::Black); // top line
     xw.fillRectangle(0, 0, win_width, win_height, Xwindow::Background);
-    xw.fillRectangle(0, global_offset*cell_size - 5, win_width, 5,Xwindow::Black); //middle line
-    xw.fillRectangle(0, win_height-5, win_width, 5, Xwindow::Black);//bottom line
+    xw.fillRectangle(0, 0, win_width, 5, Xwindow::Border); // top line
+    xw.fillRectangle(0, global_offset*cell_size - 5, win_width, 5,Xwindow::Border); //middle line
+    xw.fillRectangle(0, win_height-5, win_width, 5, Xwindow::Border);//bottom line
 
-    xw.fillRectangle(0, 0, 5, win_height, Xwindow::Black);//left line
-    xw.fillRectangle(win_width-5, 0, 5, win_height, Xwindow::Black);//right line
+    xw.fillRectangle(0, 0, 5, win_height, Xwindow::Border);//left line
+    xw.fillRectangle(win_width-5, 0, 5, win_height, Xwindow::Border);//right line
 }
 
 void GraphicsDisplay::notify(Subject &whoFrom) {
@@ -98,7 +98,7 @@ void GraphicsDisplay::updateText(){
     string hi_score_str = "Hi Score: " + to_string(my_board->getHi());
     next_block_str = "Next:";
 
-    xw.fillRectangle(5, 10, win_width-10, global_offset*cell_size-10,Xwindow::Background); //clean window
+    xw.fillRectangle(5, 5, win_width-10, global_offset*cell_size-10,Xwindow::Background); //clean window
 
     int offset = 15;
     int v_space = 30;
