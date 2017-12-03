@@ -7,7 +7,7 @@ void Board::init(int row, int col) {
 	hi_score = 0;
 	width = col;
 	length = row;
-	setLevel(0);
+	//setLevel(0);
 	is_slow = 0;
 	lifetime = 10;
 	not_over = true;
