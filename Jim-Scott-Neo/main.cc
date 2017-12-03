@@ -122,7 +122,10 @@ int main(int argc, char* argv[])
 			}
 			b.restart();
 		} // impliment first
-		else if (valid_cmd == b.changable_cmd.hint) {} //impliment last
+		else if (valid_cmd == b.changable_cmd.hint) {
+			b.hint();
+			continue;
+		} //impliment last
 		else if (valid_cmd == b.changable_cmd.sequence) { //sequence
 			cin >> file_name;
 			in.close();

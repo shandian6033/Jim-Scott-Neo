@@ -25,27 +25,27 @@ void Block::lRotate() {
     modifyCellsUnderGrid(false);
 }
 void Block::left() {
-    modifyCellsUnderGrid(true);
+    //modifyCellsUnderGrid(true);
     if (canFit(anchor->getLeft(), small_grid)) {
         anchor = anchor->getLeft();
         if (level > 2) down();
     }
-    modifyCellsUnderGrid(false);
+    //modifyCellsUnderGrid(false);
 }
 void Block::right() {
-    modifyCellsUnderGrid(true);
+    //modifyCellsUnderGrid(true);
     if (canFit(anchor->getRight(), small_grid)) {
         anchor = anchor->getRight();
         if (level > 2) down();
     }
-    modifyCellsUnderGrid(false);
+    //modifyCellsUnderGrid(false);
 }
 void Block::down() {
-    modifyCellsUnderGrid(true);
+    //modifyCellsUnderGrid(true);
     if (canFit(anchor->getDown(), small_grid)) {
         anchor = anchor->getDown();
     }
-    modifyCellsUnderGrid(false);
+   // modifyCellsUnderGrid(false);
 }
 int Block::drop() {
 	int score = 0;
@@ -196,4 +196,35 @@ bool canFit(Cell* anchor,const vector<vector<WhoIam>>& compare_with) { //waring,
         }
     }
     return ans;
+}
+
+WhoIam Block::getid()const {
+	return my_type;
+}
+
+Cell* Block::getAnchor()const {
+	return anchor;
+}
+
+void Block::setAnchor(Cell* anchor) {
+	this->anchor = anchor;
+}
+
+vector<vector<WhoIam>> Block::getGrid()const {
+	return small_grid;
+}
+
+void Block::setGrid(vector<vector<WhoIam>> other) {
+	this->small_grid = other;
+}
+
+void Block::setH() {//only temp will call this
+	my_type = WhoIam::H;
+	for (auto &r : small_grid) {
+		for (auto &c : r) {
+			if (c != WhoIam::Null) {
+				c = WhoIam::H;
+			}
+		}
+	}
 }

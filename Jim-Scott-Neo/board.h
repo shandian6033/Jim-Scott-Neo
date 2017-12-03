@@ -21,6 +21,7 @@ class Board{
     std::vector<Cell> horizontal_place_holders; //row -1,only used for IBlock
     std::vector<Cell> vertical_place_holders; //col -1, anchor can go out of the board
 	unique_ptr<Block> cur_block;
+	unique_ptr<Block> temp_block;
 	WhoIam next_block;
 
 	TextDisplay td{ 11,15,*this };
@@ -39,6 +40,7 @@ public:
 	void setCur(WhoIam); //set not_over to false if no Block can be generated. Then game should be over.
     void changeBlock(WhoIam); // redefine block type and cur position 
     void movement(std::string valid_cmd);
+	void hint();
 
 	int getLevel()const;
 	int getScore()const;

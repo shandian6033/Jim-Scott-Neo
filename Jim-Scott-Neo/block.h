@@ -36,7 +36,7 @@ private:
     void eraseCheck(int& score, int& count);
 protected:
     Cell* anchor;
-    const WhoIam my_type;
+    WhoIam my_type;
     vector<vector<WhoIam>> small_grid;
     bool is_successful; //the block is successfully generated or not, usd to check gameover
 
@@ -53,6 +53,12 @@ public:
     virtual void rRotate();
     virtual void lRotate();
 
+	vector<vector<WhoIam>> getGrid()const;
+	void setGrid(vector<vector<WhoIam>>);
+	Cell* getAnchor()const;
+	void setAnchor(Cell*);
+	void setH();
+	WhoIam getid()const;
     void modifyCellsUnderGrid(bool is_erase) const;
     bool isSuccessful();
 };
