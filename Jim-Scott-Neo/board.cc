@@ -113,10 +113,14 @@ void Board::movement(std::string valid_cmd) {
 		cur_block.get()->modifyCellsUnderGrid(false);
 	}
 	else if (valid_cmd == changable_cmd.rRotate) {
+		cur_block.get()->modifyCellsUnderGrid(true);
 		cur_block.get()->rRotate();
+		cur_block.get()->modifyCellsUnderGrid(false);
 	}
 	else if (valid_cmd == changable_cmd.lRotate) {
+		cur_block.get()->modifyCellsUnderGrid(true);
 		cur_block.get()->lRotate();
+		cur_block.get()->modifyCellsUnderGrid(false);
 	}
 	else{//drop here
 		int temp;
@@ -179,7 +183,10 @@ void Board::hint() {//will print
     else if (cur_block.get()->getid() == WhoIam::T)temp_block = make_unique<TBlock>(level, cur_block.get()->getAnchor());
     else if (cur_block.get()->getid() == WhoIam::I)temp_block = make_unique<IBlock>(level, cur_block.get()->getAnchor());
     else if (cur_block.get()->getid() == WhoIam::O)temp_block = make_unique<OBlock>(level, cur_block.get()->getAnchor());
-    temp_block.get()->setGrid(cur_block.get()->getGrid());
+	
+	temp_block.get()->modifyCellsUnderGrid(true);
+
+	temp_block.get()->setGrid(cur_block.get()->getGrid());
     temp_block.get()->setH();
 
     cur_block.get()->modifyCellsUnderGrid(true);
