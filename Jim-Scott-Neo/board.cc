@@ -393,7 +393,7 @@ void Board::setLife(int lifetime) {
 }
 
 void Board::clearSeq() {
-	sequence.clear();
+	sequence.close();
 }
 
 std::ostream &operator<<(std::ostream &out, Board &b) {
