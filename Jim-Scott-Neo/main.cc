@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
         }
         else if (flag == "-scriptfile"){
             file_name = argv[i + 1];
-			if (b.getLevel() != 0)b.setSeq(file_name);
+			//if (b.getLevel() != 0)b.setSeq(file_name);
             i++;
         }
         else if (flag == "-startlevel") {
