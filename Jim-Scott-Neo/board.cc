@@ -184,7 +184,7 @@ void Board::hint() {//will print
 
     cur_block.get()->modifyCellsUnderGrid(true);
 
-    for (int i = 0; i < width; ++i) {//try move
+    for (int i = -1; i < width; ++i) {//try move
         temp_block.get()->setAnchor(cur_block.get()->getAnchor());
         if (i > c) {
             for (int move_r = 0; move_r < i - c; ++move_r) {
