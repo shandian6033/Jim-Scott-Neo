@@ -10,7 +10,8 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     //reading flags commands
-	string file_name = "sequence.txt";
+	string sequence_file = "sequence.txt";
+	string cmd_file;
 	Board b;
 	int row = 15;
 	int col = 11;
@@ -32,7 +33,7 @@ int main(int argc, char* argv[])
             else cerr << "please enter valid seed" << endl;
         }
         else if (flag == "-scriptfile"){
-            file_name = argv[i + 1];
+            sequence_file = argv[i + 1];
 			//if (b.getLevel() != 0)b.setSeq(file_name);
             i++;
         }
@@ -57,7 +58,7 @@ int main(int argc, char* argv[])
 	ifstream in;
 	//game start here
 	if (b.getLevel() == 0) {
-		if (!b.setSeq(file_name))cout << "cannot find sequence.txt" << endl;
+		if (!b.setSeq(sequence_file))cout << "cannot find sequence.txt" << endl;
 	}
 	b.restart();
 	cout << b;
@@ -107,8 +108,8 @@ int main(int argc, char* argv[])
 			b.changeBlock(WhoIam::T);
 		}
 		else if (valid_cmd == b.changable_cmd.norandom) { //impliment when we have level 3,4 //nonrandom
-			if (!(in >> file_name))cin >> file_name;
-			if (!b.setSeq(file_name)) {
+			if (!(in >> sequence_file))cin >> sequence_file;
+			if (!b.setSeq(sequence_file)) {
 				cerr << "invalid file" << endl;
 				continue;
 			}
@@ -118,7 +119,7 @@ int main(int argc, char* argv[])
 		}//random
 		else if (valid_cmd == b.changable_cmd.restart) {//restart
 			if (b.getLevel() == 0) {
-				if (!b.setSeq(file_name))cout << "cannot find sequence.txt" << endl;
+				if (!b.setSeq(sequence_file))cout << "cannot find sequence.txt" << endl;
 			}
 			b.restart();
 		} // impliment first
@@ -127,9 +128,9 @@ int main(int argc, char* argv[])
 			continue;
 		} //impliment last
 		else if (valid_cmd == b.changable_cmd.sequence) { //sequence
-			cin >> file_name;
+			cin >> cmd_file;
 			in.close();
-			in.open(file_name);
+			in.open(cmd_file);
 			if (!in.is_open()) {
 				cerr << "invalid file" << endl;
 			}
