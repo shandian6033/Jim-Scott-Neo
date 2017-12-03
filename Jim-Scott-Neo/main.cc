@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 	Board b;
 	int row = 15;
 	int col = 11;
-	
+	b.setLevel(0);
     for (int i = 1; i < argc; i++) {
         string flag = argv[i];
         //cout << flag << endl;
