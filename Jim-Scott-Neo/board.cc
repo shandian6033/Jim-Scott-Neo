@@ -7,15 +7,19 @@ void Board::init(int row, int col) {
 	hi_score = 0;
 	width = col;
 	length = row;
-	setLevel(0);
+	//setLevel(0);
 	is_slow = 0;
 	lifetime = 10;
 	not_over = true;
+
+    if (has_graphic) gd = make_unique<GraphicsDisplay>(width,length, *this );
+
 }
 
 void Board::restart() {
 	not_over = true;
     score = 0;
+	is_slow = 0;
 
     the_board.clear();
     horizontal_place_holders.clear();
@@ -39,12 +43,13 @@ void Board::restart() {
 
 
     td.clear();
-    //gd.clear();
+    if(gd.get() != nullptr) gd.get()->clear();
 
     for (int r = 0; r < length; r++) {// setup ptr relationship in the_board
         for (int c = 0; c < width; c++) {
-            the_board.at(r).at(c).attach(&td);
-            //the_board.at(r).at(c).attach(&gd);
+            the_board.at(r).at(c).attach(&td); // text display
+            if (gd.get() != nullptr) the_board.at(r).at(c).attach(gd.get()); // graphic display
+
             if (r > 0) {
                 the_board.at(r).at(c).setUp(the_board.at(r - 1).at(c));
             }
@@ -94,19 +99,29 @@ void Board::restart() {
 
 void Board::movement(std::string valid_cmd) {
 	if (valid_cmd == changable_cmd.left) {//considering abbreviation
+		cur_block.get()->modifyCellsUnderGrid(true);
 		cur_block.get()->left();
+		cur_block.get()->modifyCellsUnderGrid(false);
 	}
 	else if (valid_cmd == changable_cmd.right) {
+		cur_block.get()->modifyCellsUnderGrid(true);
 		cur_block.get()->right();
+		cur_block.get()->modifyCellsUnderGrid(false);
 	}
 	else if (valid_cmd == changable_cmd.down) {
+		cur_block.get()->modifyCellsUnderGrid(true);
 		cur_block.get()->down();
+		cur_block.get()->modifyCellsUnderGrid(false);
 	}
 	else if (valid_cmd == changable_cmd.rRotate) {
+		cur_block.get()->modifyCellsUnderGrid(true);
 		cur_block.get()->rRotate();
+		cur_block.get()->modifyCellsUnderGrid(false);
 	}
 	else if (valid_cmd == changable_cmd.lRotate) {
+		cur_block.get()->modifyCellsUnderGrid(true);
 		cur_block.get()->lRotate();
+		cur_block.get()->modifyCellsUnderGrid(false);
 	}
 	else{//drop here
 		int temp;
@@ -154,6 +169,55 @@ void Board::movement(std::string valid_cmd) {
 			}
 		}
 	}
+}
+
+void Board::hint() {//will print
+    int compare = 0;
+    Cell* best_anchor = cur_block.get()->getAnchor();
+
+    int c = cur_block.get()->getAnchor()->getInfo().col;
+
+    if (cur_block.get()->getid() == WhoIam::S)temp_block = make_unique<SBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::Z)temp_block = make_unique<ZBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::L)temp_block = make_unique<LBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::J)temp_block = make_unique<JBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::T)temp_block = make_unique<TBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::I)temp_block = make_unique<IBlock>(level, cur_block.get()->getAnchor());
+    else if (cur_block.get()->getid() == WhoIam::O)temp_block = make_unique<OBlock>(level, cur_block.get()->getAnchor());
+	
+	temp_block.get()->modifyCellsUnderGrid(true);
+
+	temp_block.get()->setGrid(cur_block.get()->getGrid());
+    temp_block.get()->setH();
+
+    cur_block.get()->modifyCellsUnderGrid(true);
+
+    for (int i = -1; i < width; ++i) {//try move
+        temp_block.get()->setAnchor(cur_block.get()->getAnchor());
+        if (i > c) {
+            for (int move_r = 0; move_r < i - c; ++move_r) {
+                temp_block.get()->right();
+            }
+        }
+        else {
+            for (int move_l = 0; move_l < c - i; ++move_l) {
+                temp_block.get()->left();
+            }
+        }
+        for (int j = 0; j < length; ++j) {
+            temp_block.get()->down();
+        }
+        int my_row = temp_block.get()->getAnchor()->getInfo().row;
+        if (my_row > compare) {
+            compare = my_row;
+            best_anchor = temp_block.get()->getAnchor();
+        }
+    }
+    temp_block.get()->setAnchor(best_anchor);
+    temp_block.get()->modifyCellsUnderGrid(false);
+    cout << *this;
+    temp_block.get()->modifyCellsUnderGrid(true);
+    cur_block.get()->modifyCellsUnderGrid(false);
 }
 
 void Board::computeNextBlock() {
@@ -329,13 +393,13 @@ void Board::setLife(int lifetime) {
 }
 
 void Board::clearSeq() {
-	sequence.clear();
+	sequence.close();
 }
 
 std::ostream &operator<<(std::ostream &out, Board &b) {
 
 	out << b.td;
-    //b.gd.updateText();
+    if(b.gd.get() != nullptr) b.gd.get()->updateText();
 
 	return out;
 }

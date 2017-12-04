@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for file in board cell block normal_blocks special_blocks subject textdisplay graphicsdisplay main ;do
+  echo "" >> ${file}.cc
+  echo "" >> ${file}.h
+  dos2unix ${file}.cc
+  dos2unix ${file}.h
+done

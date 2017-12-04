@@ -9,7 +9,7 @@ class Xwindow {
   Window w;
   int s;
   GC gc;
-  unsigned long colours[10];
+  unsigned long colours[20];
 
  public:
   Xwindow(int width=500, int height=500);  // Constructor; displays the window.
@@ -17,7 +17,7 @@ class Xwindow {
   Xwindow(const Xwindow&) = delete;
   Xwindow &operator=(const Xwindow&) = delete;
 
-  enum {Background=0, Black, Red, Orange, Yellow, Green, Cyan, Blue, Purple}; // Available colours.
+  enum {Background=0,Black,Red,Orange,Yellow,Green,Cyan,Blue,Purple,DarkRed,Border}; // Available colours.
 
   // Draws a rectangle
   void fillRectangle(int x, int y, int width, int height, int colour=Black);

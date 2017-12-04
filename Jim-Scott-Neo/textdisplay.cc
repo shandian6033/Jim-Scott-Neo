@@ -46,6 +46,9 @@ void TextDisplay:: notify(Subject &whoFrom) {
     else if (info_I_got.id == WhoIam::I) {
 		this->the_display.at(info_I_got.row).at(info_I_got.col) = 'I';
     }
+	else if (info_I_got.id == WhoIam::H) {
+		this->the_display.at(info_I_got.row).at(info_I_got.col) = '?';
+	}
     else if (info_I_got.id == WhoIam::T) {
 		this->the_display.at(info_I_got.row).at(info_I_got.col) = 'T';
     }

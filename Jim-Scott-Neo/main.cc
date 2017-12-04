@@ -10,18 +10,17 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     //reading flags commands
-	string file_name = "seqeunce.txt";
+	string sequence_file = "sequence.txt";
+	string cmd_file;
 	Board b;
 	int row = 15;
 	int col = 11;
-	//b.computeNextBlock();
-
-	b.init(row, col);
+	b.setLevel(0);
     for (int i = 1; i < argc; i++) {
         string flag = argv[i];
         //cout << flag << endl;
         if (flag == "-text") {
-            // impliment for only text display (no graphic display)
+            b.has_graphic = false;
         }
         else if (flag == "-seed") {
             string temp = argv[i+1];
@@ -34,8 +33,8 @@ int main(int argc, char* argv[])
             else cerr << "please enter valid seed" << endl;
         }
         else if (flag == "-scriptfile"){
-            file_name = argv[i + 1];
-			if (b.getLevel() != 0)b.setSeq(file_name);
+            sequence_file = argv[i + 1];
+			//if (b.getLevel() != 0)b.setSeq(file_name);
             i++;
         }
         else if (flag == "-startlevel") {
@@ -49,6 +48,8 @@ int main(int argc, char* argv[])
             else cerr << "please enter valid level" <<endl;
         }
     }
+    b.init(row, col);
+
     // runtime commands
     string original_cmd;
 	string string_cmd;
@@ -57,7 +58,7 @@ int main(int argc, char* argv[])
 	ifstream in;
 	//game start here
 	if (b.getLevel() == 0) {
-		if (!b.setSeq(file_name))cout << "cannot find sequence.txt" << endl;
+		if (!b.setSeq(sequence_file))cout << "cannot find sequence.txt" << endl;
 	}
 	b.restart();
 	cout << b;
@@ -107,8 +108,8 @@ int main(int argc, char* argv[])
 			b.changeBlock(WhoIam::T);
 		}
 		else if (valid_cmd == b.changable_cmd.norandom) { //impliment when we have level 3,4 //nonrandom
-			if (!(in >> file_name))cin >> file_name;
-			if (!b.setSeq(file_name)) {
+			if (!(in >> sequence_file))cin >> sequence_file;
+			if (!b.setSeq(sequence_file)) {
 				cerr << "invalid file" << endl;
 				continue;
 			}
@@ -118,15 +119,18 @@ int main(int argc, char* argv[])
 		}//random
 		else if (valid_cmd == b.changable_cmd.restart) {//restart
 			if (b.getLevel() == 0) {
-				if (!b.setSeq(file_name))cout << "cannot find sequence.txt" << endl;
+				if (!b.setSeq(sequence_file))cout << "cannot find sequence.txt" << endl;
 			}
 			b.restart();
 		} // impliment first
-		else if (valid_cmd == b.changable_cmd.hint) {} //impliment last
+		else if (valid_cmd == b.changable_cmd.hint) {
+			b.hint();
+			continue;
+		} //impliment last
 		else if (valid_cmd == b.changable_cmd.sequence) { //sequence
-			cin >> file_name;
+			cin >> cmd_file;
 			in.close();
-			in.open(file_name);
+			in.open(cmd_file);
 			if (!in.is_open()) {
 				cerr << "invalid file" << endl;
 			}
