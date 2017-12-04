@@ -389,7 +389,7 @@ bool Board::setSeq(string source) {
 }
 
 void Board::setLife(int lifetime) {
-	this->lifetime = lifetime;
+    this->lifetime = lifetime + 1;
 }
 
 void Board::clearSeq() {

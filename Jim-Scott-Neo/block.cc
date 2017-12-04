@@ -106,13 +106,18 @@ vector<vector<WhoIam>> Block::ifRotated(bool is_clockwise) {
     }
     return ans;
 }
+
 void Block::eraseCheck(int& score, int& count) {
     for (int r = 0;r < (int)small_grid.size(); r++) {
         for (int c = 0;c < (int)small_grid.at(0).size(); c++) {
+            if (small_grid.at(r).at(c) == my_type) cellAt(anchor, r, c)->born();
+        }
+    }
+    
+    for (int r = 0;r < (int)small_grid.size(); r++) {
+        for (int c = 0;c < (int)small_grid.at(0).size(); c++) {
             if (small_grid.at(r).at(c) == my_type) {
-                Cell* p = cellAt(anchor, r, c);
-                p->born();
-                int temp = p->eraseRow();
+                int temp = cellAt(anchor, r, c)->eraseRow();
                 if (temp > -1) {
                     score += temp;
                     count++;
