@@ -56,22 +56,6 @@ int Block::drop() {
     }//droped to the lowest position.
     modifyCellsUnderGrid(false);
 
-	//temp = anchor->eraseRow(); //erase row if possible
-	//if (temp > -1) {
-	//	score += temp;
-	//	count++;
-	//}
-	//temp = anchor->getDown()->eraseRow();
-	//if (temp > -1) {
-	//	score += temp;
-	//	count++;
-	//}
-	//temp = anchor->getDown()->getDown()->eraseRow();
-	//if (temp > -1) {
-	//	score += temp;
-	//	count++;
-	//}
-
     eraseCheck(score, count);
 
 	if (count != 0)score += (count + level) *(count + level);
@@ -126,11 +110,14 @@ void Block::eraseCheck(int& score, int& count) {
     for (int r = 0;r < (int)small_grid.size(); r++) {
         for (int c = 0;c < (int)small_grid.at(0).size(); c++) {
             if (small_grid.at(r).at(c) == my_type) {
-                int temp = cellAt(anchor,r, c)->eraseRow();
+                Cell* p = cellAt(anchor, r, c);
+                p->born();
+                int temp = p->eraseRow();
                 if (temp > -1) {
                     score += temp;
                     count++;
                 }
+                break;
             }
         }
     }

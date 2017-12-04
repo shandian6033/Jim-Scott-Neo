@@ -35,6 +35,7 @@ public:
 
 	int age()const;
 	void grow(int lifetime = -1);
+    void born();
     int eraseRow(); //erase the entire row if possible and return score earned by eliminate block
 	Info getInfo() const override;
 };

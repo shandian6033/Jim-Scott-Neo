@@ -161,3 +161,7 @@ void Cell::grow(int lifetime) {
 		}
 	}
 }
+
+void Cell::born() {
+    living_time = 0;
+}

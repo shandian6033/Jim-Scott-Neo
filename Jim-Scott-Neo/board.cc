@@ -162,7 +162,7 @@ void Board::movement(std::string valid_cmd) {
 		}
 		for (int r = 0; r < length; r++) {
 			for (int c = 0; c < width; c++) {
-				if (the_board.at(r).at(c).getInfo().id != WhoIam::Null && the_board.at(r).at(c).getInfo().id != WhoIam::X) {
+				if (the_board.at(r).at(c).getInfo().id != WhoIam::Null && the_board.at(r).at(c).getInfo().id != WhoIam::X && the_board.at(r).at(c).getInfo().id != WhoIam::Placeholder && the_board.at(r).at(c).getInfo().id != WhoIam::H) {
 					if(level < 5)the_board.at(r).at(c).grow();
 					else{ the_board.at(r).at(c).grow(lifetime); }
 				}
