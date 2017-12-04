@@ -67,17 +67,17 @@ bool Block::isSuccessful() {
 // protected
 void Block::modifyCellsUnderGrid(bool is_erase)const {
 
-    for (int r = 0;r < static_cast<int>(small_grid.size()); r++) {
-        for (int c = 0;c < static_cast<int>(small_grid.at(0).size()); c++) {
-            if (small_grid.at(r).at(c) == my_type) {
-                if (is_erase) cellAt(anchor,r,c)->setPiece(WhoIam::Null, isNull);
-                else {
-                    Cell* temp = cellAt(anchor, r, c);
-                    temp->setPiece(my_type, level);
-                }
-            }
-        }
-    }
+	for (int r = 0; r < static_cast<int>(small_grid.size()); r++) {
+		for (int c = 0; c < static_cast<int>(small_grid.at(0).size()); c++) {
+			Cell* p = cellAt(anchor, r, c);
+			if (small_grid.at(r).at(c) == my_type && p != nullptr) {
+				if (is_erase) p->setPiece(WhoIam::Null, isNull);
+				else {
+					p->setPiece(my_type, level);
+				}
+			}
+		}
+	}
 }
 // private
 vector<vector<WhoIam>> Block::ifRotated(bool is_clockwise) {
