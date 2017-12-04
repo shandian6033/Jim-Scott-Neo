@@ -15,7 +15,7 @@ class Board{
 	int length, width;
     int score, level, hi_score;
 	int is_slow;
-	int lifetime;//for lv5
+	int lifetime;//for lv5 and lv6, determine how long the a cell exist
 
 	std::vector<std::vector<Cell>> the_board;
     std::vector<Cell> horizontal_place_holders; //row -1,only used for IBlock
@@ -26,8 +26,6 @@ class Board{
 
 	TextDisplay td{ 11,15,*this };
     unique_ptr<GraphicsDisplay>gd;
-    
-    //GraphicsDisplay gd{ 11,15,*this };
 
 	ifstream sequence;
 

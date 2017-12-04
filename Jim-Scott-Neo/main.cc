@@ -149,9 +149,15 @@ int main(int argc, char* argv[])
 		}
 		else if (valid_cmd == b.changable_cmd.life){
 			int lifetime;
-			if (in >> lifetime) {}
-			else { cin >> lifetime; }
-			b.setLife(lifetime);
+			if (in >> lifetime) b.setLife(lifetime); 
+			else if (cin >> lifetime) b.setLife(lifetime);
+            else {
+                cin.clear(); // did not read in successfully
+                in.clear();
+                cerr << "invalid life time" << endl;
+            }
+
+			
 		}
 		else if (string_cmd == b.changable_cmd.quit) break;
 		else {

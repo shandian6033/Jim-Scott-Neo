@@ -4,7 +4,7 @@
 
 class Cell:public Subject{
 	const int r, c;
-	int living_time, worth;
+	int living_time, worth; //living_time,how long I have been here, used to check if an entire block is gone or not.
 	WhoIam id;
 
 	Cell* left;
