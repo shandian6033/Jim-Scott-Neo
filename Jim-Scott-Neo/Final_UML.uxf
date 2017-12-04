@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>270</y>
+      <w>320</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>/Subject/
+--
+-who_looks_at_me: std::vector&lt;Observer*&gt;
+--
++attach(observer *): void 
++notifyObservers( ): void 
++getInfo( ): Info
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>0</y>
+      <w>200</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Info
+--
++row: int 
++col: int 
++living_time: int 
++id: WhoIam</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1170</x>
+      <y>880</y>
+      <w>320</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>TextDisplay
+--
+-the_display: std::vector&lt;std::vector&lt;char&gt;&gt;
+-length: int 
+-width: int
+-my_board: Board*
+--
++notify(Subject &amp;): void
++clear( ):void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>530</y>
+      <w>300</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>/Block/
+--
+-level: int
+#anchor: Cell* 
+#my_type: WhoIam
+#small_grid: vector&lt;vector&lt;WhoIam&gt;&gt; 
+#is_successful: bool
+--
++left( ): void
++right( ): void
++down( ): void
++drop( ): void
++lRotate( ): void
++rRotate( ): void
++isSuccessful( ): bool
+#modifyCellsUnderGrid(bool): void
+-ifRotated(bool): vector&lt;vector&lt;WhoIam&gt;&gt;
+-eraseCheck(int&amp;, int&amp;): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>420</y>
+      <w>300</w>
+      <h>470</h>
+    </coordinates>
+    <panel_attributes>Cell
+--
+-r: int 
+-c: int
+-living_time: int
+-worth: int
+-id: WhoIam
+-left: Cell* 
+-right: Cell* 
+-up: Cell* 
+-down: Cell* 
+--
++setLeft(Cell &amp;)：void 
++setRight(Cell &amp;)：void 
++setUp(Cell &amp;)：void 
++setDown(Cell &amp;)：void 
++setPiece(WhoIam new_id, int level)：void 
++getLeft( )：Cell* 
++getRight( )：Cell* 
++getUp( )：Cell* 
++getDown( )：Cell* 
++age( )：int 
++grow(int lifetime = -1)：void 
++eraseRow( )：int
++getInfo( ): Info
+-isRightClear( ): bool
+-isLeftClear( ): bool
+-isRowClear( ): bool
+-upCopy(): int
+-isLast(): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>390</y>
+      <w>290</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>GraphicDisplay
+--
+-cell_size: int
+-width: int  
+-height: int
+-win_width: int  
+-win_height: int 
+-my_board: Board* 
+-xw: Xwindow
+--
++updateText( ): void
++clear( ): void
++notify(Subject &amp;): void
++test( ): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>630</y>
+      <w>280</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Window
+--
+-d: Display *
+-w: Window
+-s: int
+-gc: GC
+-colours: long *
+--
++fillRectangle(int, int, int, int, int): void
++drawString(int, int, std::string): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>1080</y>
+      <w>110</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>JBlock</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>1080</y>
+      <w>100</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>SBLock</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1150</x>
+      <y>280</y>
+      <w>360</w>
+      <h>510</h>
+    </coordinates>
+    <panel_attributes>Board
+--
+-length: int  
+-width: int
+-score: int 
+-level: int  
+-hi_score: int 
+-is_slow: int 
+-lifetime: int
+-the_board: std::vector&lt;std::vector&lt;Cell&gt;&gt;
+-horizontal_place_holders: std::vector&lt;Cell&gt;
+-vertical_place_holders: std::vector&lt;Cell&gt;
+-cur_block: unique_ptr&lt;Block&gt;
+-next_block: WhoIam 
+-td: TextDisplay
+-gd: GraphicsDisplay
+-display: std::unique_ptr&lt;Observer&gt;
+-sequence: ifstream 
++not_over: bool
+--
++init(int, int): void
++restart( ): void
++computeNextBlock( ): void
++setCur(WhoIam): void
++movement(std::string): void
++getLevel( ): int
++getScore( ): int
++getHi( ): int
++getNext( ): WhoIam
++setLevel(int): void
++setSeq(string): bool
++setLife(int): void
++clearSeq( ): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>40</x>
+      <y>890</y>
+      <w>290</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;140.0;60.0;270.0;60.0;10.0;60.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>940</y>
+      <w>30</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>290</x>
+      <y>940</y>
+      <w>40</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>20.0;10.0;10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>280</y>
+      <w>230</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>/Observer/
+--
++notify(Subject &amp;whoFrom): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>900</x>
+      <y>330</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>370</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>280</y>
+      <w>150</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+WhoIam
+--
+O
+J
+L
+S
+Z
+I
+T
+X
+Null
+Placeholder</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>230</x>
+      <y>1080</y>
+      <w>110</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>LBlock</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>1080</y>
+      <w>110</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>ZBlock</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>1080</y>
+      <w>120</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>TBlock</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>1080</y>
+      <w>120</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>IBlock
+--
+-iRotate( ): void
++rRotate( ): void
++lRotate( ): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>730</x>
+      <y>1080</y>
+      <w>120</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>OBlock
+--
++rRotate( ): void
++lRotate( ): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>1310</y>
+      <w>200</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>CmdList
+--
++left: std::string 
++right: std::string 
++down: std::string 
++drop: std::string 
++rRotate: std::string 
++lRotate: std::string 
++levelu: std::string 
++leveldown: std::string 
++norandom: std::string 
++random: std::string 
++restart: std::string 
++hint: std::string 
++sequence: std::string 
++rename: std::string 
++life: std::string 
++quit: std::string 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>480</y>
+      <w>180</w>
+      <h>470</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;160.0;10.0;160.0;450.0;10.0;450.0;10.0;410.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>280</y>
+      <w>60</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+
+</panel_attributes>
+    <additional_attributes>40.0;20.0;10.0;20.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1480</x>
+      <y>290</y>
+      <w>110</w>
+      <h>630</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30.0;10.0;90.0;10.0;90.0;610.0;10.0;610.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>940</y>
+      <w>150</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0;130.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>940</y>
+      <w>160</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0;140.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>940</y>
+      <w>160</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0;140.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>940</y>
+      <w>160</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0;140.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>880</y>
+      <w>40</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=4</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>400</y>
+      <w>60</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1480</x>
+      <y>890</y>
+      <w>70</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>470</y>
+      <w>110</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;50.0;10.0;50.0;80.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>540</y>
+      <w>70</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>10</x>
+      <y>310</y>
+      <w>200</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;10.0;10.0;240.0;40.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1100</x>
+      <y>690</y>
+      <w>90</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0;10.0;210.0;70.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>440</y>
+      <w>90</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>70.0;10.0;30.0;10.0;30.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>310</y>
+      <w>120</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;130.0;100.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>640</y>
+      <w>200</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0;10.0;280.0;180.0;280.0;180.0;230.0</additional_attributes>
+  </element>
+</diagram>
