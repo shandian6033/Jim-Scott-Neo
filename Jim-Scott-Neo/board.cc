@@ -390,6 +390,7 @@ bool Board::setSeq(string source) {
 
 void Board::setLife(int lifetime) {
     this->lifetime = lifetime + 1;
+    // because born() is called before growth(), offset up by one to compensate;
 }
 
 void Board::clearSeq() {
